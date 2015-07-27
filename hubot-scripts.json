@@ -2,5 +2,8 @@
   "haskell.coffee",
   "cumberbatch.coffee",
   "days_since.coffee",
-  "dealwithit.coffee"
+  "dealwithit.coffee",
+  "weather.coffee",
+  "stallman.coffee",
+  "base64.coffee"
 ]
