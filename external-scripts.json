@@ -10,5 +10,6 @@
   "hubot-qr",
   "hubot-calculator",
   "hubot-decides",
-  "hubot-xkcd"
+  "hubot-xkcd",
+  "hubot-whois"
 ]
