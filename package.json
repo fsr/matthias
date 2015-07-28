@@ -13,16 +13,13 @@
     "hubot-google-images": "^0.1.5",
     "hubot-google-translate": "^0.2.0",
     "hubot-help": "^0.1.1",
-    "hubot-heroku-keepalive": "0.0.4",
     "hubot-maps": "0.0.2",
-    "hubot-pugme": "^0.1.0",
     "hubot-qr": "0.0.2",
     "hubot-redis-brain": "0.0.3",
     "hubot-rules": "^0.1.1",
     "hubot-scripts": "^2.16.1",
     "hubot-shipit": "^0.2.0",
     "hubot-slack": "^3.3.0",
-    "hubot-whois": "0.0.6",
     "hubot-xkcd": "0.0.3"
   },
   "engines": {
