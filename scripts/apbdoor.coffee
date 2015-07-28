@@ -8,7 +8,7 @@
 #   None
 #
 # Commands:
-#   hubot tür - hubot schaut nach, wie es um die Tür des APB steht.
+#   hubot türstatus - hubot schaut nach, wie es um die Tür des APB steht.
 #   hubot ist die tür kaputt? - hubot schaut nach, wie es um die Tür des APB steht.
 #   hubot glasschaden - teile hubot mit, dass die Tür mal wieder im Eimer ist.
 #   hubot rate mal, was wieder kaputt ist - teile hubot mit, dass die Tür mal wieder im Eimer ist.
