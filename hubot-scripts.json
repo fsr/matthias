@@ -3,5 +3,15 @@
   "dealwithit.coffee",
   "weather.coffee",
   "stallman.coffee",
-  "base64.coffee"
+  "base64.coffee",
+  "catfacts.coffee",
+  "chm.coffee",
+  "coin.coffee",
+  "cowsay.coffee",
+  "countdown.coffee",
+  "flip.coffee",
+  "steveholt.coffee",
+  "sudo.coffee",
+  "urban.coffee",
+  "wikipedia.coffee"
 ]
