@@ -19,7 +19,7 @@ module.exports = (robot) ->
     robot.http("http://openmensa.org/api/v2/canteens/79/days/today/meals")
       .get() (err, res, body) ->
         data = JSON.parse body
-        msg.send data.map(formatOutput).join('\n')
+        msg.send "In der Alten Mensa gibt's heute:\n#{data.map(formatOutput).join('\n')}"
 
 formatOutput = (meal) ->
   if meal.category == "Pasta"
