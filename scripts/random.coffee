@@ -27,6 +27,9 @@ module.exports = (robot) ->
   robot.respond /filmlist/i, (msg) ->
     msg.send "Vorschläge: http://letterboxd.com/kiliankoe/list/ifsr-filmvorschlage/\nGeschaute Filme: http://letterboxd.com/kiliankoe/list/ifsr-movie-night/"
 
+  robot.respond /wat is wacken?/i, (msg) ->
+    msg.send "Dat ist Wacken. Einmal im Jahr kommen hier alle bösen schwarzen Männer aus Mittelerde her, um ma richtig die Sau rauszulassen."
+
   robot.hear /(python|haskell|\sphp|^php)/i, (msg) ->
     lang = msg.match[1].toLowerCase()
     user = msg.message.user.name.toLowerCase()
