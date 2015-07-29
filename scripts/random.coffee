@@ -64,6 +64,10 @@ module.exports = (robot) ->
   robot.hear /citrix|35000|35.000|35k/, (msg) ->
     msg.send ":moneybag::moneybag::moneybag:"
 
+  robot.hear /matthias ist (.*)/, (msg) ->
+    adj = msg.match[1]
+    msg.reply "Deine Mudda ist #{adj}!"
+
 randomRange = (min, max) ->
   Math.floor(Math.random() * (max - min) + min)
 
