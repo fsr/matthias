@@ -52,6 +52,15 @@ module.exports = (robot) ->
   robot.hear /muss man wissen|fefe|sascha lobo|axel stoll/i, (msg) ->
     msg.send "http://i.imgur.com/FmEyA8t.png"
 
+  robot.hear /schuh/i, (msg) ->
+    msg.send ":shoe::shoe:? Liegen wahrscheinlich noch bei Ben daheim."
+
+  robot.hear /you're tearing me apart|the room|tommy wiseau/i, (msg) ->
+    msg.send "http://i.giphy.com/pTrgmCL2Iabg4.gif"
+
+  robot.hear /citrix|35000|35.000|35k/, (msg) ->
+    msg.send ":moneybag::moneybag::moneybag:"
+
 randomRange = (min, max) ->
   Math.floor(Math.random() * (max - min) + min)
 
