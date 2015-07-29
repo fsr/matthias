@@ -66,7 +66,8 @@ module.exports = (robot) ->
 
   robot.hear /matthias ist (.*)/, (msg) ->
     adj = msg.match[1]
-    msg.reply "Deine Mudda ist #{adj}!"
+    if adj.indexOf("die t") == -1
+      msg.reply "Deine Mudda ist #{adj}!"
 
 randomRange = (min, max) ->
   Math.floor(Math.random() * (max - min) + min)
