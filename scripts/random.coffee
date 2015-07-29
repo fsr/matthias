@@ -31,6 +31,14 @@ module.exports = (robot) ->
     if user == donny
       msg.send msg.random walter_quotes
 
+  robot.hear /pimmel/i, (msg) ->
+    msg.reply "Höhöhö, du hast Pimmel gesagt."
+
+  robot.hear /anyway/i, (msg) ->
+    msg.reply "How's your sex life?"
+
+  
+
 randomRange = (min, max) ->
   Math.floor(Math.random() * (max - min) + min)
 
@@ -39,6 +47,6 @@ walter_quotes = [
   "Shut the fuck up, #{donny}.",
   "Forget it, #{donny}, you're out of your element!",
   "#{donny}, you're out of your element!",
-  "#{donny}, shut the f— when do we play?",
+  "#{donny}, shut the f—",
   "That's ex-- Shut the fuck up, #{donny}!"
 ]
