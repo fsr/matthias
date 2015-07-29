@@ -9,6 +9,9 @@
 #
 # Commands:
 #   hubot bash me - Frag' hubot nach einem random Zitat link
+#   hubot pizza - hubot nennt alle Details für eine Pizzabestellung (im Ratsaal)
+#   hubot filmlist - Frag' hubot nach Links zu beiden Filmlisten
+#
 #
 # Author:
 #   kiliankoe
@@ -17,6 +20,12 @@
 module.exports = (robot) ->
   robot.respond /bash me/i, (msg) ->
     msg.send "http://bash.fsrleaks.de/?#{randomRange(1, 632)}"
+
+  robot.respond /pizza/i, (msg) ->
+    msg.send "Ich bin Matthias Stuhlbein, Nöthnitzerstr. 46, 01187 Dresden. Fakultät Informatik. Mail: pizza@ifsr.de, Telefon: 0351 46338223 - Pizzen schneiden nicht vergessen ;)"
+
+  robot.respond /filmlist/i, (msg) ->
+    msg.send "Vorschläge: http://letterboxd.com/kiliankoe/list/ifsr-filmvorschlage/\nGeschaute Filme: http://letterboxd.com/kiliankoe/list/ifsr-movie-night/"
 
   robot.hear /(python|haskell|\sphp|^php)/i, (msg) ->
     lang = msg.match[1].toLowerCase()
@@ -36,12 +45,6 @@ module.exports = (robot) ->
 
   robot.hear /anyway/i, (msg) ->
     msg.reply "How's your sex life?"
-
-  robot.respond /pizza/i, (msg) ->
-    msg.send "Ich bin Matthias Stuhlbein, Nöthnitzerstr. 46, 01187 Dresden. Fakultät Informatik. Mail: pizza@ifsr.de, Telefon: 0351 46338223 - Pizzen schneiden nicht vergessen ;)"
-
-  robot.respond /filmlist/i, (msg) ->
-    msg.send "Vorschläge: http://letterboxd.com/kiliankoe/list/ifsr-filmvorschlage/\nGeschaute Filme: http://letterboxd.com/kiliankoe/list/ifsr-movie-night/"
 
   robot.hear /jehova/i, (msg) ->
     msg.send "http://i.imgur.com/01PMBGj.gif"
