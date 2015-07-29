@@ -1,5 +1,4 @@
 [
-  "days_since.coffee",
   "dealwithit.coffee",
   "weather.coffee",
   "stallman.coffee",
@@ -8,7 +7,6 @@
   "chm.coffee",
   "coin.coffee",
   "cowsay.coffee",
-  "countdown.coffee",
   "flip.coffee",
   "steveholt.coffee",
   "sudo.coffee",
