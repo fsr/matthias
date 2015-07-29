@@ -49,6 +49,9 @@ module.exports = (robot) ->
   robot.hear /frau/i, (msg) ->
     msg.send ":lucas: Eh? :point_up:"
 
+  robot.hear /muss man wissen|fefe|sascha lobo|axel stoll/i, (msg) ->
+    msg.send "http://i.imgur.com/FmEyA8t.png"
+
 randomRange = (min, max) ->
   Math.floor(Math.random() * (max - min) + min)
 
