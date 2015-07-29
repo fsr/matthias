@@ -37,7 +37,17 @@ module.exports = (robot) ->
   robot.hear /anyway/i, (msg) ->
     msg.reply "How's your sex life?"
 
-  
+  robot.respond /pizza/i, (msg) ->
+    msg.send "Ich bin Matthias Stuhlbein, Nöthnitzerstr. 46, 01187 Dresden. Fakultät Informatik. Mail: pizza@ifsr.de, Telefon: 0351 46338223 - Pizzen schneiden nicht vergessen ;)"
+
+  robot.respond /filmlist/i, (msg) ->
+    msg.send "Vorschläge: http://letterboxd.com/kiliankoe/list/ifsr-filmvorschlage/\nGeschaute Filme: http://letterboxd.com/kiliankoe/list/ifsr-movie-night/"
+
+  robot.hear /jehova/i, (msg) ->
+    msg.send "http://i.imgur.com/01PMBGj.gif"
+
+  robot.hear /frau/i, (msg) ->
+    msg.send ":lucas: Eh? :point_up:"
 
 randomRange = (min, max) ->
   Math.floor(Math.random() * (max - min) + min)
