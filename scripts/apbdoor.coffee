@@ -26,12 +26,15 @@ module.exports = (robot) ->
 
   robot.respond /glasschaden|rate mal, was wieder kaputt ist|techniker ist informiert/i, (msg) ->
     setDoor(robot, "yes")
+    msg.send "Orr ne, schon wieder?!"
 
   robot.respond /tür ist wieder ganz|tuer ist wieder ganz/i, (msg) ->
     setDoor(robot, "no")
+    msg.send "/giphy party"
 
   robot.respond /tür ist weg|tuer ist weg/i, (msg) ->
     setDoor(robot, "maybe")
+    msg.send "Ähm... Ahja?"
 
 checkDoor = (robot, msg) ->
   robot.http('http://tuer.fsrleaks.de')
