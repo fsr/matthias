@@ -85,8 +85,9 @@ module.exports = (robot) ->
       getMeals(mensa, mappedMensa[mensaKey], callback)
 
   getMeals = (name, mensa, callback) ->
-    now = new Date()
-    robot.http("http://openmensa.org/api/v2/canteens/#{mensa}/days/#{now.toISOString().slice(0,10)}/meals")
+    tzoffset = (new Date()).getTimezoneOffset() * 60000
+    now = (new Date(Date.now() - tzoffset)).toISOString().slice(0,10)
+    robot.http("http://openmensa.org/api/v2/canteens/#{mensa}/days/#{now}/meals")
       .get() (err, res, body) ->
         callback (
           if body.trim() == ""
