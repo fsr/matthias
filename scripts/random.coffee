@@ -37,7 +37,7 @@ module.exports = (robot) ->
       msg.reply "Deine Mudda ist #{adj}!"
 
   robot.hear /bash me/i, (msg) ->
-    msg.reply "http://bash.fsrleaks.de/?#{randomRange(1, 632)}"
+    msg.send "http://bash.fsrleaks.de/?#{randomRange(1, 632)}"
 
 
 randomRange = (min, max) ->
