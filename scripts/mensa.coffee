@@ -21,39 +21,42 @@ default_mensa = process.env.HUBOT_DEFAULT_MENSA or "Alte Mensa"
 
 mensen = [
     names: ["zelt", "zeltmensa"]
-    id: 79
+    id: 78
   ,
     names: ["alte", "alte mensa"]
-    id: 80
+    id: 79
   ,
     names: ["reichenbachstraße"]
-    id: 81
+    id: 80
   ,
     names: ["mensologie"]
-    id: 82
+    id: 81
   ,
     names: ["siedepunkt"]
-    id: 83
+    id: 82
   ,
     names: ["tharandt"]
-    id: 84
+    id: 83
   ,
     names: ["palucca"]
-    id: 85
+    id: 84
   ,
     names: ["wu", "wundtstraße"]
-    id: 86
+    id: 85
   ,
     names: ["stimm-gabel", "stimmgabel"]
-    id: 87
+    id: 86
   ,
     names: ["johannstadt"]
-    id: 88
+    id: 87
   ,
     names: ["u-boot", "uboot"]
-    id: 89
+    id: 88
   ,
     names: ["zittau"]
+    id: 89
+  , # currently out of order
+    names: ["zittau 2", "zittau zwei", "zittau II"]
     id: 90
   ,
     names: ["sport"]
@@ -83,8 +86,13 @@ module.exports = (robot) ->
   getMeals = (name, mensa, callback) ->
     robot.http("http://openmensa.org/api/v2/canteens/#{mensa}/days/today/meals")
       .get() (err, res, body) ->
-        data = JSON.parse body
-        callback "Heute @ *#{name}*:\n#{data.map(formatOutput).join('\n')}"
+        callback (
+          if body.trim() == ""
+            "This mensa is currently out of order, sorry."
+          else
+            data = JSON.parse body
+            "Heute @ *#{name}*:\n#{data.map(formatOutput).join('\n')}"
+        )
 
 
   robot.respond /mensa$/i, (msg) ->
