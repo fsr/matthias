@@ -51,4 +51,4 @@ module.exports = (robot) ->
   simpleresponses.forEach (resp_tuple) ->
     [trigger, answer] = resp_tuple
     robot.hear trigger, (msg) ->
-      msg.reply answer
+      msg.send answer
