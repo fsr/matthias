@@ -5,7 +5,7 @@
 #   None
 #
 # Configuration:
-#   None
+#   HUBOT_DEFAULT_MENSA : default mensa to return for 'hubot mensa' command
 #
 # Commands:
 #   hubot mensa - Frag' hubot was es heute in der Alten Mensa gibt.
@@ -13,7 +13,8 @@
 #   hubot mensen - Lass' hubot die Liste der unterstützten Mensen auflisten.
 #
 # Author:
-#   kiliankoe
+#   kiliankoe - me@kilian.io
+#   Justus Adam - me@justus.science
 
 
 default_mensa = process.env.HUBOT_DEFAULT_MENSA or "Alte Mensa"
