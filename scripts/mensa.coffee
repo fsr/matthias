@@ -85,7 +85,8 @@ module.exports = (robot) ->
       getMeals(mensa, mappedMensa[mensaKey], callback)
 
   getMeals = (name, mensa, callback) ->
-    robot.http("http://openmensa.org/api/v2/canteens/#{mensa}/days/today/meals")
+    now = new Date()
+    robot.http("http://openmensa.org/api/v2/canteens/#{mensa}/days/#{now.toISOString().slice(0,10)}/meals")
       .get() (err, res, body) ->
         callback (
           if body.trim() == ""
