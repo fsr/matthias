@@ -32,12 +32,10 @@ module.exports = (robot) ->
       msg.send msg.random walter_quotes
 
   robot.hear /matthias ist (.*)/, (msg) ->
-    adj = msg.match[1]
-    if adj.indexOf("die t") == -1
+    adj = msg.match[1].toLowerCase()
+    if adj.indexOf("die tür") == -1 and adj.indexOf("die tuer") == -1
       msg.reply "Deine Mudda ist #{adj}!"
 
-randomRange = (min, max) ->
-  Math.floor(Math.random() * (max - min) + min)
 
 donny = "slackbot"
 walter_quotes = [
