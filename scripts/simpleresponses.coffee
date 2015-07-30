@@ -1,5 +1,5 @@
 # Description:
-#   Ein paar weitere kleine Antworten von matthias
+#   Einfache trigger-response Interaktionen
 #
 # Dependencies:
 #   None
@@ -8,7 +8,6 @@
 #   None
 #
 # Commands:
-#   hubot bash me - Frag' hubot nach einem random Zitat link
 #   hubot pizza - hubot nennt alle Details für eine Pizzabestellung (im Ratsaal)
 #   hubot filmlist - Frag' hubot nach Links zu beiden Filmlisten
 #
@@ -42,7 +41,7 @@ simplelistens = [
   [/schuh/, ":shoe::shoe:? Liegen wahrscheinlich noch bei Ben daheim."],
   [/you're tearing me apart|the room|tommy wiseau/, "http://i.giphy.com/pTrgmCL2Iabg4.gif"],
   [/citrix|35000|35.000|35k/, ":moneybag::moneybag::moneybag:"],
-  [/this is madness/i, "Madness you say? THIS. IS. PATRI... MATTHIAS!"]
+  [/madness/i, "Madness you say? THIS. IS. PATRI... MATTHIAS!"]
 ]
 
 

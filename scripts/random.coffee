@@ -9,8 +9,6 @@
 #
 # Commands:
 #   hubot bash me - Frag' hubot nach einem random Zitat link
-#   hubot pizza - hubot nennt alle Details für eine Pizzabestellung (im Ratsaal)
-#   hubot filmlist - Frag' hubot nach Links zu beiden Filmlisten
 #
 #
 # Author:
