@@ -95,7 +95,14 @@ module.exports = (robot) ->
     generic_resp_func(mensa, (m) -> msg.send m)
 
   robot.respond /mensen/i, (msg) ->
-    msg.send "Ich kann dir heutige Speisepläne für die folgenden Mensen holen:\n - #{mensen.join('\n - ')}\nSprich' mich einfach mit `matthias mensa <mensa>` an."
+    names = mensen.map((mensa) ->
+      if mensa.names.length > 0
+        mensa.names[0]
+      else
+        null
+    ).filter((name) -> name != null)
+
+    msg.send "Ich kann dir heutige Speisepläne für die folgenden Mensen holen:\n - #{names.join('\n - ')}\nSprich' mich einfach mit `matthias mensa <mensa>` an."
 
 
 formatOutput = (meal) ->
