@@ -18,7 +18,6 @@
 
 
 simpleresponses = [
-  [/bash me/i, "http://bash.fsrleaks.de/?#{randomRange(1, 632)}"],
   [
     /pizza/i,
     "Ich bin Matthias Stuhlbein,
@@ -53,7 +52,3 @@ module.exports = (robot) ->
     [trigger, answer] = resp_tuple
     robot.hear trigger, (msg) ->
       msg.send answer
-
-
-randomRange = (min, max) ->
-  Math.floor(Math.random() * (max - min) + min)

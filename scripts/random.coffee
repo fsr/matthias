@@ -35,7 +35,14 @@ module.exports = (robot) ->
     adj = msg.match[1].toLowerCase()
     if adj.indexOf("die tür") == -1 and adj.indexOf("die tuer") == -1
       msg.reply "Deine Mudda ist #{adj}!"
-      
+
+  robot.hear /bash me/i, (msg) ->
+    mgs.reply "http://bash.fsrleaks.de/?#{randomRange(1, 632)}"
+
+
+randomRange = (min, max) ->
+  Math.floor(Math.random() * (max - min) + min)
+
 
 donny = "slackbot"
 walter_quotes = [
