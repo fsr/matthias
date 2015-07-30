@@ -9,7 +9,7 @@
 #
 # Commands:
 #   hubot bash me - Frag' hubot nach einem random Zitat link
-#
+#   hubot random <min> <max> - Frag' hubot nach einer Zufallszahl zwischen <min> und <max> (nutzt random.org)
 #
 # Author:
 #   kiliankoe
@@ -37,10 +37,16 @@ module.exports = (robot) ->
   robot.hear /bash me/i, (msg) ->
     msg.send "http://bash.fsrleaks.de/?#{randomRange(1, 632)}"
 
+  robot.respond /random (\d*) (\d*)/i, (msg) ->
+    min = msg.match[1]
+    max = msg.match[2]
+    robot.http("https://www.random.org/integers/?num=1&min=#{min}&max=#{max}&format=plain&col=1&base=10")
+      .get() (err, res, body) ->
+        msg.send(body.trim())
+
 
 randomRange = (min, max) ->
   Math.floor(Math.random() * (max - min) + min)
-
 
 donny = "slackbot"
 walter_quotes = [
