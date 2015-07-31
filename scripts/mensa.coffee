@@ -11,10 +11,12 @@
 #   hubot mensa - Frag' hubot was es heute in der Alten Mensa gibt.
 #   hubot mensa <mensa> - Frag' hubot was es heute in einer spezifischen Mensa gibt.
 #   hubot mensen - Lass' hubot die Liste der unterstützten Mensen auflisten.
+#   hubot mensa bild <nr> Lass' hubot das Bild zum Essen finden.
 #
 # Author:
 #   kiliankoe - me@kilian.io
 #   Justus Adam - me@justus.science
+#   Philipp Heisig - matthias@pheisig.de
 
 cronjob = require("cron").CronJob
 
@@ -75,6 +77,7 @@ mappedMensa = mensen.reduce((map, mensa) ->
     map
   , {})
 
+imgcnt = -1
 
 module.exports = (robot) ->
 
@@ -96,6 +99,52 @@ module.exports = (robot) ->
     else
       getMeals(mensa, mappedMensa[mensaKey], callback)
 
+  getImage = (msg, imgid) ->
+    tzoffset = (new Date()).getTimezoneOffset() * 60000
+    now = (new Date(Date.now() - tzoffset)).toISOString().slice(0,10)
+    robot.http("http://openmensa.org/api/v2/canteens/79/days/#{now}/meals")
+      .get() (err, res, body) ->
+        if body.trim() == ""
+          msg.send "This mensa is currently out of order, sorry."
+        else
+          imgcnt = -1
+          data = JSON.parse body
+          output = "#{data.map(formatOutput).join('\n')}\n"
+          stringstart = output.indexOf("\n#{imgid}")
+          if stringstart > -1
+            if imgid > 9
+              stringstart += 5
+            else
+              stringstart += 4
+            output = output.substr(stringstart, output.indexOf("\n", stringstart) - stringstart)
+            if output.indexOf("€") > -1
+              output = output.substr(0, output.indexOf(" - "), output.length - 10)
+            robot.http("http://www.studentenwerk-dresden.de/mensen/speiseplan/")
+              .get() (err, res, body) ->
+                if body.trim() == ""
+                  msg.send ("No image found, sorry.")
+                else
+                  body = body.substr(body.indexOf("<th class=\"text\">Alte Mensa</th>"))
+                  if body.indexOf(output) > -1
+                    body = body.substr(0, body.indexOf(output) + output.length + 4)
+                    body = body.substr(body.lastIndexOf("<a href") + 9)
+                    body = body.substr(0, body.indexOf("\">"))
+                    link = "http://www.studentenwerk-dresden.de/mensen/speiseplan/" + body
+                    robot.http(link)
+                      .get() (err, res, body) ->
+                        if body.trim() == ""
+                          msg.send ("No image found, sorry.")
+                        else
+                          imagelink = body.substr(body.indexOf("//bilderspeiseplan"))
+                          imagelink = imagelink.substr(0, imagelink.indexOf("\""))
+                          imagelink = "http:" + imagelink
+                          msg.send(imagelink)
+                  else
+                    msg.send ("No image found, sorry.")
+          else
+            msg.send("No food with this number..");
+
+
   getMeals = (name, mensa, callback) ->
     tzoffset = (new Date()).getTimezoneOffset() * 60000
     now = (new Date(Date.now() - tzoffset)).toISOString().slice(0,10)
@@ -105,6 +154,7 @@ module.exports = (robot) ->
           if body.trim() == ""
             "This mensa is currently out of order, sorry."
           else
+            imgcnt = -1
             data = JSON.parse body
             "Heute @ *#{name}*:\n#{data.map(formatOutput).join('\n')}"
         )
@@ -114,7 +164,13 @@ module.exports = (robot) ->
 
   robot.respond /mensa (\S.*)/i, (msg) ->
     mensa = msg.match[1]
+    if mensa.indexOf("bild") > -1
+      return
     generic_resp_func(mensa, (m) -> msg.send m)
+
+  robot.respond /mensa bild (\d*)/i, (msg) ->
+    imgid = msg.match[1]
+    getImage(msg, imgid)
 
   robot.respond /mensen/i, (msg) ->
     names = mensen.map((mensa) ->
@@ -126,11 +182,11 @@ module.exports = (robot) ->
 
     msg.send "Ich kann dir heutige Speisepläne für die folgenden Mensen holen:\n - #{names.join('\n - ')}\nSprich' mich einfach mit `matthias mensa <mensa>` an."
 
-
 formatOutput = (meal) ->
+  imgcnt++
   if meal.category == "Pasta"
-    "Pasta mit #{meal.name}"
+    return "#{imgcnt}: Pasta mit #{meal.name}"
   else if meal.prices.students?
-    "#{meal.name} - #{meal.prices.students}€"
+    return "#{imgcnt}: #{meal.name} - #{meal.prices.students}€"
   else
-    "#{meal.name}"
+    return "#{imgcnt}: #{meal.name}"
