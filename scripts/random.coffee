@@ -16,13 +16,11 @@
 
 
 module.exports = (robot) ->
-  robot.hear /(python|haskell|\sphp|^php)/i, (msg) ->
+  robot.hear /(python|haskell)/i, (msg) ->
     lang = msg.match[1].toLowerCase()
     user = msg.message.user.name.toLowerCase()
     if user == "justus"
       msg.send "Ja, aber #{lang} ist ja auch keine ernstzunehmende Sprache..."
-    else if lang == "php" or lang == " php"
-      msg.send "Naja, ich hab mit PHP auch schon richtig gut funktioni⍰\nParse error: syntax error, unexpected '::' (T_PAAMAYIM_NEKUDOTAYIM) in Command line code on line 1"
 
   robot.hear /.*/, (msg) ->
     user = msg.message.user.name.toLowerCase()

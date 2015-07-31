@@ -42,7 +42,8 @@ simplelistens = [
   [/you're tearing me apart|the room|tommy wiseau/, "http://i.giphy.com/pTrgmCL2Iabg4.gif"],
   [/citrix|35000|35\.000|35k/, ":moneybag::moneybag::moneybag:"],
   [/madness/i, "Madness you say? THIS. IS. PATRI... MATTHIAS!"],
-  [/^nein$/i, "Doch!"]
+  [/^nein$/i, "Doch!"],
+  [/\sphp|^php/, "Naja, ich hab mit PHP auch schon richtig gut funktioni⍰\nParse error: syntax error, unexpected '::' (T_PAAMAYIM_NEKUDOTAYIM) in Command line code on line 1"]
 ]
 
 
