@@ -20,7 +20,7 @@
 simpleresponses = [
   [
     /pizza/i,
-    "Ich bin Matthias Stuhlbein, Nöthnitzerstr. 46, 01187 Dresden. Fakultät Informatik. Mail: pizza@ifsr.de, Telefon: 0351 46338223 - Pizzen schneiden nicht vergessen ;)"
+    "Ich bin Matthias Stuhlbein, Nöthnitzer Str. 46, 01187 Dresden. Fakultät Informatik. Mail: pizza@ifsr.de, Telefon: 0351 46338223 - Pizzen schneiden nicht vergessen ;)"
   ],
   [
     /filmlist/i,
