@@ -16,6 +16,7 @@
 #   kiliankoe - me@kilian.io
 #   Justus Adam - me@justus.science
 
+cronjob = require("cron").CronJob
 
 default_mensa = process.env.HUBOT_DEFAULT_MENSA or "Alte Mensa"
 
@@ -77,6 +78,17 @@ mappedMensa = mensen.reduce((map, mensa) ->
 
 module.exports = (robot) ->
 
+  new cronjob('00 30 10 * * 1-5', ->
+    dailyMensa(robot)
+  , null, true, "Europe/Berlin")
+
+  new cronjob('00 30 11 * * 1-5', ->
+    robot.messageRoom '#mensa', 'Stop! Mensatime!'
+  , null, true, "Europe/Berlin")
+
+  dailyMensa = (robot) ->
+    generic_resp_func(default_mensa, (m) -> robot.messageRoom '#mensa', m)
+
   generic_resp_func = (mensa, callback) ->
     mensaKey = mensa.toLowerCase()
     if not mappedMensa.hasOwnProperty mensaKey
@@ -96,7 +108,6 @@ module.exports = (robot) ->
             data = JSON.parse body
             "Heute @ *#{name}*:\n#{data.map(formatOutput).join('\n')}"
         )
-
 
   robot.respond /mensa$/i, (msg) ->
     generic_resp_func(default_mensa, (m) -> msg.send m)
