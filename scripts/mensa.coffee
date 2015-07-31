@@ -109,7 +109,7 @@ module.exports = (robot) ->
         else
           imgcnt = -1
           data = JSON.parse body
-          output = "#{data.map(formatOutput).join('\n')}\n"
+          output = "\n#{data.map(formatOutput).join('\n')}\n"
           stringstart = output.indexOf("\n#{imgid}")
           if stringstart > -1
             if imgid > 9
