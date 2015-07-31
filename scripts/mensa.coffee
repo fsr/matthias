@@ -109,8 +109,8 @@ module.exports = (robot) ->
         else
           imgcnt = -1
           data = JSON.parse body
-          output = "\n#{data.map(formatOutput).join('\n')}\n"
-          stringstart = output.indexOf("\n#{imgid}")
+          output = "#{data.map(formatOutput).join('\n')}\n"
+          stringstart = output.indexOf("#{imgid}: ")
           if stringstart > -1
             if imgid > 9
               stringstart += 5
@@ -138,7 +138,10 @@ module.exports = (robot) ->
                           imagelink = body.substr(body.indexOf("//bilderspeiseplan"))
                           imagelink = imagelink.substr(0, imagelink.indexOf("\""))
                           imagelink = "http:" + imagelink
-                          msg.send(imagelink)
+                          if imagelink.length < 20
+                            msg.send ("No image found, sorry.")
+                          else
+                            msg.send(imagelink)
                   else
                     msg.send ("No image found, sorry.")
           else
