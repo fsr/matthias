@@ -50,19 +50,6 @@ module.exports = (robot) ->
       .get() (err, res, body) ->
         msg.send(body.trim())
 
-  robot.respond /catfact/i, (msg) ->
-    robot.send({room: msg.envelope.user.name}, "You have now been subscribed to Cat Facts. Type 'Tyxt33358dgggyf' to unsubscribe.")
-    setTimeout () ->
-      robot.send({room: msg.envelope.user.name}, "In ancient Egypt killing a cat was a crime punishable by death. Thanks for choosing Cat Facts!")
-    , 5 * 1000
-
-  robot.respond /Tyxt33358dgggyf/, (msg) ->
-    msg.send "Command not recognized. You have a 2 year subscription to Cat Facts and will receive fun hourly updates!"
-    setTimeout () ->
-      msg.send "Did you know that the first cat show was held in 1871 at the Crystal Palace in London? Mee-wow!"
-    , 3600 * 1000
-
-
 randomRange = (min, max) ->
   Math.floor(Math.random() * (max - min) + min)
 
