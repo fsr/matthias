@@ -51,10 +51,9 @@ module.exports = (robot) ->
         msg.send(body.trim())
 
   robot.respond /catfact/i, (msg) ->
-    user = msg.message.user.name
-    robot.send({user: {name: user}}, "You have now been subscribed to Cat Facts. Type 'Tyxt33358dgggyf' to unsubscribe.")
+    robot.send({room: msg.envelope.user.name}, "You have now been subscribed to Cat Facts. Type 'Tyxt33358dgggyf' to unsubscribe.")
     setTimeout () ->
-      robot.send({user: {name: user}}, "In ancient Egypt killing a cat was a crime punishable by death. Thanks for choosing Cat Facts!")
+      robot.send({room: msg.envelope.user.name}, "In ancient Egypt killing a cat was a crime punishable by death. Thanks for choosing Cat Facts!")
     , 5 * 1000
 
   robot.respond /Tyxt33358dgggyf/, (msg) ->
