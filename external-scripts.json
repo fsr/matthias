@@ -11,6 +11,5 @@
   "hubot-calculator",
   "hubot-decides",
   "hubot-xkcd",
-  "hubot-dvb",
-  "hubot-catfacts"
+  "hubot-dvb"
 ]

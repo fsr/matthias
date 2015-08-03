@@ -13,7 +13,6 @@
     "hubot-decides": "0.0.7",
     "hubot-diagnostics": "0.0.1",
     "hubot-dvb": "*",
-    "hubot-catfacts": "*",
     "hubot-google-images": "^0.1.5",
     "hubot-google-translate": "^0.2.0",
     "hubot-help": "^0.1.1",
