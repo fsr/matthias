@@ -27,14 +27,18 @@ module.exports = (robot) ->
     if user == donny
       msg.send msg.random walter_quotes
 
-  robot.hear /matthias ist (.*)/, (msg) ->
+  robot.hear /matthias ist (.*)/i, (msg) ->
     adj = msg.match[1].toLowerCase()
     if adj.indexOf("die tür") == -1 and adj.indexOf("die tuer") == -1
       msg.reply "Deine Mudda ist #{adj}!"
 
-  robot.hear /matthias,? du bist (.*)/, (msg) ->
+  robot.hear /matthias,? du bist (.*)/i, (msg) ->
     adj = msg.match[1].toLowerCase()
     msg.reply "Deine Mudda ist #{adj}!"
+
+  robot.hear /matthias scheißt auf (.*)/i, (msg) ->
+    term = msg.match[1]
+    msg.reply "Deine Mudda scheißt auf #{term}!"
 
   robot.hear /bash me/i, (msg) ->
     msg.send "http://bash.fsrleaks.de/?#{randomRange(1, 632)}"
