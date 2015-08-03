@@ -21,7 +21,7 @@
 
 
 module.exports = (robot) ->
-  robot.respond /türstatus|tuerstatus|ist die tür kaputt?|ist die tuer kaputt?/i, (msg) ->
+  robot.respond /türstatus|tuerstatus|ist die tür kaputt\?|ist die tuer kaputt\?/i, (msg) ->
     checkDoor(robot, msg)
 
   robot.respond /glasschaden|rate mal, was wieder kaputt ist|techniker ist informiert/i, (msg) ->
