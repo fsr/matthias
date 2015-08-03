@@ -188,36 +188,36 @@ module.exports = (robot) ->
 formatOutput = (meal) ->
   imgcnt++
   if meal.category == "Pasta"
-    return "#{imgcnt}: Pasta mit #{meal.name}#{formatMealNotes(meal.notes)}"
+    return "#{imgcnt}: Pasta mit #{meal.name} #{formatMealNotes(meal.notes)}"
   else if meal.prices.students?
-    return "#{imgcnt}: #{meal.name} - #{meal.prices.students.toFixed(2)}€#{formatMealNotes(meal.notes)}"
+    return "#{imgcnt}: #{meal.name} - #{meal.prices.students.toFixed(2)}€ #{formatMealNotes(meal.notes)}"
   else
-    return "#{imgcnt}: #{meal.name}#{formatMealNotes(meal.notes)}"
+    return "#{imgcnt}: #{meal.name} #{formatMealNotes(meal.notes)}"
 
 formatMealNotes = (notes) ->
   notesabbr = [
       long: "Rindfleisch"
-      abbr: "R"
+      abbr: ":cow:"
     ,
       long: "Schweinefleisch"
-      abbr: "S"
+      abbr: ":pig:"
     ,
       long: "kein Fleisch"
-      abbr: "V"
+      abbr: ":tomato:"
     ,
       long: "vegan"
-      abbr: "V+"
+      abbr: ":herb:"
     ,
       long: "Alkohol"
-      abbr: "A"
+      abbr: ":wine_glass:"
     ,
       long: "Knoblauch"
-      abbr: "K"
+      abbr: ":garlic:"
   ]
   # @justus: Wanna throw some functional magic on this? :D
   str = ""
   for note in notes
     for abbreviation in notesabbr
       if note.indexOf(abbreviation.long) > -1
-        str += " #{abbreviation.abbr}"
+        str += "#{abbreviation.abbr}"
   return str
