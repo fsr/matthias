@@ -36,7 +36,6 @@ simplelistens = [
   [/pimmel/i, "Höhöhö, du hast Pimmel gesagt."],
   [/anyway/i, "how's your sex life?"],
   [/jehova/i, "http://i.imgur.com/01PMBGj.gif"],
-  [/frau/i, ":lucas: Eh? :point_up:"],
   [/muss man wissen|fefe|sascha lobo|axel stoll/, "http://i.imgur.com/FmEyA8t.png"],
   [/schuh/, ":shoe::shoe:? Liegen wahrscheinlich noch bei Ben daheim."],
   [/you're tearing me apart|the room|tommy wiseau/, "http://i.giphy.com/pTrgmCL2Iabg4.gif"],
