@@ -85,10 +85,6 @@ module.exports = (robot) ->
     dailyMensa(robot)
   , null, true, "Europe/Berlin")
 
-  new cronjob('00 30 11 * * 1-5', ->
-    robot.messageRoom '#mensa', 'Stop! Mensatime!'
-  , null, true, "Europe/Berlin")
-
   dailyMensa = (robot) ->
     generic_resp_func(default_mensa, (m) -> robot.messageRoom '#mensa', m)
 
