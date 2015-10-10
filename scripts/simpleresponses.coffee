@@ -37,7 +37,6 @@ simplelistens = [
   [/anyway/i, "how's your sex life?"],
   [/jehova/i, "http://i.imgur.com/01PMBGj.gif"],
   [/muss man wissen|fefe|sascha lobo|axel stoll/, "http://i.imgur.com/FmEyA8t.png"],
-  [/schuh/, ":shoe::shoe:? Liegen wahrscheinlich noch bei Ben daheim."],
   [/you're tearing me apart|the room|tommy wiseau/, "http://i.giphy.com/pTrgmCL2Iabg4.gif"],
   [/citrix|35000|35\.000|35k/, ":moneybag::moneybag::moneybag:"],
   [/madness/i, "Madness you say? THIS. IS. PATRI... MATTHIAS!"],
