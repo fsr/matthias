@@ -48,10 +48,10 @@ simplelistens = [
 
 module.exports = (robot) ->
 
-  simplelistens.forEach (resp_tuple) ->
-    [trigger, answer] = resp_tuple
-    robot.hear trigger, (msg) ->
-      msg.send answer
+#  simplelistens.forEach (resp_tuple) ->
+#    [trigger, answer] = resp_tuple
+#    robot.hear trigger, (msg) ->
+#      msg.send answer
 
   simpleresponses.forEach (resp_tuple) ->
     [trigger, answer] = resp_tuple
