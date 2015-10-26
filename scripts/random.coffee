@@ -16,12 +16,6 @@
 
 
 module.exports = (robot) ->
-  robot.hear /(python|haskell)/i, (msg) ->
-    lang = msg.match[1].toLowerCase()
-    user = msg.message.user.name.toLowerCase()
-    if user == "justus"
-      msg.send "Ja, aber #{lang} ist ja auch keine ernstzunehmende Sprache..."
-
   robot.hear /.*/, (msg) ->
     user = msg.message.user.name.toLowerCase()
     if user == donny
