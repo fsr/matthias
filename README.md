@@ -12,7 +12,7 @@ Here's a link to the [hubot docs][hubot-docs] for reference.
 [generator-hubot]: https://github.com/github/generator-hubot
 [hubot-docs]: https://github.com/github/hubot/blob/master/docs/scripting.md
 
-### Running matthias Locally
+### Running matthias locally
 
 You can test matthias by running the following, however some plugins will not
 behave as expected unless the [environment variables](#configuration) they rely
@@ -70,7 +70,7 @@ the thing.
 
 [scripting-docs]: https://github.com/github/hubot/blob/master/docs/scripting.md
 
-### external-scripts
+### External-scripts
 
 There will inevitably be functionality that everyone will want. Instead of
 writing it yourself, you can use existing plugins.
@@ -92,7 +92,7 @@ To use a package, check the package's documentation, but in general it is:
 
 You can review `external-scripts.json` to see what is included by default.
 
-##### Advanced Usage
+##### Advanced usage
 
 It is also possible to define `external-scripts.json` as an object to
 explicitly specify which scripts from a package should be included. The example
