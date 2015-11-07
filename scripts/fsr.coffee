@@ -39,3 +39,13 @@ module.exports = (robot) ->
     datediff -= hours*3600*1000
     minutes = Math.floor(datediff/1000/60)
     msg.send "Nur noch #{days} Tage, #{hours} Stunden und #{minutes} Minuten bis zur ESE 2015."
+
+  robot.respond /buero|buerostatus|büro|bürostatus/i, (msg) ->
+    robot.http('https://www.ifsr.de/buerostatus/output.php')
+      .get() (err, res, body) ->
+        if body.trim() == "1"
+          msg.send 👍
+        else if body.trim() == "0"
+          msg.send 👎
+        else
+          msg.send "Keine Ahnung, Sebastian hat schon wieder unerwartet was geändert!"
