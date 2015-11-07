@@ -44,8 +44,8 @@ module.exports = (robot) ->
     robot.http('https://www.ifsr.de/buerostatus/output.php')
       .get() (err, res, body) ->
         if body.trim() == "1"
-          msg.send 👍
+          msg.send "Jemand da."
         else if body.trim() == "0"
-          msg.send 👎
+          msg.send "Keiner da."
         else
           msg.send "Keine Ahnung, Sebastian hat schon wieder unerwartet was geändert!"
