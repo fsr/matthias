@@ -10,6 +10,8 @@
 # Commands:
 #   hubot protokoll - Frag' hubot nach dem aktuellem protokoll
 #   hubot protokoll <datum> - Frag' hubot nach dem Protokoll von <datum> (ISO-Format)
+#   hubot ese - hubot sagt dir das Datum der ESE (falls das jemand updated)
+#   hubot bürostatus - hubot sagt dir, ob aktuell wer im Büro ist.
 #
 # Author:
 #   kiliankoe
