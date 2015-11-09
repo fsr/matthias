@@ -11,7 +11,8 @@
 #   hubot protokoll - Frag' hubot nach dem aktuellem protokoll
 #   hubot protokoll <datum> - Frag' hubot nach dem Protokoll von <datum> (ISO-Format)
 #   hubot ese - hubot sagt dir das Datum der ESE (falls das jemand updated)
-#   hubot bürostatus - hubot sagt dir, ob aktuell wer im Büro ist.
+#   hubot jemand da? - hubot sagt dir, ob aktuell wer im Büro ist.
+#   hubot buerostatus - hubot zeigt den buerostatus graphen der letzten 6 Stunden.
 #
 # Author:
 #   kiliankoe
@@ -42,12 +43,15 @@ module.exports = (robot) ->
     minutes = Math.floor(datediff/1000/60)
     msg.send "Nur noch #{days} Tage, #{hours} Stunden und #{minutes} Minuten bis zur ESE 2015."
 
-  robot.respond /buero|buerostatus|büro|bürostatus/i, (msg) ->
+  robot.respond /((wer|jemand) (da|im (büro|buero))|licht an)\?/, (msg) ->
     robot.http('https://www.ifsr.de/buerostatus/output.php')
       .get() (err, res, body) ->
         if body.trim() == "1"
-          msg.send "Jemand da."
+          msg.send "Scheint so."
         else if body.trim() == "0"
-          msg.send "Keiner da."
+          msg.send "Glaub nicht."
         else
           msg.send "Keine Ahnung, Sebastian hat schon wieder unerwartet was geändert!"
+
+  robot.respond /(buero|büro)(status)?/i, (msg) ->
+    msg.send('https://www.ifsr.de/buerostatus/image.php?h=6')
