@@ -198,7 +198,7 @@ formatMealNotes = (notes) ->
       long: "Schweinefleisch"
       abbr: ":pig:"
     ,
-      long: "kein Fleisch"
+      long: "vegetarisch"
       abbr: ":tomato:"
     ,
       long: "vegan"
