@@ -25,7 +25,7 @@ module.exports = (robot) ->
 7. *Pommdöner* mit Pommes, Fleisch und Soße - 3,50€\n
 8. *Mais Döner* - 4,40€\n
 \n
-*Dönerteller*
+*Dönerteller*\n
 9. *Dönerteller* normal - 5,50€ 6,50€\n
 10. *Dönerteller* mit Käse - 6,00€ 7,00€\n
 11. *Dönerteller* mit Pommes - 5,50€ 6,50€\n
@@ -126,27 +126,27 @@ module.exports = (robot) ->
 88. *Funghi* mit Champignons - 4,50€ 5,50€\n
 89. *Salami* - 4,50€ 5,50€\n
 90. *Schinken* - 4,50€ 5,50€\n
-91. *Enzo* mit Salami und Champignons - 4,80 5,80€\n
-92. *Prosciutto Funghi* mit Schinken und Champignons - 4,80 5,80€\n
-93. *Roma* mit Salami, Schinken und Champignons - 5,00 6,00€\n
-94. *Pizza Scharf* mit Peperoniwurst, Peperoni und Zwiebeln -  4,80 6,00€\n
-95. *Hawaii* mit Schinken u. Ananas -  4,80 6,00€\n
-96. *Toskana* mit Salami, Schinken, Champignons, Peperoni u. Zwiebeln - 5,00 6,00€\n
-97. *Bolognese* mit Fleischsoße - 4,80 5,50€\n
-98. *Tonno* mit Thunfisch und Zwiebeln - 4,80 6,00€\n
+91. *Enzo* mit Salami und Champignons - 4,80€ 5,80€\n
+92. *Prosciutto Funghi* mit Schinken und Champignons - 4,80€ 5,80€\n
+93. *Roma* mit Salami, Schinken und Champignons - 5,00€ 6,00€\n
+94. *Pizza Scharf* mit Peperoniwurst, Peperoni und Zwiebeln - 4,80€ 6,00€\n
+95. *Hawaii* mit Schinken u. Ananas -  4,80€ 6,00€\n
+96. *Toskana* mit Salami, Schinken, Champignons, Peperoni u. Zwiebeln - 5,00€ 6,00€\n
+97. *Bolognese* mit Fleischsoße - 4,80€ 5,50€\n
+98. *Tonno* mit Thunfisch und Zwiebeln - 4,80€ 6,00€\n
 99. *Calzone* (gefüllte Pizza) mit Schinken, Salami, Paprika und Champignons - 5,80€\n
-100. *Mozzarella* mit Mozzarella, Tomaten und Zwiebeln - 4,80 6,00€\n
-101. *Diavala* mit Spinat, Peperoni und Zwiebeln - 4,80 5,50€\n
-102. *Halloumi* mit Halloumi, Mais und Zwiebeln - 4,80 6,00€\n
-103. *Boss* mit Salami, Schinken, Champignons und Ei - 5,20 6,50€\n
-104. *Vegetarisch* mit Brokkoli, Champignons, Paprika und Zwiebeln - 4,80 6,00€\n
-105. *Firat* mit Knoblauchwurst, Tomaten, Champignons und Zwiebeln - 5,20 6,50€\n
-106. *Döner* mit Dönerfleisch, Peperoni und Zwiebeln
-107. *Spezial* mit Thunfisch, Shrimps und Knoblauch - 5,50 6,50€\n
-108. *Mafia* mit Schinken, Zwiebeln, Chili und Knoblauch - 5,20 6,50€\n
-109. *Vier Sorten Käse* mit 4 verschiedenen Sorten Käse - 5,50 7,00€\n
-110. *Vier Jahreszeiten* mit Salami, Schinken, Peperoni und Thunfisch - 5,50 7,00€\n
-111. *Turbo* mit Salami, Schinken, Champignons u. Peperoni - 5,00 6,00€\n
+100. *Mozzarella* mit Mozzarella, Tomaten und Zwiebeln - 4,80€ 6,00€\n
+101. *Diavala* mit Spinat, Peperoni und Zwiebeln - 4,80€ 5,50€\n
+102. *Halloumi* mit Halloumi, Mais und Zwiebeln - 4,80€ 6,00€\n
+103. *Boss* mit Salami, Schinken, Champignons und Ei - 5,20€ 6,50€\n
+104. *Vegetarisch* mit Brokkoli, Champignons, Paprika und Zwiebeln - 4,80€ 6,00€\n
+105. *Firat* mit Knoblauchwurst, Tomaten, Champignons und Zwiebeln - 5,20€ 6,50€\n
+106. *Döner* mit Dönerfleisch, Peperoni und Zwiebeln -5,50€ 6,50€\n
+107. *Spezial* mit Thunfisch, Shrimps und Knoblauch - 5,50€ 6,50€\n
+108. *Mafia* mit Schinken, Zwiebeln, Chili und Knoblauch - 5,20€ 6,50€\n
+109. *Vier Sorten Käse* mit 4 verschiedenen Sorten Käse - 5,50€ 7,00€\n
+110. *Vier Jahreszeiten* mit Salami, Schinken, Peperoni und Thunfisch - 5,50€ 7,00€\n
+111. *Turbo* mit Salami, Schinken, Champignons u. Peperoni - 5,00€ 6,00€\n
 \n
 *Suppen*\n
 112. *Linsensuppe* - 3,00€\n
