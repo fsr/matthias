@@ -53,11 +53,12 @@ module.exports = (robot) ->
   simplelistens.forEach (resp_tuple) ->
     [trigger, answer] = resp_tuple
     robot.hear trigger, (msg) ->
+      
       if Math.random() > Math.exp(-messagecount/10)
         msg.send answer
-        messagecount = -1
-
-      messagecount++
+        messagecount = 0
+      else
+        messagecount++
 
   simpleresponses.forEach (resp_tuple) ->
     [trigger, answer] = resp_tuple
