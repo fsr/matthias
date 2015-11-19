@@ -41,7 +41,7 @@ module.exports = (robot) ->
     hours = Math.floor(datediff/1000/60/60)
     datediff -= hours*3600*1000
     minutes = Math.floor(datediff/1000/60)
-    msg.send "Nur noch #{days} Tage, #{hours} Stunden und #{minutes} Minuten bis zur ESE 2015."
+    msg.send "Nur noch #{days} Tage, #{hours} Stunden und #{minutes} Minuten bis zur ESE 2016. Vermutlich :stuck_out_tongue_winking_eye:"
 
   robot.respond /((wer|jemand) (da|im (büro|buero))|licht an)\?/, (msg) ->
     robot.http('https://www.ifsr.de/buerostatus/output.php')
