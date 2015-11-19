@@ -33,7 +33,7 @@ module.exports = (robot) ->
 
   robot.respond /ese/i, (msg) ->
     currentdate = new Date()
-    esedate = new Date("2015-10-05 9:00:00")
+    esedate = new Date("2016-10-04 9:00:00")
     datediff = esedate - currentdate
 
     days = Math.floor(datediff/1000/60/60/24)
