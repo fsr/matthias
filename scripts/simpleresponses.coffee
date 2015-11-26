@@ -56,7 +56,7 @@ module.exports = (robot) ->
       
       if Math.random() > Math.exp(-messagecount/10)
         msg.send answer
-        messagecount = 0
+        messagecount = -1
       else
         messagecount++
 
