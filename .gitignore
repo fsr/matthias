@@ -3,3 +3,4 @@ node_modules
 .hubot_history
 matthias.conf
 update.coffee
+configvars.txt
