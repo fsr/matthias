@@ -19,7 +19,7 @@ module.exports = (robot) ->
     robot.respond /geruecht|gerücht/i, (msg) ->
       user = process.env.FSRUSERNAME
       pw = process.env.FSRPASSWORD
-      robot.http("http://#{user}:#{pw}@leaks.fsrleaks.de")
+      robot.http("http://#{user}:#{pw}@leaks.fsrleaks.de/index.php")
         .get() (err, res, body) ->
             $ = cheerio.load body
             geruecht = $('div').text().replace /Psst\.\.\./, ""
