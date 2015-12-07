@@ -45,20 +45,19 @@ simplelistens = [
   [/gewitter/i, "Gewitter? In Neuss?"]
 ]
 
-messagecount = -1
-
-
 module.exports = (robot) ->
+
+  robot.messagecount = -1
 
   simplelistens.forEach (resp_tuple) ->
     [trigger, answer] = resp_tuple
     robot.hear trigger, (msg) ->
       
-      if Math.random() > Math.exp(-messagecount/10)
+      if Math.random() > Math.exp(-robot.messagecount)
         msg.send answer
-        messagecount = -1
+        robot.messagecount = -1
       else
-        messagecount++
+        robot.messagecount++
 
   simpleresponses.forEach (resp_tuple) ->
     [trigger, answer] = resp_tuple
