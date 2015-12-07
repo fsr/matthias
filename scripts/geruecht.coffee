@@ -28,8 +28,11 @@ module.exports = (robot) ->
             msg.send geruecht
 
 prefixes = [
-    "Also... Ich hab ja Folgendes gehört: "
-    "Pssht... "
-    "Ein kleines Vögelchen hat mir das hier verraten: "
-    "Die BILD Zeitung soll ja das hier morgen als Titelstory haben: "
+    "Also... Ich hab ja Folgendes gehört: ",
+    "Pssht... ",
+    "Ein kleines Vögelchen hat mir das hier verraten: ",
+    "Die BILD Zeitung soll ja das hier morgen als Titelstory haben: ",
+    "Böse Zungen behaupten ja: ",
+    "Bei Fefe stand letzte Woche: ",
+    "Also bei Sebi in der BRAVO Girl stand ja letztens: "
 ]
