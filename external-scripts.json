@@ -10,5 +10,6 @@
   "hubot-qr",
   "hubot-calculator",
   "hubot-xkcd",
-  "hubot-dvb"
+  "hubot-dvb",
+  "hubot-wolfram"
 ]

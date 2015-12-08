@@ -24,6 +24,7 @@
     "hubot-scripts": "^2.16.1",
     "hubot-shipit": "^0.2.0",
     "hubot-slack": "^3.3.0",
+    "hubot-wolfram": "^1.0.8",
     "hubot-xkcd": "0.0.3",
     "soupselect": "^0.2.0",
     "underscore": "^1.8.3",
