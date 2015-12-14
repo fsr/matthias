@@ -13,7 +13,7 @@
 #   niemand!
 
 module.exports = (robot) ->
-	robot.hear /\/justus (.+)/i, (msg) ->
+	robot.hear /\\justus (.+)/i, (msg) ->
 
 		msg.send(msg.match[1])
 
