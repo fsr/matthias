@@ -15,6 +15,15 @@
 module.exports = (robot) ->
 	robot.hear /\\justus (.+)/i, (msg) ->
 
+		user = msg.message.user.name.toLowerCase()
+		
+		if user == "justus"
+			msg.send "Willst du etwa mit dir selbst reden?"
+			return
+
+		if user == "matthias"
+			return
+
 		data = JSON.stringify({
 		    text: '_' + msg.match[1] + '_'
 		})
