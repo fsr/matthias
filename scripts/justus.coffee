@@ -15,8 +15,6 @@
 module.exports = (robot) ->
 	robot.hear /\\justus (.+)/i, (msg) ->
 
-		msg.send(msg.match[1])
-
 		data = JSON.stringify({
 		    text: '_' + msg.match[1] + '_'
 		})
