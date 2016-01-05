@@ -26,6 +26,7 @@
     "hubot-slack": "^3.3.0",
     "hubot-wolfram": "^1.0.8",
     "hubot-xkcd": "0.0.3",
+    "moment": "^2.11.0",
     "soupselect": "^0.2.0",
     "underscore": "^1.8.3",
     "underscore.string": "^3.1.1"
