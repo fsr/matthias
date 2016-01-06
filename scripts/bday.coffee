@@ -45,7 +45,6 @@ module.exports = (robot) ->
 			congratulate(robot)
 		, null, true, "Europe/Berlin")
 
-	# TODO: Implement me
 	robot.respond /(birthday|bday|geburtstag)\??/i, (msg) ->
 		today = moment()
 		vallist = for name, value of bdays
@@ -54,13 +53,15 @@ module.exports = (robot) ->
 				date.add(1, 'years')
 			[name, date]
 
-		nearest = vallist.reduce((prev, curr) ->
+		nearest = vallist.reduce (prev, curr) ->
 				if prev == null or prev[1] > curr[1]
 					curr
 				else
 					prev
-			, null)
+			, null
 		name = nearest[0]
+
+		# TODO Perhaps some nicer message formatting here
 		msg.send formatBirthdayInfo(name, bdays[name])
 
 
