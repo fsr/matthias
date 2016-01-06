@@ -53,16 +53,18 @@ module.exports = (robot) ->
 				date.add(1, 'years')
 			[name, date]
 
-		nearest = vallist.reduce (prev, curr) ->
+		[name, date] = vallist.reduce (prev, curr) ->
 				if prev == null or prev[1] > curr[1]
 					curr
 				else
 					prev
 			, null
-		name = nearest[0]
 
-		# TODO Perhaps some nicer message formatting here
-		msg.send formatBirthdayInfo(name, bdays[name])
+		daysDiff = date.diff(today, 'days')
+
+		msg.send "The next birthday is #{name.capitalize()}, that is " +
+			if daysDiff == 0 then "today!"
+			else "only #{daysDiff} days away."
 
 
 	robot.respond /(birthday|bday|geburtstag) (.+)/i, (msg) ->
