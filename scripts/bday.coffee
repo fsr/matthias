@@ -46,7 +46,23 @@ module.exports = (robot) ->
 		, null, true, "Europe/Berlin")
 
 	# TODO: Implement me
-	# robot.respond /(birthday|bday|geburtstag)\?/i, (msg) ->
+	robot.respond /(birthday|bday|geburtstag)\??/i, (msg) ->
+		today = moment()
+		vallist = for name, value of bdays
+			date = value.clone().year(today.year())
+			if date < today
+				date.add(1, 'years')
+			[name, date]
+
+		nearest = vallist.reduce((prev, curr) ->
+				if prev == null or prev[1] > curr[1]
+					curr
+				else
+					prev
+			, null)
+		name = nearest[0]
+		msg.send formatBirthdayInfo(name, bdays[name])
+
 
 	robot.respond /(birthday|bday|geburtstag) (.+)/i, (msg) ->
 		name = msg.match[2].toLowerCase()
