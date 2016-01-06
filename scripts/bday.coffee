@@ -60,11 +60,23 @@ module.exports = (robot) ->
 					prev
 			, null
 
-		daysDiff = date.diff(today, 'days')
+		birthdayBoysAndGirls = vallist.filter((elem) ->
+			elem[1].days() == date.days() and elem[1].month() == date.month()
+		).map((elem) -> elem[0].capitalize())
 
-		msg.send "The next birthday is #{name.capitalize()}, that is " +
+		daysDiff = date.diff(today, 'days')
+		last = birthdayBoysAndGirls.length - 1
+
+		diffStr =
 			if daysDiff == 0 then "today!"
 			else "only #{daysDiff} days away."
+
+		msgStr =
+			if birthdayBoysAndGirls.length < 2
+				"The next birthday is #{birthdayBoysAndGirls[0]}"
+			else "The next birthdays are " + birthdayBoysAndGirls.slice(0, last).join(", ") + ' and ' + birthdayBoysAndGirls[last]
+		msg.send msgStr + ", that is " + diffStr
+
 
 
 	robot.respond /(birthday|bday|geburtstag) (.+)/i, (msg) ->
