@@ -45,7 +45,7 @@ module.exports = (robot) ->
 			congratulate(robot)
 		, null, true, "Europe/Berlin")
 
-	robot.respond /(birthday|bday|geburtstag)\??/i, (msg) ->
+	robot.respond /(birthday|bday|geburtstag)\??$/i, (msg) ->
 		today = moment()
 		vallist = for name, value of bdays
 			date = value.clone().year(today.year())
@@ -68,14 +68,14 @@ module.exports = (robot) ->
 		last = birthdayBoysAndGirls.length - 1
 
 		diffStr =
-			if daysDiff == 0 then "today!"
-			else "only #{daysDiff} days away."
+			if daysDiff == 0 then "heute!"
+			else "in nur #{daysDiff} Tagen."
 
 		msgStr =
 			if birthdayBoysAndGirls.length < 2
-				"The next birthday is #{birthdayBoysAndGirls[0]}"
-			else "The next birthdays are " + birthdayBoysAndGirls.slice(0, last).join(", ") + ' and ' + birthdayBoysAndGirls[last]
-		msg.send msgStr + ", that is " + diffStr
+				"Der nächste Geburtstag ist #{birthdayBoysAndGirls[0]}"
+			else "Die nächsten Geburstage sind " + birthdayBoysAndGirls.slice(0, last).join(", ") + ' und ' + birthdayBoysAndGirls[last]
+		msg.send msgStr + ", das ist " + diffStr
 
 
 
