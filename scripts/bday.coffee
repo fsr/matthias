@@ -29,7 +29,7 @@ init_birthdays = ->
 		for name, dateString of JSON.parse fs.readFileSync('./data/bday.json')
 			bdays[name] = moment(dateString)
 	catch err
-		console.log "Couldn't find bdaydata.json."
+		console.log "Couldn't find bday.json."
 	bdays
 
 # Please enter your birthday into bday.json.
