@@ -97,10 +97,10 @@ module.exports = (robot) ->
 
 formatBirthdayInfo = (name, birthday) ->
 	if birthday.year() == DONT_SHOW
-		# If the year is the current year the person doesn't want it shown.
 		"#{name.capitalize()} hat am #{birthday.format('Do MMMM')} Geburtstag."
 	else
-		"#{name.capitalize()} wurde am #{birthday.format('Do MMMM YYYY')} geboren. Das war #{birthday.fromNow()}."
+		age = moment().diff birthday, 'years'
+		"#{name.capitalize()} wurde am #{birthday.format('Do MMMM YYYY')} geboren. Das war vor #{age} Jahren! :O"
 
 congratulate = (robot) ->
 	for name, birthday of bdays
