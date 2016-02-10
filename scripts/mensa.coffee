@@ -17,6 +17,7 @@
 #   kiliankoe - me@kilian.io
 #   Justus Adam - me@justus.science
 #   Philipp Heisig - matthias@pheisig.de
+#   Lucas Woltmann - mail@lucaswoltmann.de
 
 cronjob = require("cron").CronJob
 
@@ -186,9 +187,9 @@ formatOutput = (meal) ->
   if meal.category == "Pasta"
     return "#{imgcnt}: Pasta mit #{meal.name} #{formatMealNotes(meal.notes)}"
   else if meal.prices.students?
-    return "#{imgcnt}: #{meal.name} - #{meal.prices.students.toFixed(2)}€ #{formatMealNotes(meal.notes)}"
+    return "#{imgcnt}: #{meal.name} - #{meal.prices.students.toFixed(2)}€ #{formatMealNotes(meal.notes)}#{formatMealCategory(meal.category)}"
   else
-    return "#{imgcnt}: #{meal.name} #{formatMealNotes(meal.notes)}"
+    return "#{imgcnt}: #{meal.name} #{formatMealNotes(meal.notes)}#{formatMealCategory(meal.category)}"
 
 formatMealNotes = (notes) ->
   notesabbr = [
@@ -216,4 +217,16 @@ formatMealNotes = (notes) ->
     for abbreviation in notesabbr
       if note.indexOf(abbreviation.long) > -1
         str += "#{abbreviation.abbr}"
+  return str
+
+formatMealCategory = (category) ->
+  catabbr = {
+      "Abendangebot": ":moon:",
+      "Angebote": ""
+  }
+
+  str = ""
+  for full, abbreviation of catabbr
+    if category == full
+      str += "#{abbreviation}"
   return str
