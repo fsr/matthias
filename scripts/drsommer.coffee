@@ -15,7 +15,7 @@
 
 module.exports = (robot) ->
   robot.hear /^(hey |hallo |lieber )?dr\.? sommer,?/i, (msg) ->
-    robot.messageRoom '#tmp', "\"#{msg.message.text}\" - #{msg.random names} (#{randomInt(10,15)})"
+    robot.messageRoom '#dr_sommer', "\"#{msg.message.text}\" - #{msg.random names} (#{randomInt(10,15)})"
 
 names = [
   "Shantalle",
