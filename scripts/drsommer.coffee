@@ -17,6 +17,11 @@ module.exports = (robot) ->
   robot.hear /^(hey |hallo |lieber )?dr\.? sommer,?/i, (msg) ->
     robot.messageRoom '#dr_sommer', "\"#{msg.message.text}\" - #{msg.random names} (#{randomInt(10,15)})"
 
+  # help matthias respond to priv messages as well
+  robot.respond /(hey |hallo |lieber )?dr\.? sommer,?/i, (msg) ->
+    question = msg.message.text.replace("matthias ", "")
+    robot.messageRoom '#dr_sommer', "\"#{question}\" - #{msg.random names} (#{randomInt(10,15)})"
+
 names = [
   "Shantalle",
   "Schackeline",
