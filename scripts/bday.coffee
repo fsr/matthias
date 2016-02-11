@@ -73,9 +73,9 @@ module.exports = (robot) ->
 
 		msgStr =
 			if birthdayBoysAndGirls.length < 2
-				"Der nächste Geburtstag ist #{birthdayBoysAndGirls[0]}"
-			else "Die nächsten Geburstage sind " + birthdayBoysAndGirls.slice(0, last).join(", ") + ' und ' + birthdayBoysAndGirls[last]
-		msg.send msgStr + ", das ist " + diffStr
+				"Das nächste Geburtstagskind ist #{birthdayBoysAndGirls[0]}"
+			else "Die nächsten Geburstage sind von " + birthdayBoysAndGirls.slice(0, last).join(", ") + ' und ' + birthdayBoysAndGirls[last]
+		msg.send msgStr + " " + diffStr
 
 
 
