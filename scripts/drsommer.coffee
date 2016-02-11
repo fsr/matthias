@@ -14,8 +14,8 @@
 #   kiliankoe
 
 module.exports = (robot) ->
-  robot.respond /^(hey |hallo |lieber )?dr\.? sommer,?/i, (msg) ->
-    robot.messageRoom '#dr_sommer', "\"#{msg.message.text}\" - #{msg.random names} (#{randomInt(10,15)})"
+  robot.hear /^(hey |hallo |lieber )?dr\.? sommer,?/i, (msg) ->
+    robot.messageRoom '#tmp', "\"#{msg.message.text}\" - #{msg.random names} (#{randomInt(10,15)})"
 
 names = [
   "Shantalle",
@@ -34,5 +34,5 @@ names = [
   "Dörte"
 ]
 
-randomInt = (max, min)->
+randomInt = (max, min) ->
   return Math.floor(Math.random() * (max - min + 1)) + min
