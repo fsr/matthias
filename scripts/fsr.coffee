@@ -55,3 +55,6 @@ module.exports = (robot) ->
 
   robot.respond /(buero|büro)(status)?/i, (msg) ->
     msg.send('https://www.ifsr.de/buerostatus/image.php?h=6')
+
+  robot.hear /(sind wir (beschlussfähig|beschlussfaehig))/i, (msg) ->
+    msg.send("Einmal durchzählen, bitte! Ich fang' an, 0!")
