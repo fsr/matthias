@@ -16,6 +16,7 @@
 
 fs = require 'fs'
 cronjob = require('cron').CronJob
+cheerio = require 'cheerio'
 
 module.exports = (robot) ->
 
@@ -30,7 +31,21 @@ module.exports = (robot) ->
         msg.send("Ok, ich poste Updates zu #{shortname} in #dudle.")
 
     robot.respond /dudle (.*)/i, (msg) ->
-        msg.send "Das Feature kommt noch :)"
+        shortname = msg.match[1]
+        dudle_link = "https://dudle.inf.tu-dresden.de/#{shortname}/"
+        robot.http(dudle_link)
+            .get() (err, res, body) ->
+                if res.statusCode != 200
+                    msg.send 'Sieht nicht so aus, als ob das Dudle (noch) existiert.'
+                else
+                    totals = parse_totals body
+                    num_elements = Object.keys(totals).length # what kind of syntax is this?!
+                    if num_elements > 0
+                        msg.send 'Hab folgende Resultate gefunden:'
+                        for el, count of totals
+                            msg.send "Option #{el} mit #{count} Stimmen"
+                    else
+                        msg.send 'Das Dudle scheint leer zu sein...'
 
 shortname_from_link = (link) ->
     link_elements = link.split('/') # TODO: Remove possible trailing '/' before doing this
@@ -72,6 +87,26 @@ check_dudle_feed = (dudle) ->
 
 publish_events = (robot, dudle, events) ->
     # TODO: Send messages for all events for a specific dudle
+
+parse_totals = (body) ->
+    $ = cheerio.load body
+
+    header_rows = $('#participanttable > thead > tr:nth-child(2)').children()
+    header_items = elements_of_column header_rows
+
+    summary_rows = $('#summary').children()
+    summary_items = elements_of_column summary_rows
+
+    totals = {}
+    for i in [0..header_items.length - 1]
+        totals[header_items[i]] = summary_items[i]
+    totals
+
+elements_of_column = (row) ->
+    elements = []
+    for column in row.slice 1, row.length - 1
+        elements.push column.children[0].data
+    elements
 
 
 # stuffjsdoesnthave.tumblr.com
