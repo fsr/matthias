@@ -7,6 +7,7 @@
   "dependencies": {
     "cheerio": "^0.20.0",
     "cron": "^1.0.9",
+    "feed-read": "0.0.1",
     "flip": "^1.0.0",
     "git-rev": "^0.2.1",
     "htmlparser": "^1.7.7",
