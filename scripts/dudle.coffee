@@ -19,7 +19,9 @@
 fs = require 'fs'
 cronjob = require('cron').CronJob
 cheerio = require 'cheerio'
-url = require 'url'
+feed = require 'feed-read'
+
+dudle_db = "./data/dudle.json"
 
 module.exports = (robot) ->
 
@@ -32,6 +34,9 @@ module.exports = (robot) ->
         # shortname_from_link returns same content early if it's not a link
         shortname = shortname_from_link match
         dudle_link = make_valid_dudle_link match
+        # TODO: Theoretically one could validate the dudle itself here as well.
+        # Otherwise it will get removed after <10 minutes automatically
+        # But the user won't be any smarter...
         if is_already_subscribed shortname
             msg.send 'Das tracke ich bereits.'
         else
@@ -105,23 +110,23 @@ is_already_subscribed = (shortname) ->
 read_dudles_file = ->
     dudles = []
     try
-        dudles = JSON.parse(fs.readFileSync('./data/dudle.json'))
+        dudles = JSON.parse(fs.readFileSync(dudle_db))
     catch err
-        console.log "Couldn't find dudle.json"
+        console.log "Couldn't find #{dudle_db}"
     dudles
 
 write_dudles_file = (dudle_list) ->
     try
-        fs.writeFile('./data/dudle.json', JSON.stringify(dudle_list, null, 2))
+        fs.writeFile(dudle_db, JSON.stringify(dudle_list, null, 2))
     catch err
-        console.log "Couldn't write to dudle.json: #{err}"
+        console.log "Couldn't write to #{dudle_db}: #{err}"
 
 save_dudle_to_file = (shortname, url) ->
     dudles = read_dudles_file()
     new_dudle =
         "shortname": shortname,
         "url": url,
-        "last_checked": new Date().toISOString() # TODO: Set this date in the past
+        "last_checked": new Date().toISOString()
     dudles.push new_dudle
     write_dudles_file dudles
 
@@ -137,24 +142,44 @@ remove_dudle_from_file = (shortname) ->
     write_dudles_file new_dudle_list
     found
 
+update_dudle_date = (shortname, date) ->
+    dudles = read_dudles_file()
+    new_list = []
+    for dudle in dudles
+        if dudle.shortname == shortname
+            dudle.last_checked = date.toISOString()
+        new_list.push dudle
+    write_dudles_file new_list
+
 check_all_dudles = (robot) ->
     dudles = read_dudles_file()
-    dudles.forEach (dudle) ->
-        events = check_dudle_feed dudle
-        publish_events robot, dudle, events
+    for dudle in dudles
+        check_dudle_feed dudle, (events) ->
+            if events.length > 0
+                publish_events robot, dudle, events
 
-check_dudle_feed = (dudle) ->
-    atom_url = dudle.url + "/atom.cgi"
-    # TODO: Fetch and parse feed
-    # TODO: Remove dudle from list if 404
-        # Actually... We're probably the ones preventing this from happening
-        # It might be better to remove dudles after a period of inactivity
-    # TODO: Return list of new events
+check_dudle_feed = (dudle, event_callback) ->
+    atom_url = dudle.url + "atom.cgi"
+    feed atom_url, (err, articles) ->
+        if err != null
+            console.log "Feed for dudle #{dudle.shortname} not found. Removing it from list."
+            remove_dudle_from_file dudle.shortname
+        else
+            events = []
+            last_checked = new Date(dudle.last_checked)
+            last_updated = articles.first().published
+            update_dudle_date dudle.shortname, new Date()
+            for article in articles
+                if last_checked < article.published
+                    events.push article.title
+            event_callback events
 
-publish_events = (robot, shortname, events) ->
-    robot.messageRoom '#dudle', "Neues zum Dudle #{shortname}"
+publish_events = (robot, dudle, events) ->
+    robot.messageRoom '#dudle', "Neues zum Dudle #{dudle.shortname}:"
+    events = events.reverse() # let's do this in chronological order
     for e in events
         robot.messageRoom '#dudle', e
+    robot.messageRoom '#dudle', "Mehr Infos direkt hier: #{dudle.url}"
 
 parse_totals = (body) ->
     $ = cheerio.load body
@@ -181,3 +206,5 @@ elements_of_column = (row) ->
 if !Array.prototype.last
     Array.prototype.last = ->
         return this[this.length - 1]
+    Array.prototype.first = ->
+        return this[0]
