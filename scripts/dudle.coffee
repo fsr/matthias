@@ -8,7 +8,9 @@
 #   None
 #
 # Commands:
-#   hubot watch <dudle> - Poste Updates zu <dudle> in #dudle
+#   hubot subscribe <dudle> - Poste Updates zu <dudle> in #dudle
+#   hubot unsubscribe <dudle> - Poste keine weiteren Updates zu <dudle>
+#   hubot dudlelist - Welche Dudles werden aktuell beobachtet?
 #   hubot dudle <dudle> - Hole aktuelle Ergebnisse zu <dudle>
 #
 # Author:
@@ -17,6 +19,7 @@
 fs = require 'fs'
 cronjob = require('cron').CronJob
 cheerio = require 'cheerio'
+url = require 'url'
 
 module.exports = (robot) ->
 
@@ -24,11 +27,25 @@ module.exports = (robot) ->
         check_all_dudles(robot)
     , null, true, "Europe/Berlin")
 
-    robot.respond /watch (.*)/i, (msg) ->
-        dudle_link = msg.match[1]
+    robot.respond /subscribe (.*)/i, (msg) ->
+        dudle_link = msg.match[1] # TODO: Decide if this is already a shortname or link
         shortname = shortname_from_link dudle_link
         save_dudle_to_file shortname, dudle_link
         msg.send("Ok, ich poste Updates zu #{shortname} in #dudle.")
+
+    robot.respond /unsubscribe (.*)/i, (msg) ->
+        shortname = msg.match[1]
+        found = remove_dudle_from_file shortname
+        if found
+            msg.send "Ok, tracke #{shortname} nicht mehr."
+        else
+            msg.send "Tracke aktuell nichts mit diesem Namen."
+
+    robot.respond /dudlelist/i, (msg) ->
+        msg.send 'Aktuell tracke ich folgende Dudles:'
+        dudles = read_dudles_file()
+        for dudle in dudles
+            msg.send "#{dudle.shortname}: #{dudle.url}"
 
     robot.respond /dudle (.*)/i, (msg) ->
         shortname = msg.match[1]
@@ -56,7 +73,7 @@ read_dudles_file = ->
     try
         dudles = JSON.parse(fs.readFileSync('./data/dudle.json'))
     catch err
-        console.log "Coulnd't find dudle.json"
+        console.log "Couldn't find dudle.json"
     dudles
 
 save_dudle_to_file = (shortname, url) ->
@@ -66,10 +83,25 @@ save_dudle_to_file = (shortname, url) ->
         "url": url,
         "last_checked": new Date().toISOString() # TODO: Set this date in the past
     dudles.push new_dudle
+    write_dudle_file dudles
+
+remove_dudle_from_file = (shortname) ->
+    dudles = read_dudles_file()
+    new_dudle_list = []
+    found = false
+    for dudle in dudles
+        if shortname != dudle.shortname
+            new_dudle_list.push dudle
+        else
+            found = true
+    write_dudle_file new_dudle_list
+    found
+
+write_dudle_file = (dudle_list) ->
     try
-        fs.writeFile('./data/dudle.json', JSON.stringify(dudles, null, 2))
+        fs.writeFile('./data/dudle.json', JSON.stringify(dudle_list, null, 2))
     catch err
-        console.log "Couldn't write to dudle.json"
+        console.log "Couldn't write to dudle.json: #{err}"
 
 check_all_dudles = (robot) ->
     dudles = read_dudles_file()
