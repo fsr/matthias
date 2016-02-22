@@ -42,7 +42,10 @@ simplelistens = [
   [/madness/i, "Madness you say? THIS. IS. PATRI... MATTHIAS!"],
   [/^nein$/i, "Doch!"],
   [/\sphp|^php/, "Naja, ich hab mit PHP auch schon richtig gut funktioni⍰\nParse error: syntax error, unexpected '::' (T_PAAMAYIM_NEKUDOTAYIM) in Command line code on line 1"],
-  [/gewitter/i, "Gewitter? In Neuss?"]
+  [/gewitter/i, "Gewitter? In Neuss?"],
+  [/danke matthias/i, "No problemo"],
+  [/thanks matthias/i, "Not sure if sarcastic or actually grateful..."],
+  [/thx matthias/i, "Not sure if sarcastic or actually grateful..."]
 ]
 
 module.exports = (robot) ->
@@ -52,7 +55,7 @@ module.exports = (robot) ->
   simplelistens.forEach (resp_tuple) ->
     [trigger, answer] = resp_tuple
     robot.hear trigger, (msg) ->
-      
+
       if Math.random() > Math.exp(-robot.messagecount)
         msg.send answer
         robot.messagecount = -1
