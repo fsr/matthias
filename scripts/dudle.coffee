@@ -76,6 +76,12 @@ read_dudles_file = ->
         console.log "Couldn't find dudle.json"
     dudles
 
+write_dudles_file = (dudle_list) ->
+    try
+        fs.writeFile('./data/dudle.json', JSON.stringify(dudle_list, null, 2))
+    catch err
+        console.log "Couldn't write to dudle.json: #{err}"
+
 save_dudle_to_file = (shortname, url) ->
     dudles = read_dudles_file()
     new_dudle =
@@ -83,7 +89,7 @@ save_dudle_to_file = (shortname, url) ->
         "url": url,
         "last_checked": new Date().toISOString() # TODO: Set this date in the past
     dudles.push new_dudle
-    write_dudle_file dudles
+    write_dudles_file dudles
 
 remove_dudle_from_file = (shortname) ->
     dudles = read_dudles_file()
@@ -94,14 +100,8 @@ remove_dudle_from_file = (shortname) ->
             new_dudle_list.push dudle
         else
             found = true
-    write_dudle_file new_dudle_list
+    write_dudles_file new_dudle_list
     found
-
-write_dudle_file = (dudle_list) ->
-    try
-        fs.writeFile('./data/dudle.json', JSON.stringify(dudle_list, null, 2))
-    catch err
-        console.log "Couldn't write to dudle.json: #{err}"
 
 check_all_dudles = (robot) ->
     dudles = read_dudles_file()
