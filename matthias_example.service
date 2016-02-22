@@ -11,7 +11,13 @@ User=hubot-user
 Restart=always
 RestartSec=10
 
-Environment=ENVVAR=aaa ENVVAR2=bbb
+Environment=FSRPASSWORD=
+Environment=FSRUSERNAME=
+Environment=HUBOT_FORECAST_API_KEY=
+Environment=HUBOT_GOOGLE_CSE_ID=
+Environment=HUBOT_GOOGLE_CSE_KEY=
+Environment=HUBOT_SLACK_TOKEN=
+Environment=HUBOT_WEATHER_CELSIUS=1
 
 ExecStart=/path/to/hubot/bin/hubot --adapter xyz
 
