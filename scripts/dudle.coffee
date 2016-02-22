@@ -168,7 +168,9 @@ check_dudle_feed = (dudle, event_callback) ->
             events = []
             last_checked = new Date(dudle.last_checked)
             last_updated = articles.first().published
-            update_dudle_date dudle.shortname, new Date()
+            now = new Date()
+            now.addHours 1
+            update_dudle_date dudle.shortname, now
             for article in articles
                 if last_checked < article.published
                     events.push article.title
@@ -208,3 +210,7 @@ if !Array.prototype.last
         return this[this.length - 1]
     Array.prototype.first = ->
         return this[0]
+
+Date.prototype.addHours = (h) ->
+   this.setTime(this.getTime() + (h*60*60*1000))
+   return this
