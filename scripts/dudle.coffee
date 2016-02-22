@@ -28,10 +28,15 @@ module.exports = (robot) ->
     , null, true, "Europe/Berlin")
 
     robot.respond /subscribe (.*)/i, (msg) ->
-        dudle_link = msg.match[1] # TODO: Decide if this is already a shortname or link
-        shortname = shortname_from_link dudle_link
-        save_dudle_to_file shortname, dudle_link
-        msg.send("Ok, ich poste Updates zu #{shortname} in #dudle.")
+        match = msg.match[1]
+        # shortname_from_link returns same content early if it's not a link
+        shortname = shortname_from_link match
+        dudle_link = make_valid_dudle_link match
+        if is_already_subscribed shortname
+            msg.send 'Das tracke ich bereits.'
+        else
+            save_dudle_to_file shortname, dudle_link
+            msg.send "Ok, ich poste Updates zu #{shortname} in #dudle."
 
     robot.respond /unsubscribe (.*)/i, (msg) ->
         shortname = msg.match[1]
@@ -65,8 +70,37 @@ module.exports = (robot) ->
                         msg.send 'Das Dudle scheint leer zu sein...'
 
 shortname_from_link = (link) ->
-    link_elements = link.split('/') # TODO: Remove possible trailing '/' before doing this
+    if !is_dudle_url link
+        return link
+    if has_trailing_slash link
+        link = link.slice 0, -1 # the easy way out^^
+    link_elements = link.split('/')
     link_elements.last()
+
+make_valid_dudle_link = (str) ->
+    if is_dudle_url str
+        if !has_trailing_slash str
+            str += '/'
+    else
+        str = "https://dudle.inf.tu-dresden.de/#{str}/"
+    str
+
+is_dudle_url = (str) ->
+    pattern = /dudle\.inf\./
+    pattern.test str
+
+has_trailing_slash = (str) ->
+    pattern = /\/$/
+    pattern.test str
+
+is_already_subscribed = (shortname) ->
+    dudles = read_dudles_file()
+    found = false
+    for dudle in dudles
+        if dudle.shortname == shortname
+            found = true
+            break
+    found
 
 read_dudles_file = ->
     dudles = []
@@ -117,8 +151,10 @@ check_dudle_feed = (dudle) ->
         # It might be better to remove dudles after a period of inactivity
     # TODO: Return list of new events
 
-publish_events = (robot, dudle, events) ->
-    # TODO: Send messages for all events for a specific dudle
+publish_events = (robot, shortname, events) ->
+    robot.messageRoom '#dudle', "Neues zum Dudle #{shortname}"
+    for e in events
+        robot.messageRoom '#dudle', e
 
 parse_totals = (body) ->
     $ = cheerio.load body
