@@ -14,6 +14,7 @@
 #
 # Author:
 #   kiliankoe
+#   Justus Adam <me@justus.science>
 
 fs = require('fs')
 cronjob = require("cron").CronJob
@@ -24,10 +25,10 @@ DONT_SHOW = 1900
 
 
 init_birthdays = ->
-	bdays = {}
+	bdays = new Map()
 	try
 		for name, dateString of JSON.parse fs.readFileSync('./data/bday.json')
-			bdays[name] = moment(dateString)
+			bdays.set(name, moment(dateString))
 	catch err
 		console.log "Couldn't find bday.json."
 	bdays
@@ -47,7 +48,7 @@ module.exports = (robot) ->
 
 	robot.respond /(birthday|bday|geburtstag)\??$/i, (msg) ->
 		today = moment()
-		vallist = for name, value of bdays
+		vallist = Array.from(bdays.entries()).map ([name, value]) ->
 			date = value.clone().year(today.year())
 			if date < today
 				date.add(1, 'years')
@@ -84,7 +85,7 @@ module.exports = (robot) ->
 		if name == 'list' or name == 'liste'
 			# Looks like we're going for the list below...
 			return
-		bday = bdays[name]
+		bday = bdays.get(name)
 		if bday
 			msg.send formatBirthdayInfo(name, bday)
 		else
