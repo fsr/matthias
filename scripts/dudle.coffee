@@ -67,7 +67,7 @@ module.exports = (robot) ->
                     return
 
                 totals = parse_totals body
-                if totals.size() == 0
+                if totals.size == 0
                     msg.send 'Das Dudle scheint leer zu sein...'
                     return
 
