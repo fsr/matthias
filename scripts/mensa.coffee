@@ -78,8 +78,6 @@ mappedMensa = mensen.reduce((map, mensa) ->
     map
   , {})
 
-imgcnt = -1
-
 module.exports = (robot) ->
 
   new cronjob('00 30 10 * * 1-5', ->
@@ -105,7 +103,6 @@ module.exports = (robot) ->
           msg.send "This mensa is currently out of order, sorry."
           return
 
-        imgcnt = -1
         data = JSON.parse body
         output = "#{data.map(formatOutput).join('\n')}\n"
         stringstart = output.indexOf("#{imgid}: ")
@@ -161,7 +158,6 @@ module.exports = (robot) ->
           if body.trim() == ""
             "This mensa is currently out of order, sorry."
           else
-            imgcnt = -1
             data = JSON.parse body
             "Heute @ *#{name}*:\n#{data.map(formatOutput).join('\n')}"
         )
@@ -189,51 +185,42 @@ module.exports = (robot) ->
 
     msg.send "Ich kann dir heutige Speisepläne für die folgenden Mensen holen:\n - #{names.join('\n - ')}\nSprich' mich einfach mit `matthias mensa <mensa>` an."
 
-formatOutput = (meal) ->
-  imgcnt++
-  if meal.category == "Pasta"
-    return "#{imgcnt}: Pasta mit #{meal.name} #{formatMealNotes(meal.notes)}"
-  else if meal.prices.students?
-    return "#{imgcnt}: #{meal.name} - #{meal.prices.students.toFixed(2)}€ #{formatMealNotes(meal.notes)}#{formatMealCategory(meal.category)}"
-  else
-    return "#{imgcnt}: #{meal.name} #{formatMealNotes(meal.notes)}#{formatMealCategory(meal.category)}"
+formatOutput = (meal, index) ->
+  "#{index}: " +
+    (if meal.category == "Pasta"
+      "Pasta mit #{meal.name} #{formatMealNotes(meal.notes)}"
+    else if meal.prices.students?
+      "#{meal.name} - #{meal.prices.students.toFixed(2)}€ #{formatMealNotes(meal.notes)}#{formatMealCategory(meal.category)}"
+    else
+      "#{meal.name} #{formatMealNotes(meal.notes)}#{formatMealCategory(meal.category)}")
+
+notesabbr =
+  Rindfleisch: ":cow:"
+  Schweinefleisch: ":pig:"
+  vegetarisch: ":tomato:"
+  vegan: ":herb:"
+  Alkohol: ":wine_glass:"
+  Knoblauch: ":garlic:"
+
+catabbr =
+  Abendangebot: ":moon:"
+  Angebote: ""
 
 formatMealNotes = (notes) ->
-  notesabbr = [
-      long: "Rindfleisch"
-      abbr: ":cow:"
-    ,
-      long: "Schweinefleisch"
-      abbr: ":pig:"
-    ,
-      long: "vegetarisch"
-      abbr: ":tomato:"
-    ,
-      long: "vegan"
-      abbr: ":herb:"
-    ,
-      long: "Alkohol"
-      abbr: ":wine_glass:"
-    ,
-      long: "Knoblauch"
-      abbr: ":garlic:"
-  ]
   # @justus: Wanna throw some functional magic on this? :D
-  str = ""
-  for note in notes
-    for abbreviation in notesabbr
-      if note.indexOf(abbreviation.long) > -1
-        str += "#{abbreviation.abbr}"
-  return str
+  # Here you go
+  notes.map((note) ->
+      words = note.split(' ')
+      words[words.length - 1]
+    ).reduce((list, note) ->
+      if notesabbr.hasOwnProperty note
+        # it would better with immutable operations ... but this should be more performant
+        list.push(notesabbr[note])
+      list
+  , []).join('')
 
 formatMealCategory = (category) ->
-  catabbr = {
-      "Abendangebot": ":moon:",
-      "Angebote": ""
-  }
-
-  str = ""
-  for full, abbreviation of catabbr
-    if category == full
-      str += "#{abbreviation}"
-  return str
+  if catabbr.hasOwnProperty category
+    catabbr[category]
+  else
+    ""
