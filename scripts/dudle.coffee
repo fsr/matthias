@@ -99,19 +99,13 @@ has_trailing_slash = (str) ->
     pattern.test str
 
 is_already_subscribed = (shortname) ->
-    dudles = read_dudles_file()
-    found = false
-    for dudle in dudles
-        if dudle.shortname == shortname
-            found = true
-            break
-    found
+    if read_dudles_file().find((dudle) -> dudle.shortname == shortname) then true else false
 
 read_dudles_file = ->
-    dudles = []
     try
         dudles = JSON.parse(fs.readFileSync(dudle_db))
     catch err
+        dudles = []
         console.log "Couldn't find #{dudle_db}"
     dudles
 
@@ -132,24 +126,20 @@ save_dudle_to_file = (shortname, url) ->
 
 remove_dudle_from_file = (shortname) ->
     dudles = read_dudles_file()
-    new_dudle_list = []
-    found = false
-    for dudle in dudles
-        if shortname != dudle.shortname
-            new_dudle_list.push dudle
-        else
-            found = true
-    write_dudles_file new_dudle_list
-    found
+    new_dudle_list = dudles.filter((dudle) -> dudle.shortname != shortname)
+
+    if dudles.length != new_dudle_list.length
+      write_dudles_file new_dudle_list
+      true
+    else
+      false
 
 update_dudle_date = (shortname, date) ->
     dudles = read_dudles_file()
-    new_list = []
-    for dudle in dudles
+    dudles.forEach (dudle) ->
         if dudle.shortname == shortname
             dudle.last_checked = date.toISOString()
-        new_list.push dudle
-    write_dudles_file new_list
+    write_dudles_file dudles
 
 check_all_dudles = (robot) ->
     dudles = read_dudles_file()
