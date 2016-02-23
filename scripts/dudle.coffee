@@ -187,7 +187,7 @@ parse_totals = (body) ->
     totals
 
 elements_of_column = (row) ->
-    row.slice(1, row.length - 1).map((column) -> column.children[0].data)
+    Array.from(row.slice(1, row.length - 1)).map((column) -> column.children[0].data)
 
 
 # stuffjsdoesnthave.tumblr.com
