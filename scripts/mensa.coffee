@@ -78,8 +78,6 @@ mappedMensa = mensen.reduce((map, mensa) ->
     map
   , {})
 
-imgcnt = -1
-
 module.exports = (robot) ->
 
   new cronjob('00 30 10 * * 1-5', ->
@@ -104,7 +102,6 @@ module.exports = (robot) ->
         if body.trim() == ""
           msg.send "This mensa is currently out of order, sorry."
         else
-          imgcnt = -1
           data = JSON.parse body
           output = "#{data.map(formatOutput).join('\n')}\n"
           stringstart = output.indexOf("#{imgid}: ")
@@ -154,7 +151,6 @@ module.exports = (robot) ->
           if body.trim() == ""
             "This mensa is currently out of order, sorry."
           else
-            imgcnt = -1
             data = JSON.parse body
             "Heute @ *#{name}*:\n#{data.map(formatOutput).join('\n')}"
         )
@@ -182,14 +178,14 @@ module.exports = (robot) ->
 
     msg.send "Ich kann dir heutige Speisepläne für die folgenden Mensen holen:\n - #{names.join('\n - ')}\nSprich' mich einfach mit `matthias mensa <mensa>` an."
 
-formatOutput = (meal) ->
-  imgcnt++
-  if meal.category == "Pasta"
-    return "#{imgcnt}: Pasta mit #{meal.name} #{formatMealNotes(meal.notes)}"
-  else if meal.prices.students?
-    return "#{imgcnt}: #{meal.name} - #{meal.prices.students.toFixed(2)}€ #{formatMealNotes(meal.notes)}#{formatMealCategory(meal.category)}"
-  else
-    return "#{imgcnt}: #{meal.name} #{formatMealNotes(meal.notes)}#{formatMealCategory(meal.category)}"
+formatOutput = (meal, index) ->
+  "#{index}: " +
+    (if meal.category == "Pasta"
+      "Pasta mit #{meal.name} #{formatMealNotes(meal.notes)}"
+    else if meal.prices.students?
+      "#{meal.name} - #{meal.prices.students.toFixed(2)}€ #{formatMealNotes(meal.notes)}#{formatMealCategory(meal.category)}"
+    else
+      "#{meal.name} #{formatMealNotes(meal.notes)}#{formatMealCategory(meal.category)}")
 
 formatMealNotes = (notes) ->
   notesabbr = [
