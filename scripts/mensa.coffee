@@ -187,42 +187,33 @@ formatOutput = (meal, index) ->
     else
       "#{meal.name} #{formatMealNotes(meal.notes)}#{formatMealCategory(meal.category)}")
 
+notesabbr =
+  Rindfleisch: ":cow:"
+  Schweinefleisch: ":pig:"
+  vegetarisch: ":tomato:"
+  vegan: ":herb:"
+  Alkohol: ":wine_glass:"
+  Knoblauch: ":garlic:"
+
+catabbr =
+  Abendangebot: ":moon:"
+  Angebote: ""
+
 formatMealNotes = (notes) ->
-  notesabbr = [
-      long: "Rindfleisch"
-      abbr: ":cow:"
-    ,
-      long: "Schweinefleisch"
-      abbr: ":pig:"
-    ,
-      long: "vegetarisch"
-      abbr: ":tomato:"
-    ,
-      long: "vegan"
-      abbr: ":herb:"
-    ,
-      long: "Alkohol"
-      abbr: ":wine_glass:"
-    ,
-      long: "Knoblauch"
-      abbr: ":garlic:"
-  ]
   # @justus: Wanna throw some functional magic on this? :D
-  str = ""
-  for note in notes
-    for abbreviation in notesabbr
-      if note.indexOf(abbreviation.long) > -1
-        str += "#{abbreviation.abbr}"
-  return str
+  # Here you go
+  notes.map((note) ->
+      words = note.split(' ')
+      words[words.length - 1]
+    ).reduce((list, note) ->
+      if notesabbr.hasOwnProperty note
+        # it would better with immutable operations ... but this should be more performant
+        list.push(notesabbr[note])
+      list
+  , []).join('')
 
 formatMealCategory = (category) ->
-  catabbr = {
-      "Abendangebot": ":moon:",
-      "Angebote": ""
-  }
-
-  str = ""
-  for full, abbreviation of catabbr
-    if category == full
-      str += "#{abbreviation}"
-  return str
+  if catabbr.hasOwnProperty category
+    catabbr[category]
+  else
+    ""
