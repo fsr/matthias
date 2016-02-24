@@ -13,6 +13,7 @@
     "htmlparser": "^1.7.7",
     "hubot": "^2.13.2",
     "hubot-calculator": "^0.4.0",
+    "hubot-clarifai2": "^1.0.2",
     "hubot-diagnostics": "0.0.1",
     "hubot-dvb": "^1.0.0",
     "hubot-google-images": "^0.2.5",

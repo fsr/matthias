@@ -18,6 +18,8 @@ Environment=HUBOT_GOOGLE_CSE_ID=
 Environment=HUBOT_GOOGLE_CSE_KEY=
 Environment=HUBOT_SLACK_TOKEN=
 Environment=HUBOT_WEATHER_CELSIUS=1
+Environment=CLARIFAI_ID=
+Environment=CLARIFAI_SECRET=
 
 ExecStart=/path/to/hubot/bin/hubot --adapter xyz
 
