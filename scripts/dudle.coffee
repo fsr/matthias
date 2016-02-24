@@ -115,6 +115,7 @@ write_dudles_file = (dudle_map) ->
         fs.writeFile(dudle_db, JSON.stringify(Array.from(dudle_map.values()), null, 2))
     catch err
         console.log "Couldn't write to #{dudle_db}: #{err}"
+        console.log dudle_map
 
 save_dudle_to_file = (shortname, url) ->
     dudles = read_dudles_file()
