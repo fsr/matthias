@@ -93,7 +93,7 @@ module.exports = (robot) ->
 
 	robot.respond /(birthday|bday|geburtstag) list(e?)/i, (msg) ->
 		msg.send "Ich kenne folgende Geburtstage:"
-		for key, value of bdays
+		bdays.forEach (value, key) ->
 			msg.send formatBirthdayInfo(key, value)
 
 formatBirthdayInfo = (name, birthday) ->
