@@ -104,7 +104,7 @@ formatBirthdayInfo = (name, birthday) ->
 		"#{name.capitalize()} wurde am #{birthday.format('Do MMMM YYYY')} geboren. Das war vor #{age} Jahren! :O"
 
 congratulate = (robot) ->
-	for name, birthday of bdays
+	bdays.forEach (birthday, name) ->
 		today = moment()
 		if today.month() == birthday.month() and today.date() == birthday.date()
 			robot.messageRoom '#general', ":tada: Alles Gute zum Geburtstag, #{name.capitalize()}! :tada:"
