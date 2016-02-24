@@ -143,7 +143,7 @@ update_dudle_date = (shortname, date) ->
 check_all_dudles = (robot) ->
     dudles = read_dudles_file()
     dudles.forEach (dudle) ->
-        check_dudle_feed map, dudle, (events) ->
+        check_dudle_feed dudles, dudle, (events) ->
             if events.length > 0
                 publish_events robot, dudle, events
     write_dudles_file dudles
