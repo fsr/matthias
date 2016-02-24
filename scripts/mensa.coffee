@@ -74,9 +74,9 @@ mensen = [
 
 mappedMensa = mensen.reduce((map, mensa) ->
     mensa.names.forEach (name) ->
-      map[name] = mensa.id
+      map.set(name, mensa.id)
     map
-  , {})
+  , new Map())
 
 module.exports = (robot) ->
 
@@ -89,10 +89,12 @@ module.exports = (robot) ->
 
   generic_resp_func = (mensa, callback) ->
     mensaKey = mensa.toLowerCase()
-    if not mappedMensa.hasOwnProperty mensaKey
-      callback "Kenne leider keine solche Mensa..."
+    if mappedMensa.has mensaKey
+      getMeals(mensa, mappedMensa.get(mensaKey), callback)
     else
-      getMeals(mensa, mappedMensa[mensaKey], callback)
+      callback "Kenne leider keine solche Mensa..."
+
+
 
   getImage = (msg, imgid) ->
     tzoffset = (new Date()).getTimezoneOffset() * 60000
@@ -187,17 +189,21 @@ formatOutput = (meal, index) ->
     else
       "#{meal.name} #{formatMealNotes(meal.notes)}#{formatMealCategory(meal.category)}")
 
-notesabbr =
-  Rindfleisch: ":cow:"
-  Schweinefleisch: ":pig:"
-  vegetarisch: ":tomato:"
-  vegan: ":herb:"
-  Alkohol: ":wine_glass:"
-  Knoblauch: ":garlic:"
+notesabbr = new Map(
+    [ ["Rindfleisch", ":cow:"]
+    , ["Schweinefleisch", ":pig:"]
+    , ["vegetarisch", ":tomato:"]
+    , ["vegan", ":herb:"]
+    , ["Alkohol", ":wine_glass:"]
+    , ["Knoblauch", ":garlic:"]
+    ]
+)
 
-catabbr =
-  Abendangebot: ":moon:"
-  Angebote: ""
+catabbr = new Map(
+    [ ["Abendangebot", ":moon:"]
+    , ["Angebote", ""]
+    ]
+)
 
 formatMealNotes = (notes) ->
   # @justus: Wanna throw some functional magic on this? :D
@@ -206,14 +212,14 @@ formatMealNotes = (notes) ->
       words = note.split(' ')
       words[words.length - 1]
     ).reduce((list, note) ->
-      if notesabbr.hasOwnProperty note
+      if notesabbr.has note
         # it would better with immutable operations ... but this should be more performant
-        list.push(notesabbr[note])
+        list.push(notesabbr.get(note))
       list
   , []).join('')
 
 formatMealCategory = (category) ->
-  if catabbr.hasOwnProperty category
-    catabbr[category]
+  if catabbr.has category
+    catabbr.get category
   else
     ""
