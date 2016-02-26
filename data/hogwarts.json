@@ -1,0 +1,14 @@
+{
+  "people": [
+    {
+      "name": "Justus",
+      "house": "Haskell"
+    }
+  ],
+  "houses": [
+    {
+      "name": "Haskell",
+      "points": 0
+    }
+  ]
+}
