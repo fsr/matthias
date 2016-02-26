@@ -83,6 +83,35 @@ class Hogwarts
     query: (person) ->
         @people.get person
 
+    reassign: (person, house, msg) ->
+        house = house.toLowerCase()
+        person = person.toLowerCase()
+        if not @houses.has house
+            msg.send "I don't know a house '#{house}'"
+            return
+        else if not @people.has person
+            msg.send "I don't know any '#{person}'"
+            return
+        else
+            person_obj = @people.get person.toLowerCase()
+            person.house = house
+            msg.send "#{person_obj.name} is now in #{@houses.get(house).name}."
+
+    sorting_hat: (person, msg) ->
+        person = person.toLowerCase()
+        if not @people.has person
+            msg.send "I don't know anyone named '#{person}'"
+            return
+
+        house_arr = Array.from(@houses.values())
+
+        house = house_arr[Math.floor(Math.random() * house_arr.length)]
+
+        person.house = house.name
+
+        msg.send house.name.toUpperCase() + "!"
+
+
     modify_points: (thing, points, msg) ->
         if @people.has thing
             person = @people.get thing
@@ -92,6 +121,7 @@ class Hogwarts
             house_name = thing
             name = "Someone"
         else
+            msg.send "I neither know a person nor a house named '#{thing}'"
             return
 
         house = @houses.get house_name
@@ -108,13 +138,29 @@ module.exports = (robot) ->
     ensure_ledger hogwarts_ledger
     hogwarts = from_file hogwarts_ledger
 
-    robot.hear /(\d+) points to @?(\w+)/i, (msg) ->
+    robot.hear /(\d+) points(?: will be awarded)? to @?(\w+)/i, (msg) ->
         points = parseInt msg.match[1]
         matcher = msg.match[2].toLowerCase()
         hogwarts.modify_points(matcher, points, msg)
-
 
     robot.hear /(\d+) points(?: will be taken(?: away)?)? from (\w+)?/i, (msg) ->
         points = -1 * parseInt msg.match[1]
         matcher = msg.match[2].toLowerCase()
         hogwarts.modify_points(matcher, points, msg)
+
+    robot.respond /(?:I (?:(?:will|should|want to) ))join(?: the \w+)? house (\w+)/, (msg) ->
+        house = msg.match[1].toLowerCase()
+        hogwarts.reassign(msg.message.user.name, house, msg)
+
+    robot.respond /@?(\w+)(?: (?:joins|is joining|should join))?(?: the \w+)? house (\w+)/, (msg) ->
+        house = msg.match[2].toLowerCase()
+        person = msg.match[1].toLowerCase()
+        if person == "i"
+            return
+        hogwarts.reassign(person, house, msg)
+
+    robot.respond /(?:sorting hat|sort me)$/, (msg) ->
+        hogwarts.sorting_hat(msg.message.user.name, msg)
+
+    robot.respond /(?:sorting hat) (\w+)/, (msg) ->
+        hogwarts.sorting_hat(msg.match[1], msg)
