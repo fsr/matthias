@@ -23,6 +23,16 @@ feed = require 'feed-read'
 
 dudle_db = "./data/dudle.json"
 
+
+assert = (assertion, message) ->
+    if not assertion
+        console.log message
+
+
+assert_type = (type, object) ->
+    assert object instanceof type, "#{object} is not an instance of #{type}"
+
+
 module.exports = (robot) ->
 
     new cronjob('00 */10 * * * *', ->
@@ -112,10 +122,16 @@ read_dudles_file = ->
 
 write_dudles_file = (dudle_map) ->
     try
-        fs.writeFile(dudle_db, JSON.stringify(Array.from(dudle_map.values()), null, 2))
+        assert_type Function, JSON.stringify
+        assert_type Function, Array.from
+        assert_type Function, dudle_map.values
+        assert_type Map, dudle_map
+        assert_type Function, fs.writeFile
+        fs.writeFile(dudle_db, JSON.stringify(Array.from(dudle_map.values()), null, 2), -> null)
     catch err
         console.log "Couldn't write to #{dudle_db}: #{err}"
-        console.log dudle_map
+        
+        
 
 save_dudle_to_file = (shortname, url) ->
     dudles = read_dudles_file()
