@@ -29,8 +29,8 @@ assert = (assertion, message) ->
         console.log message
 
 
-assert_type = (type, object) ->
-    assert object instanceof type, "#{object} is not an instance of #{type}"
+assert_type = (type, object, message) ->
+    assert object instanceof type, "<#{object}> is not an instance of <#{type}> - #{message}"
 
 
 module.exports = (robot) ->
@@ -122,11 +122,11 @@ read_dudles_file = ->
 
 write_dudles_file = (dudle_map) ->
     try
-        assert_type Function, JSON.stringify
-        assert_type Function, Array.from
-        assert_type Function, dudle_map.values
-        assert_type Map, dudle_map
-        assert_type Function, fs.writeFile
+        assert_type Function, JSON.stringify, "JSON.stringify"
+        assert_type Function, Array.from, "Array.from"
+        assert_type Function, dudle_map.values,  "dudle_map.values"
+        assert_type Map, dudle_map, "dudle_map"
+        assert_type Function, fs.writeFile, "fs.writeFile"
         fs.writeFile(dudle_db, JSON.stringify(Array.from(dudle_map.values()), null, 2), -> null)
     catch err
         console.log "Couldn't write to #{dudle_db}: #{err}"
