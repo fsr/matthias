@@ -17,7 +17,7 @@
 module.exports = (robot) ->
   robot.respond /porn me/i, (msg) ->
     porn_title = msg.random porn_responses
-    porn_title = porn_title.replace("{target}", msg.message.user.name)
+    porn_title = porn_title.replace("{target}", msg.message.user.name.capitalize())
 
     msg.send porn_title
 
