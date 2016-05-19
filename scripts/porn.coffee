@@ -8,16 +8,21 @@
 #   None
 #
 # Commands:
-#   hubot porn me - Needs porntitle
+#   hubot porn me - Get a random porn title
 #
 # Author:
 #   Johnny Deep
 
 
 module.exports = (robot) ->
-  robot.respond /porn me/i, (msg) ->
+  robot.respond /porn (.+)/i, (msg) ->
     porn_title = msg.random porn_responses
-    porn_title = porn_title.replace("{target}", msg.message.user.name.capitalize())
+
+    name = msg.match[1]
+    if name == "me"
+        porn_title = porn_title.replace("{target}", msg.message.user.name.capitalize())
+    else
+        porn_title = porn_title.replace("{target}", name.capitalize())
 
     msg.send porn_title
 
