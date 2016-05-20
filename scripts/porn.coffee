@@ -16,12 +16,13 @@
 
 module.exports = (robot) ->
   robot.respond /porn (.+)/i, (msg) ->
-    porn_title = msg.random porn_responses
 
     name = msg.match[1]
     if name == "me"
+        porn_title = msg.random porn_responses.concat(targeted_porn_responses)
         porn_title = porn_title.replace("{target}", msg.message.user.name.capitalize())
     else
+        porn_title = msg.random targeted_porn_responses
         porn_title = porn_title.replace("{target}", name.capitalize())
 
     msg.send porn_title
@@ -434,8 +435,10 @@ porn_responses = [
 
 
         "Zucht der Karibik: Hairy Man's Chest",
-        "Zum Löten freigegeben",
+        "Zum Löten freigegeben"
+    ]
 
+targeted_porn_responses = [
         "Ach jodel mir noch einen - Stoßtrupp {target} bläst zum Angriff",
         "{target}s unheimliche Begegnung mit der Reizwäsche",
         "{target} in Wonderland",
