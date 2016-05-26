@@ -17,7 +17,6 @@
 module.exports = (robot) ->
   robot.respond /qr (.*)/i, (msg) ->
     url = encodeURIComponent(msg.match[1])
-    msg.send url
     robot.http("https://api.qrserver.com/v1/read-qr-code/?fileurl=#{url}")
       .get() (err, res, body) ->
         unless err
