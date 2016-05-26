@@ -29,6 +29,10 @@ simpleresponses = [
   [
     /wat is wacken\?/i,
     "Dat ist Wacken. Einmal im Jahr kommen hier alle bösen schwarzen Männer aus Mittelerde her, um ma richtig die Sau rauszulassen."
+  ],
+  [
+    /marco\s*/i,
+    "POLO"
   ]
 ]
 
