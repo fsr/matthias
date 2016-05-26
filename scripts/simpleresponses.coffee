@@ -49,7 +49,8 @@ simplelistens = [
   [/gewitter/i, "Gewitter? In Neuss?"],
   [/danke matthias/i, "No problemo"],
   [/thanks matthias/i, "Not sure if sarcastic or actually grateful..."],
-  [/thx matthias/i, "Not sure if sarcastic or actually grateful..."]
+  [/thx matthias/i, "Not sure if sarcastic or actually grateful..."],
+  [/(spiel|game)/i, "ICH HAB' DAS SPIEL VERLOREN!"]
 ]
 
 module.exports = (robot) ->
