@@ -22,6 +22,6 @@ module.exports = (robot) ->
       .get() (err, res, body) ->
         unless err
           json = JSON.parse body
-          msg.send(json[0]["symbol"][0]["data"]j)
+          msg.send(json[0]["symbol"][0]["data"])
         else
           msg.send("DOES NOT COMPUTE")
