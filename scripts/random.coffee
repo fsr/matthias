@@ -22,9 +22,10 @@ module.exports = (robot) ->
       msg.send msg.random walter_quotes
 
   robot.hear /matthias ist (.*)/i, (msg) ->
-    adj = msg.match[1].toLowerCase()
+    raw_msg = msg.match[1]
+    adj = raw_msg.toLowerCase()
     if adj.indexOf("die tür") == -1 and adj.indexOf("die tuer") == -1
-      msg.reply "Deine Mudda ist #{adj}!"
+      msg.reply "Deine Mudda ist #{raw_msg}!"
 
   robot.hear /matthias,? du bist (.*)/i, (msg) ->
     adj = msg.match[1].toLowerCase()
