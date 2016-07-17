@@ -107,7 +107,7 @@ congratulate = (robot) ->
 	bdays.forEach (birthday, name) ->
 		today = moment()
 		if today.month() == birthday.month() and today.date() == birthday.date()
-			robot.messageRoom '#general', ":tada: Alles Gute zum Geburtstag, #{name.capitalize()}! :tada:"
+			robot.messageRoom '#random', ":tada: Alles Gute zum Geburtstag, #{name.capitalize()}! :tada:"
 
 # Kinda hoped to find this in the stdlib.
 String.prototype.capitalize = () ->
