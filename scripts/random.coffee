@@ -16,10 +16,10 @@
 
 
 module.exports = (robot) ->
-  robot.hear /.*/, (msg) ->
-    user = msg.message.user.name.toLowerCase()
-    if user == donny
-      msg.send msg.random walter_quotes
+  # robot.hear /.*/, (msg) ->
+  #   user = msg.message.user.name.toLowerCase()
+  #   if user == donny
+  #     msg.send msg.random walter_quotes
 
   robot.hear /matthias ist (.*)/i, (msg) ->
     raw_msg = msg.match[1]
