@@ -103,45 +103,52 @@ module.exports = (robot) ->
       .get() (err, res, body) ->
         if body.trim() == ""
           msg.send "This mensa is currently out of order, sorry."
-        else
-          data = JSON.parse body
-          output = "#{data.map(formatOutput).join('\n')}\n"
-          stringstart = output.indexOf("#{imgid}: ")
-          if stringstart > -1
-            if imgid > 9
-              stringstart += 5
-            else
-              stringstart += 4
-            output = output.substr(stringstart, output.indexOf("\n", stringstart) - stringstart)
-            if output.indexOf("€") > -1
-              output = output.substr(0, output.indexOf(" - "), output.length - 10)
-            robot.http("http://www.studentenwerk-dresden.de/mensen/speiseplan/")
+          return
+
+        data = JSON.parse body
+        output = "#{data.map(formatOutput).join('\n')}\n"
+        stringstart = output.indexOf("#{imgid}: ")
+
+        if stringstart == -1
+          msg.send "No food with this number.."
+          return
+
+        stringstart += if imgid > 9 then 5 else 4
+        output = output.substr(stringstart, output.indexOf("\n", stringstart) - stringstart)
+
+        if output.indexOf("€") > -1
+          output = output.substr(0, output.indexOf(" - "), output.length - 10)
+
+        robot.http("http://www.studentenwerk-dresden.de/mensen/speiseplan/")
+          .get() (err, res, body) ->
+            if body.trim() == ""
+              msg.send "No image found, sorry."
+              return
+
+            # would this substring madness not be a good place to use regex?
+            body = body.substr(body.indexOf("<th class=\"text\">Alte Mensa</th>"))
+
+            if body.indexOf(output) == -1
+              msg.send "No image found, sorry."
+              return
+
+            body = body.substr(0, body.indexOf(output) + output.length + 4)
+            body = body.substr(body.lastIndexOf("<a href") + 9)
+            body = body.substr(0, body.indexOf("\">"))
+            link = "http://www.studentenwerk-dresden.de/mensen/speiseplan/#{body}"
+            robot.http(link)
               .get() (err, res, body) ->
                 if body.trim() == ""
+                  msg.send "No image found, sorry."
+                  return
+
+                imagelink = body.substr(body.indexOf("//bilderspeiseplan"))
+                imagelink = imagelink.substr(0, imagelink.indexOf("\""))
+                imagelink = "http:" + imagelink
+                if imagelink.length < 20
                   msg.send ("No image found, sorry.")
                 else
-                  body = body.substr(body.indexOf("<th class=\"text\">Alte Mensa</th>"))
-                  if body.indexOf(output) > -1
-                    body = body.substr(0, body.indexOf(output) + output.length + 4)
-                    body = body.substr(body.lastIndexOf("<a href") + 9)
-                    body = body.substr(0, body.indexOf("\">"))
-                    link = "http://www.studentenwerk-dresden.de/mensen/speiseplan/" + body
-                    robot.http(link)
-                      .get() (err, res, body) ->
-                        if body.trim() == ""
-                          msg.send ("No image found, sorry.")
-                        else
-                          imagelink = body.substr(body.indexOf("//bilderspeiseplan"))
-                          imagelink = imagelink.substr(0, imagelink.indexOf("\""))
-                          imagelink = "http:" + imagelink
-                          if imagelink.length < 20
-                            msg.send ("No image found, sorry.")
-                          else
-                            msg.send(imagelink)
-                  else
-                    msg.send ("No image found, sorry.")
-          else
-            msg.send("No food with this number..");
+                  msg.send(imagelink)
 
 
   getMeals = (name, mensa, callback) ->
