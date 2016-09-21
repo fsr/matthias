@@ -38,8 +38,8 @@ func (random *Random) InitPlugin(bot *slick.Bot) {
 // BashHandler ...
 func (random *Random) BashHandler(listen *slick.Listener, msg *slick.Message) {
 	log.Println("Bash Quote requested by", msg.FromUser.Name)
-	random := rand.New(rand.NewSource(time.Now().UnixNano()))
-	randomID := random.RandInt(950)
+	r := rand.New(rand.NewSource(time.Now().UnixNano()))
+	randomID := r.Intn(950)
 	msg.Reply(fmt.Sprintf("http://bash.fsrleaks.de/?%d", randomID))
 }
 
