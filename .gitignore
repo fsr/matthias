@@ -1,7 +1,11 @@
+# config files
+matthias.conf
+matthias_debug.conf
+configvars.txt
+matthias.service
+
 node_modules
 .DS_Store*
 .hubot_history
-matthias.conf
 update.coffee
-configvars.txt
-matthias.service
+matthias.bolt.db
