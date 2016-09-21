@@ -9,17 +9,17 @@ import (
 	"github.com/abourget/slick"
 )
 
-var isDebug = flag.Bool("debug", false, "debug mode, uses ./matthias_debug.conf")
-var configFile = flag.String("config", os.Getenv("HOME")+"/.matthias.conf", "config file")
+var isProduction = flag.Bool("production", false, "production mode, uses $HOME/.matthias.conf")
 
 func main() {
 	flag.Parse()
 
-	if *isDebug {
-		debugPath := "./matthias_debug.conf"
-		configFile = &debugPath
+	configFile := "./matthias_debug.conf"
+
+	if *isProduction {
+		configFile = os.Getenv("HOME") + "/.matthias.conf"
 	}
 
-	bot := slick.New(*configFile)
+	bot := slick.New(configFile)
 	bot.Run()
 }
