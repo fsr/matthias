@@ -10,3 +10,4 @@ node_modules
 update.coffee
 matthias.bolt.db
 matthias
+deploy.sh
