@@ -4,6 +4,7 @@ import (
 	"flag"
 	"os"
 
+	_ "./scripts/mensa"
 	_ "./scripts/random"
 
 	"github.com/abourget/slick"
