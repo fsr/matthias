@@ -7,26 +7,22 @@ import (
 	"github.com/abourget/slick"
 )
 
-// Firat ...
-// Commands:
-// !firat - Return Firat's menu
 // Thanks @philipp for typing all of this!
-type Firat struct{}
+type firat struct{}
 
 func init() {
-	slick.RegisterPlugin(&Firat{})
+	slick.RegisterPlugin(&firat{})
 }
 
 // InitPlugin ...
-func (firat *Firat) InitPlugin(bot *slick.Bot) {
+func (firat *firat) InitPlugin(bot *slick.Bot) {
 	bot.Listen(&slick.Listener{
 		Matches:            regexp.MustCompile("^!firat"),
-		MessageHandlerFunc: firat.MenuHandler,
+		MessageHandlerFunc: firat.menuHandler,
 	})
 }
 
-// MenuHandler ...
-func (firat *Firat) MenuHandler(listen *slick.Listener, msg *slick.Message) {
+func (firat *firat) menuHandler(listen *slick.Listener, msg *slick.Message) {
 	log.Println("Firat menu requested by", msg.FromUser.Name)
 
 	msg.ReplyMention("Firat hat ganz schön viel leckeres Zeug. Ich schick' dir die Liste mal als private Nachricht.")
@@ -34,6 +30,10 @@ func (firat *Firat) MenuHandler(listen *slick.Listener, msg *slick.Message) {
 	for _, menu := range menuParts {
 		msg.ReplyPrivately(menu)
 	}
+}
+
+func (firat *firat) String() string {
+	return `!firat - Speiseplan vom Firat ausgeben`
 }
 
 // Sending everything at once is too much content for Slack. It's therefore split into two parts.
