@@ -4,34 +4,43 @@ import (
 	"fmt"
 	"log"
 	"regexp"
+	"strconv"
 
 	"github.com/abourget/slick"
 	vvo "github.com/kiliankoe/dvbgo"
 )
 
-// DVB ...
-// Commands:
-// !dvb <stop> - Return list of upcoming departures from stop
-type DVB struct{}
+type dvb struct{}
 
 func init() {
-	slick.RegisterPlugin(&DVB{})
+	slick.RegisterPlugin(&dvb{})
 }
 
 // InitPlugin ...
-func (dvb *DVB) InitPlugin(bot *slick.Bot) {
+func (dvb *dvb) InitPlugin(bot *slick.Bot) {
 	bot.Listen(&slick.Listener{
 		Matches:            regexp.MustCompile("^!dvb (.*)"),
-		MessageHandlerFunc: dvb.DepartureHandler,
+		MessageHandlerFunc: dvb.departureHandler,
 	})
+	// bot.Listen(&slick.Listener{
+	// 	Matches:            regexp.MustCompile("^!dvb (.*) in (\\d+)"),
+	// 	MessageHandlerFunc: dvb.departureHandler,
+	// })
 }
 
-// DepartureHandler ...
-func (dvb *DVB) DepartureHandler(listen *slick.Listener, msg *slick.Message) {
+func (dvb *dvb) departureHandler(listen *slick.Listener, msg *slick.Message) {
 	query := msg.Match[1]
 	log.Println("DVB monitor for", query, "requested by", msg.FromUser.Name)
 
-	departures, err := vvo.Monitor(query, 0, "")
+	offset := 0
+	if len(msg.Match) > 2 {
+		value, err := strconv.Atoi(msg.Match[2])
+		if err == nil {
+			offset = value
+		}
+	}
+
+	departures, err := vvo.Monitor(query, offset, "")
 	if err != nil {
 		msg.Reply("Unerwarteter Fehler 😱", err)
 	}
@@ -52,4 +61,9 @@ func formatOutput(departures []*vvo.Departure, stopName string) (output string) 
 		output += "\n"
 	}
 	return
+}
+
+func (dvb *dvb) String() string {
+	return `!dvb <hst> - Gebe Liste der nächsten Abfahrten von <hst> aus.
+!dvb <hst> in <x> - Selbes wie !dvb <hst>, nur mit <x> Minuten offset.`
 }
