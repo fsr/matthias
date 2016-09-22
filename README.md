@@ -5,7 +5,7 @@ matthias is a Slack chat bot built on the [slick][https://github.com/abourget/sl
 ### Plugin migration from previous hubot
 
 #### Wanted
-- [ ] mensa
+- [x] mensa
 - [x] random
 - [ ] google images
 - [ ] simpleresponses
