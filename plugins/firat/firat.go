@@ -29,6 +29,8 @@ func (firat *Firat) InitPlugin(bot *slick.Bot) {
 func (firat *Firat) MenuHandler(listen *slick.Listener, msg *slick.Message) {
 	log.Println("Firat menu requested by", msg.FromUser.Name)
 
+	msg.ReplyMention("Firat hat ganz schön viel leckeres Zeug. Ich schick' dir die Liste mal als private Nachricht.")
+
 	for _, menu := range menuParts {
 		msg.ReplyPrivately(menu)
 	}
