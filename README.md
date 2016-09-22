@@ -15,7 +15,7 @@ matthias is a Slack chat bot built on the [slick][https://github.com/abourget/sl
 - [ ] porn
 - [ ] version
 - [x] dvb
-- [ ] urban dictionary
+- [x] urban dictionary
 
 #### Probably unecessary
 **ours:** apdoor, bday, btc, drsommer, dudle, geruecht, qr, stoll, sudo_ger, video

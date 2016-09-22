@@ -9,6 +9,7 @@ import (
 	_ "github.com/fsr/matthias/plugins/googleimages"
 	_ "github.com/fsr/matthias/plugins/mensa"
 	_ "github.com/fsr/matthias/plugins/random"
+	_ "github.com/fsr/matthias/plugins/urbandictionary"
 
 	"github.com/abourget/slick"
 )
