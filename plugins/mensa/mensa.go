@@ -14,20 +14,14 @@ import (
 var defaultMensa = speiseplan.AlteMensa
 var mensaChannelName = "mensa"
 
-// Mensa as in omnomnom.
-// This automatically posts today's menu in #mensa at 10:30 on every workday.
-// Commands:
-//   !mensa - omnom @ Alte Mensa
-//   !mensa <mensa> - omnom @ <mensa>
-//   !mensa bild <nr> - Show an image of meal <nr>, only supports Alte Mensa
-type Mensa struct{}
+type mensa struct{}
 
 func init() {
-	slick.RegisterPlugin(&Mensa{})
+	slick.RegisterPlugin(&mensa{})
 }
 
 // InitPlugin ...
-func (mensa *Mensa) InitPlugin(bot *slick.Bot) {
+func (mensa *mensa) InitPlugin(bot *slick.Bot) {
 	c := cron.New()
 	c.AddFunc("00 30 10 * * 1-5", func() {
 		meals, _, err := speiseplan.GetCurrentForCanteen(defaultMensa)
@@ -43,21 +37,26 @@ func (mensa *Mensa) InitPlugin(bot *slick.Bot) {
 
 	bot.Listen(&slick.Listener{
 		Matches:            regexp.MustCompile("^!mensa$"),
-		MessageHandlerFunc: mensa.MensaHandler,
+		MessageHandlerFunc: mensa.mensaHandler,
 	})
 	bot.Listen(&slick.Listener{
 		Matches:            regexp.MustCompile("^!mensa (.*)"),
-		MessageHandlerFunc: mensa.MensaHandler,
+		MessageHandlerFunc: mensa.mensaHandler,
 	})
 	bot.Listen(&slick.Listener{
 		// TODO: Mensa Name here should be optional and default to defaultMensa
 		Matches:            regexp.MustCompile("^!mensabild (.*) (\\d+)"),
-		MessageHandlerFunc: mensa.MealImageHandler,
+		MessageHandlerFunc: mensa.mealImageHandler,
 	})
 }
 
-// MensaHandler ...
-func (mensa *Mensa) MensaHandler(listen *slick.Listener, msg *slick.Message) {
+func (mensa *mensa) String() string {
+	return `!mensa - omnom @ Alte Mensa
+!mensa <mensa> - omnom @ <mensa>
+!mensabild <mensa> <nr> - Bild anzeigen für Speise <nr> @ <mensa>`
+}
+
+func (mensa *mensa) mensaHandler(listen *slick.Listener, msg *slick.Message) {
 	log.Println("Mensa menu requested by", msg.FromUser.Name)
 
 	mensaName := defaultMensa
@@ -96,8 +95,7 @@ var notesEmoji = map[string]string{
 	"Knoblauch":       ":garlic:",
 }
 
-// MealImageHandler ...
-func (mensa *Mensa) MealImageHandler(listen *slick.Listener, msg *slick.Message) {
+func (mensa *mensa) mealImageHandler(listen *slick.Listener, msg *slick.Message) {
 	log.Println("Meal image", msg.Match[2], "@", msg.Match[1], "requested by", msg.FromUser.Name)
 
 	mensaName := msg.Match[1]
