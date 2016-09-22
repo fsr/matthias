@@ -4,8 +4,8 @@ import (
 	"flag"
 	"os"
 
-	_ "./scripts/mensa"
-	_ "./scripts/random"
+	_ "github.com/fsr/matthias/plugins/mensa"
+	_ "github.com/fsr/matthias/plugins/random"
 
 	"github.com/abourget/slick"
 )
