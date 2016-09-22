@@ -14,7 +14,7 @@ matthias is a Slack chat bot built on the [slick][https://github.com/abourget/sl
 - [x] firat
 - [ ] porn
 - [ ] version
-- [ ] dvb
+- [x] dvb
 - [ ] urban dictionary
 
 #### Probably unecessary
