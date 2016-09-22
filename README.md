@@ -11,7 +11,7 @@ matthias is a Slack chat bot built on the [slick][https://github.com/abourget/sl
 - [ ] simpleresponses
 - [ ] fsr
 - [ ] elbe
-- [ ] firat
+- [x] firat
 - [ ] porn
 - [ ] version
 - [ ] dvb
