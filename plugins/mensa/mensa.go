@@ -11,8 +11,8 @@ import (
 	"github.com/robfig/cron"
 )
 
-var defaultMensa = speiseplan.AlteMensa
-var mensaChannelName = "mensa"
+var defaultMensa string
+var mensaChannelName string
 
 type mensa struct{}
 
@@ -22,8 +22,22 @@ func init() {
 
 // InitPlugin ...
 func (mensa *mensa) InitPlugin(bot *slick.Bot) {
+	var conf struct {
+		Mensa struct {
+			DefaultMensa string
+			CronChannel  string
+			CronTime     string
+		}
+	}
+
+	bot.LoadConfig(&conf)
+
+	defaultMensa = conf.Mensa.DefaultMensa
+	mensaChannelName = conf.Mensa.CronChannel
+	cronTime := conf.Mensa.CronTime
+
 	c := cron.New()
-	c.AddFunc("00 30 10 * * 1-5", func() {
+	c.AddFunc(cronTime, func() {
 		meals, _, err := speiseplan.GetCurrentForCanteen(defaultMensa)
 		if err != nil {
 			bot.SendToChannel(mensaChannelName, "Konnte für heute leider keine Mensadaten laden 😓")
