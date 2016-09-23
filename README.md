@@ -30,7 +30,7 @@ A rewrite in go (a compiled and typed language), has the nice effect of producin
 ### Running matthias locally
 
 As long as you have go installed on your system, running matthias locally shouldn't be a problem. A simple `go run matthias.go` should do the trick.
-Be sure to duplicate *matthias_example.conf* first and name it *matthias_debug.conf*. You can get the necessary Slack API token from the Slack integrations page or @kiliankoe. Once matthias is running, you can chat with directly with @matthias_dev in Slack or use the #tmp channel.
+Be sure to duplicate *matthias_example.conf* first and name it *matthias_debug.conf*. You can get the necessary Slack API token from the Slack integrations page or @kiliankoe. Once matthias is running, you can chat directly with @matthias_dev in Slack or use the #tmp channel.
 
 ### Configuration
 
