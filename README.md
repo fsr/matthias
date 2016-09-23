@@ -30,6 +30,8 @@ matthias is a Slack chat bot built on the [slick][https://github.com/abourget/sl
 
 **TODO**
 
-### Scripting
+### Custom Plugins
 
-**TODO**
+Matthias' plugins reside in /plugins. Writing more should be pretty straight-forward.
+There's a bit of very simple documentation in /plugins/exampleplugin/exampleplugin.go, which goes over the basics.
+Should any other questions arise, ask @kiliankoe.
