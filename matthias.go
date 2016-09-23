@@ -8,6 +8,7 @@ import (
 	_ "github.com/fsr/matthias/plugins/firat"
 	_ "github.com/fsr/matthias/plugins/googleimages"
 	_ "github.com/fsr/matthias/plugins/mensa"
+	_ "github.com/fsr/matthias/plugins/porn"
 	_ "github.com/fsr/matthias/plugins/random"
 	_ "github.com/fsr/matthias/plugins/urbandictionary"
 
