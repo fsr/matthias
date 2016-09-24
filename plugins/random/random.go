@@ -3,11 +3,10 @@ package random
 import (
 	"fmt"
 	"log"
+	"math/rand"
 	"regexp"
 
 	"github.com/abourget/slick"
-
-	r "github.com/fsr/matthias/util/random"
 )
 
 type random struct{}
@@ -34,7 +33,7 @@ func (random *random) InitPlugin(bot *slick.Bot) {
 
 func (random *random) bashHandler(listen *slick.Listener, msg *slick.Message) {
 	log.Println("Bash Quote requested by", msg.FromUser.Name)
-	randomID := r.Int(950)
+	randomID := rand.Intn(950)
 	msg.Reply(fmt.Sprintf("http://bash.fsrleaks.de/?%d", randomID))
 }
 

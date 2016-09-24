@@ -2,7 +2,9 @@ package main
 
 import (
 	"flag"
+	"math/rand"
 	"os"
+	"time"
 
 	_ "github.com/fsr/matthias/plugins/apbdoor"
 	_ "github.com/fsr/matthias/plugins/drsommer"
@@ -32,4 +34,8 @@ func main() {
 
 	bot := slick.New(configFile)
 	bot.Run()
+}
+
+func init() {
+	rand.Seed(time.Now().UnixNano())
 }
