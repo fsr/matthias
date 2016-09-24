@@ -2,12 +2,11 @@ package porn
 
 import (
 	"log"
-	"math/rand"
 	"regexp"
 	"strings"
-	"time"
 
 	"github.com/abourget/slick"
+	"github.com/fsr/matthias/util/random"
 )
 
 type porn struct{}
@@ -52,6 +51,5 @@ func randomPornTitle(all bool) string {
 }
 
 func randomIndex(length int) int {
-	r := rand.New(rand.NewSource(time.Now().UnixNano()))
-	return r.Intn(length)
+	return random.Int(length)
 }

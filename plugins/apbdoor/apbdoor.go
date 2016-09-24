@@ -8,6 +8,7 @@ import (
 	"strings"
 
 	"github.com/abourget/slick"
+	"github.com/fsr/matthias/util/random"
 )
 
 const (
@@ -42,16 +43,16 @@ func (apbdoor *apbdoor) InitPlugin(bot *slick.Bot) {
 func (apbdoor *apbdoor) checkDoorHandler(listen *slick.Listener, msg *slick.Message) {
 	doorState, err := checkDoorState()
 	if err != nil {
-		msg.ReplyRandom(maybeMsgs)
+		msg.Reply(random.StringFromList(maybeMsgs))
 	}
 
 	switch doorState {
 	case doorBroken:
-		msg.ReplyRandom(yesMsgs)
+		msg.Reply(random.StringFromList(yesMsgs))
 	case doorFunctional:
-		msg.ReplyRandom(noMsgs)
+		msg.Reply(random.StringFromList(noMsgs))
 	default:
-		msg.ReplyRandom(maybeMsgs)
+		msg.Reply(random.StringFromList(maybeMsgs))
 	}
 }
 
@@ -63,7 +64,7 @@ func (apbdoor *apbdoor) setDoorHandler(listen *slick.Listener, msg *slick.Messag
 		msg.Reply("Orr ne, schon wieder?!")
 	case "ganz", "wieder ganz", "funktional":
 		setDoorState(doorFunctional)
-		msg.ReplyRandom(partyGifs)
+		msg.Reply(random.StringFromList(partyGifs))
 	case "weg", "unbekannt":
 		setDoorState(doorUnknown)
 		msg.Reply("Ähm.... Ahja?")
