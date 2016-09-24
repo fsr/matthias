@@ -89,13 +89,17 @@ func (mensa *mensa) mensaHandler(listen *slick.Listener, msg *slick.Message) {
 }
 
 func formatOutput(meals []*speiseplan.Meal, mensaName string) (output string) {
-	output += fmt.Sprintf("Heute @ *%s*:\n", mensaName)
-	for idx, meal := range meals {
-		output += fmt.Sprintf("%d: %s", idx, meal.Name)
-		if meal.StudentPrice > 0 {
-			output += fmt.Sprintf(" - %.2f€", meal.StudentPrice)
+	if len(meals) > 0 {
+		output += fmt.Sprintf("Heute @ *%s*:\n", mensaName)
+		for idx, meal := range meals {
+			output += fmt.Sprintf("%d: %s", idx, meal.Name)
+			if meal.StudentPrice > 0 {
+				output += fmt.Sprintf(" - %.2f€", meal.StudentPrice)
+			}
+			output += "\n"
 		}
-		output += "\n"
+	} else {
+		output += fmt.Sprintf("Heute gibt's leider nichts @ %s 😢", mensaName)
 	}
 	return
 }
