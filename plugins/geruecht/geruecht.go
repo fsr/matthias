@@ -15,7 +15,7 @@ var password string
 type geruecht struct{}
 
 func (geruecht *geruecht) String() string {
-	return ``
+	return `!gerücht - Gib ein zufälliges Gerücht zurück`
 }
 
 func init() {
