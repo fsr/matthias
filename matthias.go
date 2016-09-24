@@ -4,6 +4,7 @@ import (
 	"flag"
 	"os"
 
+	_ "github.com/fsr/matthias/plugins/apbdoor"
 	_ "github.com/fsr/matthias/plugins/dvb"
 	_ "github.com/fsr/matthias/plugins/firat"
 	_ "github.com/fsr/matthias/plugins/googleimages"
