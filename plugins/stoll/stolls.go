@@ -1,4 +1,6 @@
-[
+package stoll
+
+var quotes = []string{
     "Ist ne stehende Welle, junge Dame.",
     "Licht ist keine Grenzgeschwindigkeit, vorsicht. Skalarwellen und stehende Welle hat ein vielfaches mehr.",
     "Auf die Maßeinheiten der Kernphysik hab ich bewusst verzichtet, denn außer mir würde das kaum jemand begreifen.",
@@ -489,5 +491,5 @@
     "Alles ist vorhersehbar!",
     "3 mal Storgram reinen Alkohol!",
     "Das schirmt gegen radioaktive Strahlung ab.",
-    "Irrtum! Gezielte Desinformation!"
-]
+    "Irrtum! Gezielte Desinformation!",
+}

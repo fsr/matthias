@@ -1,8 +1,6 @@
 package stoll
 
 import (
-	"encoding/json"
-	"io/ioutil"
 	"regexp"
 
 	"github.com/abourget/slick"
@@ -28,14 +26,14 @@ func (stoll *stoll) InitPlugin(bot *slick.Bot) {
 }
 
 func (stoll *stoll) stollHandler(listen *slick.Listener, msg *slick.Message) {
-	var quotes []string
-	bytes, err := ioutil.ReadFile("./plugins/stoll/stolls.json")
-	if err != nil {
-		msg.Reply("Meine Liste an Dr. Axel Stoll Zitaten ist nicht da 😓")
-	}
-	err = json.Unmarshal(bytes, &quotes)
-	if err != nil {
-		msg.Reply("Meine Liste an Dr. Axel Stoll Zitaten ist nicht lesbar 😭")
-	}
+	// var quotes []string
+	// bytes, err := ioutil.ReadFile("./plugins/stoll/stolls.json")
+	// if err != nil {
+	// 	msg.Reply("Meine Liste an Dr. Axel Stoll Zitaten ist nicht da 😓")
+	// }
+	// err = json.Unmarshal(bytes, &quotes)
+	// if err != nil {
+	// 	msg.Reply("Meine Liste an Dr. Axel Stoll Zitaten ist nicht lesbar 😭")
+	// }
 	msg.Reply(random.StringFromList(quotes))
 }
