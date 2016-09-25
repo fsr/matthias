@@ -35,7 +35,7 @@ func (apbdoor *apbdoor) InitPlugin(bot *slick.Bot) {
 		MessageHandlerFunc: apbdoor.checkDoorHandler,
 	})
 	bot.Listen(&slick.Listener{
-		Matches:            regexp.MustCompile("!t(?:ü|ue)r(?: ist )?(.+)"),
+		Matches:            regexp.MustCompile("!t(?:ü|ue)r (?:ist )?(.+)"),
 		MessageHandlerFunc: apbdoor.setDoorHandler,
 	})
 }
