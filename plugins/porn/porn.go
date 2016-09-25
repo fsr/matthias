@@ -1,18 +1,17 @@
 package porn
 
 import (
-	"log"
-	"math/rand"
 	"regexp"
 	"strings"
 
 	"github.com/abourget/slick"
+	"github.com/fsr/matthias/util/random"
 )
 
 type porn struct{}
 
 func (porn *porn) String() string {
-	return `!porn me - Random Porn Titel
+	return `!porn - Random Porn Titel
 !porn <name> - Random Porn Titel mit <name>`
 }
 
@@ -23,33 +22,35 @@ func init() {
 // InitPlugin ...
 func (porn *porn) InitPlugin(bot *slick.Bot) {
 	bot.Listen(&slick.Listener{
-		Matches:            regexp.MustCompile("^!porn (.+)"),
+		Matches:            regexp.MustCompile("^!porn(.+)?"),
 		MessageHandlerFunc: porn.pornHandler,
 	})
 }
 
 func (porn *porn) pornHandler(listen *slick.Listener, msg *slick.Message) {
-	log.Println("Porn request for", msg.Match[1], "from", msg.FromUser.Name)
+	hasTarget := msg.Match[1] != ""
 
-	name := msg.Match[1]
-	var title string
-	if name == "me" {
-		name = strings.Title(msg.FromUser.Name)
-		title = strings.Replace(randomPornTitle(true), "{target}", name, -1)
-	} else {
+	name := ""
+	if hasTarget {
+		name = msg.Match[1][1:] // The leading space is in the capture group as well
+		if name == "me" {
+			name = msg.FromUser.Name
+		}
 		name = strings.Title(name)
-		title = strings.Replace(randomPornTitle(false), "{target}", name, -1)
 	}
-	msg.Reply(title)
+
+	var pornTitle string
+	if hasTarget {
+		pornTitle = strings.Replace(randomPornTitle(true), "{target}", name, -1)
+	} else {
+		pornTitle = randomPornTitle(false)
+	}
+	msg.Reply(pornTitle)
 }
 
-func randomPornTitle(all bool) string {
-	if all {
-		targetedPornTitles = append(targetedPornTitles, pornTitles...)
+func randomPornTitle(targeted bool) string {
+	if targeted {
+		return random.StringFromList(targetedPornTitles)
 	}
-	return targetedPornTitles[randomIndex(len(targetedPornTitles))]
-}
-
-func randomIndex(length int) int {
-	return rand.Intn(length)
+	return random.StringFromList(pornTitles)
 }
