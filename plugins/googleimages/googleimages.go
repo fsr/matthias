@@ -8,6 +8,10 @@ import (
 
 type googleimages struct{}
 
+func (images *googleimages) String() string {
+	return `!image (me) <suchbegriff> - Gibt ein Zufallsbild der Google Bildersuche zum <suchbegriff> aus`
+}
+
 func init() {
 	slick.RegisterPlugin(&googleimages{})
 }
@@ -27,8 +31,4 @@ Wenn du helfen magst es einzubauen, schau doch bitte mal hier vorbei: https://gi
 Hier ist die Doku zu dem Custom Search Gedöns: https://godoc.org/google.golang.org/api/customsearch/v1
 Hatte beim Schreiben dieser Nachricht aktuell keine Lust mich da einzulesen. Wenn du Lust dazu hast, nur zu :smile:
 Solltest du ein alternatives golang Package findest, was das schon implementiert, wär das natürlich auch klasse :blush:`)
-}
-
-func (images *googleimages) String() string {
-	return `!image (me) <suchbegriff> - Gibt ein Zufallsbild der Google Bildersuche zum <suchbegriff> aus`
 }

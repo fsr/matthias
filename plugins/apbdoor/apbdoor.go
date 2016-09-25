@@ -11,18 +11,18 @@ import (
 	"github.com/fsr/matthias/util/random"
 )
 
-const (
-	doorBroken     = "yes"
-	doorFunctional = "no"
-	doorUnknown    = "maybe"
-)
-
 type apbdoor struct{}
 
 func (apbdoor *apbdoor) String() string {
 	return `!türstatus/!tuerstatus - Ist die Eingangstür vom APB aktuell im Eimer?
 !tuer (ist) (kaputt/ganz/weg) - Setzt die Eingangstür vom APB auf den jeweiligen Status`
 }
+
+const (
+	doorBroken     = "yes"
+	doorFunctional = "no"
+	doorUnknown    = "maybe"
+)
 
 func init() {
 	slick.RegisterPlugin(&apbdoor{})

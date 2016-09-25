@@ -21,13 +21,23 @@ import (
 // called goimports. In case you're using Atom, go ahead and install go-plus,
 // which also installs goimports and runs it on each save.
 
-// Next step is to declare a struct for the plugin, which can then be passed
-// on to the underlying framework to register it.
-// Go automatically exports (as in declares public) capitalized types and
-// methods. There's no need for that here, as that will only make the linter
-// complain about missing documentation ;)
+// Next step is to declare a struct for the plugin which we can use to declare
+// all our functionality on.
 
 type exampleplugin struct{}
+
+// It's a good practice to document what this plugin can do by implementing
+// the String() function on the plugin. This is also the output returned by
+// !help.
+
+func (example *exampleplugin) String() string {
+	return `!example - outputs 'Hello, World!'`
+}
+
+// The plugin struct can now be passed on to the underlying framework to
+// register it. Go automatically exports (as in declares public) capitalized
+// types and methods. There's no need for that here, as that will only make the
+// linter complain about missing documentation ;)
 
 func init() {
 	slick.RegisterPlugin(&exampleplugin{})

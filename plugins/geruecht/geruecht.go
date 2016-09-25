@@ -9,14 +9,14 @@ import (
 	"github.com/abourget/slick"
 )
 
-var username string
-var password string
-
 type geruecht struct{}
 
 func (geruecht *geruecht) String() string {
 	return `!gerücht - Gib ein zufälliges Gerücht zurück`
 }
+
+var username string
+var password string
 
 func init() {
 	slick.RegisterPlugin(&geruecht{})

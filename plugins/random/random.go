@@ -10,6 +10,10 @@ import (
 
 type random struct{}
 
+func (random *random) String() string {
+	return `!bash - Link zu einem zufälligen Bashzitat`
+}
+
 func init() {
 	slick.RegisterPlugin(&random{})
 }
@@ -37,8 +41,4 @@ func (random *random) bashHandler(listen *slick.Listener, msg *slick.Message) {
 
 func (random *random) insultHandler(listen *slick.Listener, msg *slick.Message) {
 	msg.ReplyMention(fmt.Sprintf("Deine Mudda ist %s!", msg.Match[1]))
-}
-
-func (random *random) String() string {
-	return `!bash - Link zu einem zufälligen Bashzitat`
 }

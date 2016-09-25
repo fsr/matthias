@@ -9,6 +9,10 @@ import (
 
 type urbandictionary struct{}
 
+func (urban *urbandictionary) String() string {
+	return `!urban <begriff> - Sucht die Top Definition auf Urbandictionary heraus`
+}
+
 func init() {
 	slick.RegisterPlugin(&urbandictionary{})
 }
@@ -30,8 +34,4 @@ func (urban *urbandictionary) defineHandler(listen *slick.Listener, msg *slick.M
 	top := result.List[0]
 
 	msg.Reply(top.String())
-}
-
-func (urban *urbandictionary) String() string {
-	return `!urban <begriff> - Sucht die Top Definition auf Urbandictionary heraus`
 }

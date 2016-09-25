@@ -8,9 +8,9 @@ import (
 	"github.com/fsr/matthias/util/random"
 )
 
-var drsommerChannel string
-
 type drsommer struct{}
+
+var drsommerChannel string
 
 func init() {
 	slick.RegisterPlugin(&drsommer{})

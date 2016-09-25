@@ -6,15 +6,15 @@ import (
 	"github.com/abourget/slick"
 )
 
-// this var is set via a linker flag, it doesn't have to edited by hand
-// just make sure to use make instead of go when running or building
-var gitVersion = "latest"
-
 type version struct{}
 
 func (version *version) String() string {
 	return `!version - Welche Version von matthias läuft gerade?`
 }
+
+// this var is set via a linker flag, it doesn't have to edited by hand
+// just make sure to use make instead of go when running or building
+var gitVersion = "latest"
 
 func init() {
 	slick.RegisterPlugin(&version{})

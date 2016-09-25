@@ -10,10 +10,16 @@ import (
 	"github.com/robfig/cron"
 )
 
+type mensa struct{}
+
+func (mensa *mensa) String() string {
+	return `!mensa - omnom @ Alte Mensa
+!mensa <mensa> - omnom @ <mensa>
+!mensabild <mensa> <nr> - Bild anzeigen für Speise <nr> @ <mensa>`
+}
+
 var defaultMensa string
 var mensaChannelName string
-
-type mensa struct{}
 
 func init() {
 	slick.RegisterPlugin(&mensa{})
@@ -61,12 +67,6 @@ func (mensa *mensa) InitPlugin(bot *slick.Bot) {
 		Matches:            regexp.MustCompile("^!mensabild (.*) (\\d+)"),
 		MessageHandlerFunc: mensa.mealImageHandler,
 	})
-}
-
-func (mensa *mensa) String() string {
-	return `!mensa - omnom @ Alte Mensa
-!mensa <mensa> - omnom @ <mensa>
-!mensabild <mensa> <nr> - Bild anzeigen für Speise <nr> @ <mensa>`
 }
 
 func (mensa *mensa) mensaHandler(listen *slick.Listener, msg *slick.Message) {

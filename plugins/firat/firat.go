@@ -6,8 +6,11 @@ import (
 	"github.com/abourget/slick"
 )
 
-// Thanks @philipp for typing all of this!
 type firat struct{}
+
+func (firat *firat) String() string {
+	return `!firat - Speiseplan vom Firat ausgeben`
+}
 
 func init() {
 	slick.RegisterPlugin(&firat{})
@@ -29,11 +32,8 @@ func (firat *firat) menuHandler(listen *slick.Listener, msg *slick.Message) {
 	}
 }
 
-func (firat *firat) String() string {
-	return `!firat - Speiseplan vom Firat ausgeben`
-}
-
 // Sending everything at once is too much content for Slack. It's therefore split into two parts.
+// Thanks @philipp for typing all of this!
 var menuParts = []string{
 	`*Döner Gerichte*
 1. *Döner* normal - 3,80€
