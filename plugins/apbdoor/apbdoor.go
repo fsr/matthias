@@ -21,7 +21,7 @@ type apbdoor struct{}
 
 func (apbdoor *apbdoor) String() string {
 	return `!türstatus/!tuerstatus - Ist die Eingangstür vom APB aktuell im Eimer?
-!tuer (kaputt/ganz/weg) - Setzt die Eingangstür vom APB auf den jeweiligen Status`
+!tuer (ist) (kaputt/ganz/weg) - Setzt die Eingangstür vom APB auf den jeweiligen Status`
 }
 
 func init() {
@@ -35,7 +35,7 @@ func (apbdoor *apbdoor) InitPlugin(bot *slick.Bot) {
 		MessageHandlerFunc: apbdoor.checkDoorHandler,
 	})
 	bot.Listen(&slick.Listener{
-		Matches:            regexp.MustCompile("!t(?:ü|ue)r (.+)"),
+		Matches:            regexp.MustCompile("!t(?:ü|ue)r(?: ist )?(.+)"),
 		MessageHandlerFunc: apbdoor.setDoorHandler,
 	})
 }
