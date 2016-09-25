@@ -1,7 +1,6 @@
 package urbandictionary
 
 import (
-	"log"
 	"regexp"
 
 	ud "github.com/StalkR/goircbot/lib/urbandictionary"
@@ -23,8 +22,6 @@ func (urban *urbandictionary) InitPlugin(bot *slick.Bot) {
 }
 
 func (urban *urbandictionary) defineHandler(listen *slick.Listener, msg *slick.Message) {
-	log.Println("Urban Dict definition for", msg.Match[2], "requested by", msg.FromUser.Name)
-
 	result, err := ud.Define(msg.Match[2])
 	if err != nil || len(result.List) == 0 {
 		msg.Reply("Unerwarteter Fehler ⚠️", err)

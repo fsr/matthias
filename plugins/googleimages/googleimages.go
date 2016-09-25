@@ -1,7 +1,6 @@
 package googleimages
 
 import (
-	"log"
 	"regexp"
 
 	"github.com/abourget/slick"
@@ -22,8 +21,7 @@ func (images *googleimages) InitPlugin(bot *slick.Bot) {
 }
 
 func (images *googleimages) imageHandler(listen *slick.Listener, msg *slick.Message) {
-	query := msg.Match[2]
-	log.Println("Google Image search for", query, "requested by", msg.FromUser.Name)
+	// query := msg.Match[2]
 	msg.Reply(`Sorry, das Feature funktioniert noch nicht ganz :confused:
 Wenn du helfen magst es einzubauen, schau doch bitte mal hier vorbei: https://github.com/google/google-api-go-client
 Hier ist die Doku zu dem Custom Search Gedöns: https://godoc.org/google.golang.org/api/customsearch/v1

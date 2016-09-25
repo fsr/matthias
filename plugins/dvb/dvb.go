@@ -2,7 +2,6 @@ package dvb
 
 import (
 	"fmt"
-	"log"
 	"regexp"
 	"strconv"
 
@@ -30,7 +29,6 @@ func (dvb *dvb) InitPlugin(bot *slick.Bot) {
 
 func (dvb *dvb) departureHandler(listen *slick.Listener, msg *slick.Message) {
 	query := msg.Match[1]
-	log.Println("DVB monitor for", query, "requested by", msg.FromUser.Name)
 
 	offset := 0
 	if len(msg.Match) > 2 {

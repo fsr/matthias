@@ -1,7 +1,6 @@
 package firat
 
 import (
-	"log"
 	"regexp"
 
 	"github.com/abourget/slick"
@@ -23,8 +22,6 @@ func (firat *firat) InitPlugin(bot *slick.Bot) {
 }
 
 func (firat *firat) menuHandler(listen *slick.Listener, msg *slick.Message) {
-	log.Println("Firat menu requested by", msg.FromUser.Name)
-
 	msg.ReplyMention("Firat hat ganz schön viel leckeres Zeug. Ich schick' dir die Liste mal als private Nachricht.")
 
 	for _, menu := range menuParts {

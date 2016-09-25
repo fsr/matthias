@@ -2,7 +2,6 @@ package random
 
 import (
 	"fmt"
-	"log"
 	"math/rand"
 	"regexp"
 
@@ -32,13 +31,11 @@ func (random *random) InitPlugin(bot *slick.Bot) {
 }
 
 func (random *random) bashHandler(listen *slick.Listener, msg *slick.Message) {
-	log.Println("Bash Quote requested by", msg.FromUser.Name)
 	randomID := rand.Intn(950)
 	msg.Reply(fmt.Sprintf("http://bash.fsrleaks.de/?%d", randomID))
 }
 
 func (random *random) insultHandler(listen *slick.Listener, msg *slick.Message) {
-	log.Println(msg.FromUser.Name, "insulted matthias with", msg.Match[1])
 	msg.ReplyMention(fmt.Sprintf("Deine Mudda ist %s!", msg.Match[1]))
 }
 

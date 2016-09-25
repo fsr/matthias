@@ -2,7 +2,6 @@ package mensa
 
 import (
 	"fmt"
-	"log"
 	"regexp"
 	"strconv"
 
@@ -71,8 +70,6 @@ func (mensa *mensa) String() string {
 }
 
 func (mensa *mensa) mensaHandler(listen *slick.Listener, msg *slick.Message) {
-	log.Println("Mensa menu requested by", msg.FromUser.Name)
-
 	mensaName := defaultMensa
 	if len(msg.Match) > 1 {
 		mensaName = msg.Match[1]
@@ -114,8 +111,6 @@ var notesEmoji = map[string]string{
 }
 
 func (mensa *mensa) mealImageHandler(listen *slick.Listener, msg *slick.Message) {
-	log.Println("Meal image", msg.Match[2], "@", msg.Match[1], "requested by", msg.FromUser.Name)
-
 	mensaName := msg.Match[1]
 	idx, _ := strconv.Atoi(msg.Match[2])
 	meals, _, err := speiseplan.GetCurrentForCanteen(mensaName)
