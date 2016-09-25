@@ -1,6 +1,6 @@
 # config files
 matthias.conf
-matthias_debug.conf
+matthias_dev.conf
 configvars.txt
 matthias.service
 

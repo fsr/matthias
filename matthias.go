@@ -27,7 +27,7 @@ var isProduction = flag.Bool("production", false, "production mode, uses $HOME/.
 func main() {
 	flag.Parse()
 
-	configFile := "./matthias_debug.conf"
+	configFile := "./matthias_dev.conf"
 
 	if *isProduction {
 		configFile = os.Getenv("HOME") + "/.matthias.conf"
