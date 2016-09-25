@@ -13,6 +13,7 @@ import (
 	_ "github.com/fsr/matthias/plugins/fsr"
 	_ "github.com/fsr/matthias/plugins/googleimages"
 	_ "github.com/fsr/matthias/plugins/mensa"
+	_ "github.com/fsr/matthias/plugins/ping"
 	_ "github.com/fsr/matthias/plugins/porn"
 	_ "github.com/fsr/matthias/plugins/random"
 	_ "github.com/fsr/matthias/plugins/stoll"
