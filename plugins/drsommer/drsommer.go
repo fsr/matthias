@@ -16,8 +16,6 @@ func init() {
 	slick.RegisterPlugin(&drsommer{})
 }
 
-var robot *slick.Bot
-
 // InitPlugin ...
 func (drsommer *drsommer) InitPlugin(bot *slick.Bot) {
 	var conf struct {
@@ -34,13 +32,11 @@ func (drsommer *drsommer) InitPlugin(bot *slick.Bot) {
 		Matches:            regexp.MustCompile("(?i)^(?:hey |hallo |lieber )?dr\\.? sommer,?"),
 		MessageHandlerFunc: drsommer.chatHandler,
 	})
-
-	robot = bot
 }
 
 func (drsommer *drsommer) chatHandler(listen *slick.Listener, msg *slick.Message) {
 	question := fmt.Sprintf("\"%s\" - %s (%d)", msg.Text, random.StringFromList(names), random.IntBetween(10, 15))
-	robot.SendToChannel(drsommerChannel, question)
+	listen.Bot.SendToChannel(drsommerChannel, question)
 }
 
 var names = []string{
