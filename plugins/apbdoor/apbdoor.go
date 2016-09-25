@@ -68,6 +68,8 @@ func (apbdoor *apbdoor) setDoorHandler(listen *slick.Listener, msg *slick.Messag
 	case "weg", "unbekannt":
 		setDoorState(doorUnknown)
 		msg.Reply("Ähm.... Ahja?")
+	default:
+		msg.Reply("Keine Ahnung, was du damit meinst. Ist die Tür kaputt, ganz oder weg?")
 	}
 }
 
