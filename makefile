@@ -13,5 +13,6 @@ fmt:
 deploy:
 	$(shell GOOS=linux GOARCH=386 go build $(LDFLAGS) matthias.go)
 	$(shell ./upload.sh)
+	$(shell rm matthias)
 
 .PHONY: build fmt deploy
