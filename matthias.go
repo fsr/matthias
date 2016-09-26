@@ -8,6 +8,7 @@ import (
 
 	_ "github.com/fsr/matthias/plugins/apbdoor"
 	_ "github.com/fsr/matthias/plugins/bday"
+	_ "github.com/fsr/matthias/plugins/btc"
 	_ "github.com/fsr/matthias/plugins/drsommer"
 	_ "github.com/fsr/matthias/plugins/dvb"
 	_ "github.com/fsr/matthias/plugins/firat"
