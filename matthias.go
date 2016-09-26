@@ -19,6 +19,7 @@ import (
 	_ "github.com/fsr/matthias/plugins/ping"
 	_ "github.com/fsr/matthias/plugins/porn"
 	_ "github.com/fsr/matthias/plugins/random"
+	_ "github.com/fsr/matthias/plugins/simpleresponses"
 	_ "github.com/fsr/matthias/plugins/stoll"
 	_ "github.com/fsr/matthias/plugins/urbandictionary"
 	_ "github.com/fsr/matthias/plugins/version"
