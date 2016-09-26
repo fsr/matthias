@@ -10,7 +10,7 @@ import (
 type help struct{}
 
 func (help *help) String() string {
-	return `!help - Alles auflisten, was matthias aktuell für dich tun kann`
+	return `!help - Das ausgeben, was du aktuell siehst ;)`
 }
 
 func init() {
