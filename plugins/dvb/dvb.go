@@ -12,8 +12,8 @@ import (
 type dvb struct{}
 
 func (dvb *dvb) String() string {
-	return `!dvb <hst> - Gebe Liste der nächsten Abfahrten von <hst> aus.`
-	// !dvb <hst> in <x> - Selbes wie !dvb <hst>, nur mit <x> Minuten offset.`
+	return `!dvb <hst> - Gebe Liste der nächsten Abfahrten von <hst> aus.
+	!dvb <hst> in <x> - Selbes wie !dvb <hst>, nur mit <x> Minuten offset.`
 }
 
 func init() {
@@ -23,13 +23,13 @@ func init() {
 // InitPlugin ...
 func (dvb *dvb) InitPlugin(bot *slick.Bot) {
 	bot.Listen(&slick.Listener{
-		Matches:            regexp.MustCompile("^!dvb (.*)"),
+		Matches:            regexp.MustCompile("^!dvb (\\D*)$"),
 		MessageHandlerFunc: dvb.departureHandler,
 	})
-	// bot.Listen(&slick.Listener{
-	// 	Matches:            regexp.MustCompile("^!dvb (.*) in (\\d+)"),
-	// 	MessageHandlerFunc: dvb.departureHandler,
-	// })
+	bot.Listen(&slick.Listener{
+		Matches:            regexp.MustCompile("^!dvb\\s+(.*)in (\\d*)"),
+		MessageHandlerFunc: dvb.departureHandler,
+	})
 }
 
 func (dvb *dvb) departureHandler(listen *slick.Listener, msg *slick.Message) {
