@@ -59,9 +59,19 @@ func formatOutput(departures []*vvo.Departure, stopName string) (output string) 
 	if len(departures) < 5 {
 		amount = len(departures)
 	}
-	for _, departure := range departures[:amount] {
-		output += departure.String()
-		output += "\n"
+	for _, dep := range departures[:amount] {
+		output += fmt.Sprintf("%s %s %s\n", dep.Line, dep.Direction, formatTime(dep.RelativeTime))
 	}
 	return
+}
+
+func formatTime(minutes int) string {
+	switch minutes {
+	case 0:
+		return "jetzt"
+	case 1:
+		return "in 1 Minute"
+	default:
+		return fmt.Sprintf("in %d Minuten", minutes)
+	}
 }
