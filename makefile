@@ -15,4 +15,7 @@ deploy:
 	$(shell ./upload.sh)
 	$(shell rm matthias)
 
-.PHONY: build fmt deploy
+pi:
+	$(shell GOOS=linux GOARCH=arm GOARM=6 go build $(LDFLAGS) matthias.go)
+
+.PHONY: build fmt deploy pi
