@@ -8,6 +8,7 @@ import (
 	"net/http"
 	"os"
 	"reflect"
+	"regexp"
 	"strconv"
 	"strings"
 	"sync"
@@ -174,6 +175,15 @@ func (bot *Bot) Listen(listen *Listener) error {
 	if err != nil {
 		log.Println("Bot.Listen(): Invalid Listener: ", err)
 		return err
+	}
+
+	if listen.Matches != nil {
+		// This is so unbelievably hacky and will certainly break shit >.<
+		str := listen.Matches.String()
+		if str[:2] == "^!" {
+			prefix := fmt.Sprintf("^(?:!|%s )", bot.Config.Username)
+			listen.Matches = regexp.MustCompile(prefix + str[2:])
+		}
 	}
 
 	bot.addListener(listen)

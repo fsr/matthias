@@ -25,13 +25,13 @@ func (fsr *fsr) InitPlugin(bot *slick.Bot) {
 		MessageHandlerFunc: fsr.isOfficeOpenHandler,
 	})
 	bot.Listen(&slick.Listener{
-		Matches: regexp.MustCompile("!b(?:ü|ue)rostatus"),
+		Matches: regexp.MustCompile("^!b(?:ü|ue)rostatus"),
 		MessageHandlerFunc: func(l *slick.Listener, m *slick.Message) {
 			m.Reply("https://www.ifsr.de/buerostatus/image.php?h=6")
 		},
 	})
 	bot.Listen(&slick.Listener{
-		Matches: regexp.MustCompile("!protokoll"),
+		Matches: regexp.MustCompile("^!protokoll"),
 		MessageHandlerFunc: func(l *slick.Listener, m *slick.Message) {
 			m.Reply("https://www.ifsr.de/protokolle/current.pdf")
 		},

@@ -46,6 +46,8 @@ func init() {
 // InitPlugin is used to... well... initialize the plugin. You can do whatever
 // is needed here, but the most important thing is to create the listener, so
 // that a matching method here can be called when it is needed.
+// Please make sure that your regex matcher starts with "^!", because only then
+// will matthias also match on "matthias command" AND "!command".
 func (example *exampleplugin) InitPlugin(bot *slick.Bot) {
 	bot.Listen(&slick.Listener{
 		Matches:            regexp.MustCompile("^!exampleplugin"),

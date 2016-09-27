@@ -31,11 +31,11 @@ func init() {
 // InitPlugin ...
 func (apbdoor *apbdoor) InitPlugin(bot *slick.Bot) {
 	bot.Listen(&slick.Listener{
-		Matches:            regexp.MustCompile("!t(?:ü|ue)rstatus"),
+		Matches:            regexp.MustCompile("^!t(?:ü|ue)rstatus"),
 		MessageHandlerFunc: apbdoor.checkDoorHandler,
 	})
 	bot.Listen(&slick.Listener{
-		Matches:            regexp.MustCompile("!t(?:ü|ue)r (?:ist )?(.+)"),
+		Matches:            regexp.MustCompile("^!t(?:ü|ue)r (?:ist )?(.+)"),
 		MessageHandlerFunc: apbdoor.setDoorHandler,
 	})
 }
