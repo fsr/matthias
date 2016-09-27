@@ -32,6 +32,7 @@ var sometimesResponses = map[string]string{
 // these are reacted upon with the specified emoji (can be more than one)
 var simpleReactions = map[string][]string{
 	"ascii":           {"ascii"},
+	"brandenburg":     {"tumbleweed"},
 	"brandschutz":     {"brandschutz"},
 	"bravo girl":      {"bravo"},
 	"cage":            {"onetruegod"},
