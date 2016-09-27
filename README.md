@@ -2,7 +2,7 @@
 
 [![Travis](https://img.shields.io/travis/fsr/matthias.svg?style=flat-square)](https://travis-ci.org/fsr/matthias)
 
-Matthias is a Slack chat bot built on the [slick][https://github.com/abourget/slick] framework.
+Matthias is a Slack chat bot built on the [slick](https://github.com/abourget/slick) framework.
 
 ### Running matthias locally
 
