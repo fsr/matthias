@@ -9,7 +9,7 @@ import (
 type firat struct{}
 
 func (firat *firat) String() string {
-	return `!firat - Speiseplan vom Firat ausgeben`
+	return `!firat - Menü vom Firat ausgeben`
 }
 
 func init() {
