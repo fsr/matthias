@@ -49,6 +49,7 @@ func (maintain *maintain) InitPlugin(bot *slick.Bot) {
 			log.Println("Got !plugins command from", m.FromUser.Name)
 			m.ReplyPrivately("Currently loaded plugins:")
 			for _, plugin := range slick.RegisteredPlugins() {
+				time.Sleep(500 * time.Millisecond)
 				m.ReplyPrivately(fmt.Sprintf("%T", plugin))
 			}
 		},
