@@ -15,6 +15,7 @@ import (
 	_ "github.com/fsr/matthias/plugins/fsr"
 	_ "github.com/fsr/matthias/plugins/googleimages"
 	_ "github.com/fsr/matthias/plugins/help"
+	_ "github.com/fsr/matthias/plugins/maintain"
 	_ "github.com/fsr/matthias/plugins/mensa"
 	_ "github.com/fsr/matthias/plugins/ping"
 	_ "github.com/fsr/matthias/plugins/porn"
