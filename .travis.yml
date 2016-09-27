@@ -1,0 +1,11 @@
+language: go
+
+go:
+  - tip
+
+script:
+  - make build
+
+notifications:
+  email:
+    on_success: never
