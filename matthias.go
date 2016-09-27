@@ -11,6 +11,7 @@ import (
 	_ "github.com/fsr/matthias/plugins/btc"
 	_ "github.com/fsr/matthias/plugins/drsommer"
 	_ "github.com/fsr/matthias/plugins/dvb"
+	_ "github.com/fsr/matthias/plugins/elbe"
 	_ "github.com/fsr/matthias/plugins/firat"
 	_ "github.com/fsr/matthias/plugins/fsr"
 	_ "github.com/fsr/matthias/plugins/googleimages"
