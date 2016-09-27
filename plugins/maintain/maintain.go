@@ -34,8 +34,8 @@ func (maintain *maintain) InitPlugin(bot *slick.Bot) {
 				return
 			}
 			m.Reply("Cya")
-			time.Sleep(1 * time.Second)
 			log.Println("Got !exit command from", m.FromUser.Name)
+			time.Sleep(1 * time.Second)
 			os.Exit(0)
 		},
 	})
