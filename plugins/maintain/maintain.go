@@ -4,6 +4,8 @@ import (
 	"fmt"
 	"io/ioutil"
 	"log"
+	"net"
+	"net/http"
 	"os"
 	"regexp"
 	"time"
@@ -83,4 +85,39 @@ func (maintain *maintain) InitPlugin(bot *slick.Bot) {
 			}
 		},
 	})
+
+	bot.Listen(&slick.Listener{
+		Matches: regexp.MustCompile("^!ip"),
+		MessageHandlerFunc: func(l *slick.Listener, m *slick.Message) {
+			if m.FromUser.Name != conf.Maintain.Username {
+				return
+			}
+			log.Println("Got !ip command from", m.FromUser.Name)
+
+			m.ReplyPrivately(fmt.Sprintf("Local IP: %s\nExternal IP: %s", getLocalIP(), getExternalIP()))
+		},
+	})
+}
+
+func getLocalIP() string {
+	addrs, err := net.InterfaceAddrs()
+	if err != nil {
+		return ""
+	}
+	for _, address := range addrs {
+		// check the address type and if it is not a loopback the display it
+		if ipnet, ok := address.(*net.IPNet); ok && !ipnet.IP.IsLoopback() {
+			if ipnet.IP.To4() != nil {
+				return ipnet.IP.String()
+			}
+		}
+	}
+	return ""
+}
+
+func getExternalIP() string {
+	resp, _ := http.Get("http://canihazip.com/s")
+	defer resp.Body.Close()
+	body, _ := ioutil.ReadAll(resp.Body)
+	return string(body)
 }
