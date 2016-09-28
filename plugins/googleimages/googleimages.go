@@ -56,7 +56,12 @@ func (images *googleimages) imageHandler(listen *slick.Listener, msg *slick.Mess
 	query := msg.Match[2]
 	animated := msg.Match[1] == "animated"
 
-	url, err := imageMe(query, animated)
+	safe := "medium"
+	if msg.FromChannel.Name == "nsfw" {
+		safe = "off"
+	}
+
+	url, err := imageMe(query, safe, animated)
 	if err != nil {
 		msg.Reply(err.Error())
 		msg.Reply(url)
@@ -65,12 +70,12 @@ func (images *googleimages) imageHandler(listen *slick.Listener, msg *slick.Mess
 	}
 }
 
-func imageMe(query string, animated bool) (string, error) {
+func imageMe(query, safe string, animated bool) (string, error) {
 	req, _ := http.NewRequest("GET", "https://www.googleapis.com/customsearch/v1", nil)
 	q := req.URL.Query()
 	q.Add("q", query)
 	q.Add("searchType", "image")
-	q.Add("safe", "high") // Sure about this? allowed are high, medium, off
+	q.Add("safe", safe)
 	q.Add("fields", "items(link)")
 	q.Add("cx", cseID)
 	q.Add("key", cseKey)
