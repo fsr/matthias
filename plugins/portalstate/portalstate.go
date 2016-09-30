@@ -53,36 +53,44 @@ func (portal *portalstate) InitPlugin(bot *slick.Bot) {
 
 func (portal *portalstate) portalHandler(listen *slick.Listener, msg *slick.Message) {
 	for _, portal := range watchedPortals {
-		state, err := getFactionFor(portal.ID)
+		portalRes, err := getFactionFor(portal.ID)
 		if err != nil {
 			msg.Reply(fmt.Sprintf("Konnte keinen Status für %s abrufen: %s", portal.Name, err.Error()))
 			continue
 		}
-		msg.Reply(fmt.Sprintf("%s: %s", portal.Name, mapFaction(state)))
+		msg.Reply(fmt.Sprintf("%s: Lvl %d %s", portal.Name, portalRes.Level, mapFaction(portalRes.Faction)))
 	}
 }
 
-func getFactionFor(portal int) (string, error) {
+type portalResponse struct {
+	UUID    string `json:"uuid"`
+	Level   int    `json:"portalLevel"`
+	Faction string `json:"faction"`
+}
+
+func getFactionFor(portal int) (*portalResponse, error) {
 	url := portalURL + fmt.Sprintf("%d", portal)
 	resp, err := http.Get(url)
 	if err != nil {
-		return "", err
+		return nil, err
 	}
 
 	defer resp.Body.Close()
 	body, err := ioutil.ReadAll(resp.Body)
 	if err != nil {
-		return "", err
+		return nil, err
 	}
 
-	var value []string
+	var portalRes portalResponse
 
-	err = json.Unmarshal(body, &value)
-	if err != nil || len(value) == 0 {
-		return "", err
+	str := strings.Replace(string(body), "'", "\"", -1) // temporary fix for invalid json
+
+	err = json.Unmarshal([]byte(str), &portalRes)
+	if err != nil {
+		return nil, err
 	}
 
-	return value[0], nil
+	return &portalRes, nil
 }
 
 func mapFaction(faction string) string {
