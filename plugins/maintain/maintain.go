@@ -7,7 +7,9 @@ import (
 	"net"
 	"net/http"
 	"os"
+	"os/exec"
 	"regexp"
+	"syscall"
 	"time"
 
 	"github.com/abourget/slick"
@@ -95,6 +97,34 @@ func (maintain *maintain) InitPlugin(bot *slick.Bot) {
 			log.Println("Got !ip command from", m.FromUser.Name)
 
 			m.ReplyPrivately(fmt.Sprintf("Local IP: %s\nExternal IP: %s", getLocalIP(), getExternalIP()))
+		},
+	})
+
+	bot.Listen(&slick.Listener{
+		Matches: regexp.MustCompile("^!update"),
+		MessageHandlerFunc: func(l *slick.Listener, m *slick.Message) {
+			if m.FromUser.Name != conf.Maintain.Username {
+				return
+			}
+			log.Println("Got !update command from", m.FromUser.Name)
+
+			m.Reply("Ok, bin gleich wieder da! 😊")
+
+			script, err := exec.LookPath("./update.sh")
+			if err != nil {
+				m.Reply("Kann mein Updateskript nicht finden 😣")
+				return
+			}
+
+			args := []string{"./update.sh"}
+
+			env := os.Environ()
+
+			err = syscall.Exec(script, args, env)
+			if err != nil {
+				log.Println(err.Error())
+				m.Reply("Konnte mein Updateskript nicht ausführen 😓")
+			}
 		},
 	})
 }
