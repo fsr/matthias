@@ -42,7 +42,7 @@ func (maintain *maintain) InitPlugin(bot *slick.Bot) {
 		MessageHandlerFunc: func(l *slick.Listener, m *slick.Message) {
 			log.Println("Got !ip command from", m.FromUser.Name)
 
-			m.ReplyPrivately(fmt.Sprintf("Local IP: %s\nExternal IP: %s", getLocalIP(), getExternalIP()))
+			m.Reply(fmt.Sprintf("Local IP: %s\nExternal IP: %s", getLocalIP(), getExternalIP()))
 		},
 	})
 
