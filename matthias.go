@@ -3,7 +3,6 @@ package main
 import (
 	"flag"
 	"math/rand"
-	"os"
 	"time"
 
 	_ "github.com/fsr/matthias/plugins/apbdoor"
@@ -30,7 +29,7 @@ import (
 	"github.com/abourget/slick"
 )
 
-var isProduction = flag.Bool("production", false, "production mode, uses $HOME/.matthias.conf")
+var isProduction = flag.Bool("production", false, "production mode, uses matthias.conf")
 
 func main() {
 	flag.Parse()
@@ -38,7 +37,7 @@ func main() {
 	configFile := "./matthias_dev.conf"
 
 	if *isProduction {
-		configFile = os.Getenv("HOME") + "/.matthias.conf"
+		configFile = "./matthias.conf"
 	}
 
 	bot := slick.New(configFile)
