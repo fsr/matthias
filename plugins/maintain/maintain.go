@@ -17,6 +17,12 @@ import (
 
 type maintain struct{}
 
+// Only those listeners working for every user are documented here
+func (maintain *maintain) String() string {
+	return `!ip - Aktuelle interne und externe IP von matthias
+!uptime - Wie lange läuft matthias schon?`
+}
+
 func init() {
 	slick.RegisterPlugin(&maintain{})
 }
@@ -30,6 +36,27 @@ func (maintain *maintain) InitPlugin(bot *slick.Bot) {
 	}
 
 	bot.LoadConfig(&conf)
+
+	bot.Listen(&slick.Listener{
+		Matches: regexp.MustCompile("^!ip"),
+		MessageHandlerFunc: func(l *slick.Listener, m *slick.Message) {
+			log.Println("Got !ip command from", m.FromUser.Name)
+
+			m.ReplyPrivately(fmt.Sprintf("Local IP: %s\nExternal IP: %s", getLocalIP(), getExternalIP()))
+		},
+	})
+
+	bot.Listen(&slick.Listener{
+		Matches: regexp.MustCompile("^!uptime"),
+		MessageHandlerFunc: func(l *slick.Listener, m *slick.Message) {
+			log.Println("Got !uptime command from", m.FromUser.Name)
+
+			m.Reply(fmt.Sprintf("Laufe aktuell seit %s", uptime()))
+		},
+	})
+
+	// The following listeners can only be executed by the current maintainer
+	// (see config file)
 
 	bot.Listen(&slick.Listener{
 		Matches: regexp.MustCompile("^!exit"),
@@ -89,18 +116,6 @@ func (maintain *maintain) InitPlugin(bot *slick.Bot) {
 	})
 
 	bot.Listen(&slick.Listener{
-		Matches: regexp.MustCompile("^!ip"),
-		MessageHandlerFunc: func(l *slick.Listener, m *slick.Message) {
-			if m.FromUser.Name != conf.Maintain.Username {
-				return
-			}
-			log.Println("Got !ip command from", m.FromUser.Name)
-
-			m.ReplyPrivately(fmt.Sprintf("Local IP: %s\nExternal IP: %s", getLocalIP(), getExternalIP()))
-		},
-	})
-
-	bot.Listen(&slick.Listener{
 		Matches: regexp.MustCompile("^!update"),
 		MessageHandlerFunc: func(l *slick.Listener, m *slick.Message) {
 			if m.FromUser.Name != conf.Maintain.Username {
@@ -127,6 +142,12 @@ func (maintain *maintain) InitPlugin(bot *slick.Bot) {
 			}
 		},
 	})
+}
+
+var startTime = time.Now()
+
+func uptime() time.Duration {
+	return time.Since(startTime)
 }
 
 func getLocalIP() string {
