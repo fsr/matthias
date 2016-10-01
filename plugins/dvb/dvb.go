@@ -13,7 +13,7 @@ type dvb struct{}
 
 func (dvb *dvb) String() string {
 	return `!dvb <hst> - Gebe Liste der nächsten Abfahrten von <hst> aus.
-	!dvb <hst> in <x> - Selbes wie !dvb <hst>, nur mit <x> Minuten offset.`
+!dvb <hst> in <x> - Selbes wie !dvb <hst>, nur mit <x> Minuten offset.`
 }
 
 func init() {
