@@ -6,7 +6,6 @@ go:
 before_install:
   - rvm install 2.0.0
   - gem install danger
-  - gem install danger-mention
   - gem install danger-todoist
 
 script:

@@ -1,6 +1,3 @@
-# Find max. 2 potential reviewers using git blame
-# mention.run(2, [], [])
-
 # Warn for TODOs
 todoist.message = 'You have a TODO or two left in there 🙃'
 todoist.warn_for_todos
