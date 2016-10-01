@@ -3,8 +3,16 @@ language: go
 go:
   - tip
 
+rvm: 2.0.0
+
+before_install:
+  - gem install danger
+  - gem install danger-mention
+  - gem install danger-todoist
+
 script:
   - make build
+  - danger --verbose
 
 notifications:
   email:
