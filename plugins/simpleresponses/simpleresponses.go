@@ -91,7 +91,7 @@ func (simple *simpleresponses) InitPlugin(bot *slick.Bot) {
 	}
 	for listener := range simpleReactions {
 		bot.Listen(&slick.Listener{
-			Matches:            regexp.MustCompile("(?i)" + listener),
+			Matches:            regexp.MustCompile(`(?i)\b` + listener + `\b`),
 			MessageHandlerFunc: simple.reactionsHandler,
 		})
 	}
