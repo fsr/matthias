@@ -3,9 +3,8 @@ language: go
 go:
   - tip
 
-rvm: 2.0.0
-
 before_install:
+  - rvm install 2.0.0
   - gem install danger
   - gem install danger-mention
   - gem install danger-todoist
