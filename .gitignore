@@ -5,3 +5,4 @@ matthias.conf
 update.coffee
 configvars.txt
 matthias.service
+.stack-work/
