@@ -23,28 +23,28 @@ module Apbdoor (script) where
 
 import Marvin.Prelude
 import Network.Wreq
-import System.Random
 import Control.Lens
 
 
+script :: IsAdapter a => ScriptInit a
 script = defineScript "apbdoor" $ do
-  respond (r "türstatus|tuerstatus|ist die tür kaputt\\?|ist die tuer kaputt\\?" [IgnoreCase]) $
+  respond (r [CaseInsensitive] "türstatus|tuerstatus|ist die tür kaputt\\?|ist die tuer kaputt\\?") $
     checkDoor
 
-  respond (r "glasschaden|rate mal, was wieder kaputt ist|techniker ist informiert" [IgnoreCase]) $ do
+  respond (r [CaseInsensitive] "glasschaden|rate mal, was wieder kaputt ist|techniker ist informiert") $ do
     setDoor "yes"
     send "Orr ne, schon wieder?!"
 
-  respond (r "tür ist wieder ganz|tuer ist wieder ganz" [IgnoreCase]) $ do
+  respond (r [CaseInsensitive] "tür ist wieder ganz|tuer ist wieder ganz") $ do
     setDoor "no"
     send "/giphy party"
 
-  respond (r "tür ist weg|tuer ist weg" [IgnoreCase]) $ do
+  respond (r [CaseInsensitive] "tür ist weg|tuer ist weg") $ do
     setDoor "maybe"
     send "Ähm... Ahja?"
 
 
-checkDoor :: (IsAdapter a, HasMessage m) => BotReacting a m ()
+checkDoor :: IsAdapter a => BotReacting a MessageReactionData ()
 checkDoor = do
   r <- liftIO $ get "http://tuer.fsrleaks.de"
   
@@ -56,13 +56,7 @@ checkDoor = do
     | otherwise -> randomFrom maybeMsgs >>= send
 
 
-randomFrom :: (IsSequence s, MonadIO m) => s a -> m a 
-randomFrom list = do
-  n <- liftIO $ randomRIO (0, pred $ length list)
-  return $ list `indexEx` n
-
-
-setDoor state = get (unpack $ format "http://door.fsrleaks.de/set.php?{}" [state])
+setDoor state = liftIO $ get (unpack $ format "http://door.fsrleaks.de/set.php?{}" [state :: Text])
 
 yesMsgs = 
   [ "Jop, Tür ist im Eimer."
