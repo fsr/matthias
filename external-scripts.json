@@ -4,5 +4,6 @@
   "hubot-google-images",
   "hubot-maps",
   "hubot-clarifai2",
-  "hubot-dvb"
+  "hubot-dvb",
+  "hubot-urban"
 ]
