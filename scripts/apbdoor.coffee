@@ -9,32 +9,31 @@
 #
 # Commands:
 #   hubot türstatus - hubot schaut nach, wie es um die Tür des APB steht.
-#   hubot ist die tür kaputt? - hubot schaut nach, wie es um die Tür des APB steht.
-#   hubot glasschaden - teile hubot mit, dass die Tür mal wieder im Eimer ist.
-#   hubot rate mal, was wieder kaputt ist - teile hubot mit, dass die Tür mal wieder im Eimer ist.
-#   hubot techniker ist informiert - teile hubot mit, dass die Tür mal wieder im Eimer ist.
-#   hubot tür ist wieder ganz - teile hubot mit, dass die Tür wieder ganz ist
-#   hubot tür ist weg - teile hubot mit, dass die Tür sich in einem unbekannten Status befindet.
+#   hubot tür ist ganz - teile hubot mit, dass die Tür wieder ganz ist.
+#   hubot tür ist kaputt - teile hubot mit, dass die Tür im Eimer ist.
 #
 # Author:
 #   kiliankoe
 
 
 module.exports = (robot) ->
-  robot.respond /türstatus|tuerstatus|ist die tür kaputt\?|ist die tuer kaputt\?/i, (msg) ->
+  robot.respond /t(?:ü|ue)rstatus/i, (msg) ->
     checkDoor(robot, msg)
 
-  robot.respond /glasschaden|rate mal, was wieder kaputt ist|techniker ist informiert/i, (msg) ->
-    setDoor(robot, "yes")
-    msg.send "Orr ne, schon wieder?!"
-
-  robot.respond /tür ist wieder ganz|tuer ist wieder ganz/i, (msg) ->
-    setDoor(robot, "no")
-    msg.send "/giphy party"
-
-  robot.respond /tür ist weg|tuer ist weg/i, (msg) ->
-    setDoor(robot, "maybe")
-    msg.send "Ähm... Ahja?"
+  robot.respond /t(?:ü|ue)r (?:ist )?(.*)/, (msg) ->
+    state = msg.match[1].toLowerCase()
+    switch state
+      when "kaputt", "broken", "im eimer"
+        setDoor(robot, "yes")
+        msg.send "Orr ne, schon wieder?!"
+      when "ganz", "wieder ganz", "funktional"
+        setDoor(robot, "no")
+        msg.send msg.random partyGifs
+      when "weg", "unbekannt"
+        setDoor(robot, "maybe")
+        msg.send "Ähm... Ahja?"
+      else
+        msg.send "Keine Ahnung, was du damit meinst. Ist die Tür kaputt, ganz oder weg?"
 
 checkDoor = (robot, msg) ->
   robot.http('http://tuer.fsrleaks.de')
@@ -76,4 +75,12 @@ maybeMsgs = [
   "Sorry, no clue.",
   "Schrödingers Tür?",
   "Lässt sich aus diesem Blickwinkel schlecht beurteilen."
+]
+
+partyGifs = [
+  "http://i.giphy.com/6nuiJjOOQBBn2.gif",
+	"http://i.giphy.com/EktbegF3J8QIo.gif",
+	"http://i.giphy.com/YTbZzCkRQCEJa.gif",
+	"http://i.giphy.com/3rgXBQIDHkFNniTNRu.gif",
+	"http://i.giphy.com/s2qXK8wAvkHTO.gif"
 ]
