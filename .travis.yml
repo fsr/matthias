@@ -1,7 +1,7 @@
-language: go
+language: node_js
 
-go:
-  - tip
+node_js:
+  - node
 
 before_install:
   - rvm install 2.0.0
@@ -9,7 +9,7 @@ before_install:
   - gem install danger-todoist
 
 script:
-  - make build
+  # - npm test
   - danger --verbose
 
 notifications:
