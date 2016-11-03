@@ -5,6 +5,7 @@
   "author": "Kilian Koeltzsch <koeltzsch@ifsr.de>",
   "description": "Matthias Stuhlbein",
   "dependencies": {
+    "cheerio": "^0.22.0",
     "hubot": "^2.19.0",
     "hubot-clarifai2": "^1.0.2",
     "hubot-diagnostics": "0.0.1",
