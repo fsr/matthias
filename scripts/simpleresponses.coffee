@@ -69,7 +69,6 @@ reactions = [
   [/kapital/, ["marx"]],
   [/lobo/, ["lobo"]],
   [/lecker/, ["letscho"]],
-  [/matthias/, ["wave"]],
   [/monty python/, ["sillywalk"]],
   [/muss man wissen/, ["stoll"]],
   [/pampa/, ["brandenburg"]],
