@@ -52,6 +52,7 @@ rarelistens = [
 
 reactions = [
   [/ascii/, ["ascii"]],
+  [/bayern/, ["logik", "bavaria"]],
 	[/brandenburg/, ["tumbleweed"]],
 	[/brandschutz/, ["brandschutz"]],
 	[/bravo girl/, ["bravo"]],
@@ -64,9 +65,11 @@ reactions = [
 	[/fefe/, ["fefe"]],
 	[/gabba/, ["gandalf"]],
 	[/graz/, ["graz"]],
+  [/haskell/, ["justus"]],
 	[/kapital/, ["marx"]],
 	[/lobo/, ["lobo"]],
 	[/lecker/, ["letscho"]],
+  [/matthias/, ["wave"]],
 	[/monty python/, ["sillywalk"]],
 	[/muss man wissen/, ["stoll"]],
 	[/pampa/, ["brandenburg"]],
