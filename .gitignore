@@ -2,8 +2,7 @@
 .hubot_history
 
 # config files
-matthias.conf
-configvars.txt
+config.sh
 matthias.service
 
 node_modules
