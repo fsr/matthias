@@ -2,20 +2,42 @@
 
 [![Travis](https://img.shields.io/travis/fsr/matthias.svg?style=flat-square)](https://travis-ci.org/fsr/matthias)
 
-Matthias is a Slack chat bot built on the [slick](https://github.com/abourget/slick) framework.
+Matthias is a chat bot (currently) built on top of the fantastic [hubot](https://hubot.github.com) framework.
 
 ### Running matthias locally
 
-As long as you have [go](https://golang.org) installed on your system, running matthias locally shouldn't be a problem. A simple `go run matthias.go` should do the trick.
-Be sure to duplicate *matthias_example.conf* first and name it *matthias_dev.conf*. You can get the necessary Slack API token from the Slack integrations page or @kiliankoe. Once matthias is running, you can chat directly with @matthias_dev in Slack or use the #tmp channel.
+You can start matthias locally by running:
 
-Building a matthias binary should be done via the provided makefile, as this also sets up some additional stuff. Doing so requires nothing more than a simple `make build`. Or `make pi` if you're cross-compiling for a Raspberry Pi.
+    % bin/hubot
+
+You'll see some start up output and a prompt:
+
+    [Sat Feb 28 2015 12:38:27 GMT+0000 (GMT)] INFO Using default redis on localhost:6379
+    matthias>
+
+Then you can interact with matthias by typing `matthias help`.
+
+    matthias> matthias help
+    matthias animate me <query> - The same thing as `image me`, except adds [snip]
+    matthias help - Displays all of the help commands that matthias knows about.
+    ...
 
 ### Configuration
 
-Any plugin configuration should go into the config file. Be aware though that the "production" version of matthias uses it's own config file and necessary values should be added there as well.
+A few scripts (including some installed by default) require environment
+variables to be set as a simple form of configuration.
 
-### Custom Plugins
+Each script should have a commented header which contains a "Configuration"
+section that explains which values it requires to be placed in which variable.
+When you have lots of scripts installed this process can be quite labour
+intensive. The following shell command can be used as a stop gap until an
+easier way to do this has been implemented.
 
-Matthias' plugins reside in `/plugins`. Writing more should be pretty straight-forward. There's a bit of very simple documentation in `/plugins/exampleplugin/exampleplugin.go`, which goes over the basics.
-Should any other questions arise, ask @kiliankoe.
+    grep -o 'hubot-[a-z0-9_-]\+' external-scripts.json | \
+      xargs -n1 -I {} sh -c 'sed -n "/^# Configuration/,/^#$/ s/^/{} /p" \
+          $(find node_modules/{}/ -name "*.coffee")' | \
+        awk -F '#' '{ printf "%-25s %s\n", $1, $2 }'
+
+How to set environment variables will be specific to your operating system.
+Rather than recreate the various methods and best practices in achieving this,
+it's suggested that you search for a dedicated guide focused on your OS.

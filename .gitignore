@@ -1,14 +1,8 @@
+# hubot
+.hubot_history
+
 # config files
-matthias.conf
-matthias_dev.conf
-configvars.txt
+config.sh
 matthias.service
 
 node_modules
-.DS_Store*
-.hubot_history
-update.coffee
-matthias.bolt.db
-matthias
-upload.sh
-update.sh

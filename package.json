@@ -1,0 +1,25 @@
+{
+  "name": "matthias",
+  "version": "0.0.0",
+  "private": true,
+  "author": "Kilian Koeltzsch <koeltzsch@ifsr.de>",
+  "description": "Matthias Stuhlbein",
+  "dependencies": {
+    "cheerio": "^0.22.0",
+    "cron": "^1.1.1",
+    "git-rev": "^0.2.1",
+    "hubot": "^2.19.0",
+    "hubot-clarifai2": "^1.0.2",
+    "hubot-diagnostics": "0.0.1",
+    "hubot-dvb": "^1.0.0",
+    "hubot-google-images": "^0.2.6",
+    "hubot-help": "^0.2.0",
+    "hubot-maps": "0.0.2",
+    "hubot-scripts": "^2.17.2",
+    "hubot-slack": "^4.2.1",
+    "hubot-urban": "^1.0.1"
+  },
+  "engines": {
+    "node": "0.10.x"
+  }
+}
