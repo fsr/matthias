@@ -6,7 +6,9 @@
   "description": "Matthias Stuhlbein",
   "dependencies": {
     "hubot": "^2.19.0",
+    "hubot-clarifai2": "^1.0.2",
     "hubot-diagnostics": "0.0.1",
+    "hubot-dvb": "^1.0.0",
     "hubot-google-images": "^0.2.6",
     "hubot-help": "^0.2.0",
     "hubot-maps": "0.0.2",
