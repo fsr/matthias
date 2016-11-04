@@ -2,10 +2,7 @@
 #   version
 #
 # Dependencies:
-#   None
-#
-# Configuration:
-#   None
+#   git-rev
 #
 # Commands:
 #   hubot version - Welche Version von hubot läuft gerade?

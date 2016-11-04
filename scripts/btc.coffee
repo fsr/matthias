@@ -1,14 +1,8 @@
 # Description:
 #   BTC Krams
 #
-# Dependencies:
-#   None
-#
-# Configuration:
-#   None
-#
 # Commands:
-#   hubot btc - Frag' hubot nach dem aktuellem BTC Kurs
+#   hubot btc - Aktueller Bitcoin Kurs in USD und EUR
 #
 # Author:
 #   kiliankoe

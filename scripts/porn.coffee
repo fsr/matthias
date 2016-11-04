@@ -1,14 +1,8 @@
 # Description:
 #   Such porn, much wow
 #
-# Dependencies:
-#   None
-#
-# Configuration:
-#   None
-#
 # Commands:
-#   hubot porn - Get a random porn title
+#   hubot porn <name> - Random Porn Title, optional mit <name>
 #
 # Author:
 #   Johnny Deep

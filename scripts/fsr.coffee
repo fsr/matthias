@@ -2,15 +2,12 @@
 #   FSR Krams
 #
 # Dependencies:
-#   None
-#
-# Configuration:
-#   None
+#   ../util
 #
 # Commands:
-#   hubot ese - hubot sagt dir das Datum der ESE (falls das jemand updated)
-#   hubot jemand da? - hubot sagt dir, ob aktuell wer im Büro ist.
-#   hubot buerostatus - hubot zeigt den buerostatus Graphen der letzten 6 Stunden.
+#   hubot ese - Datum der nächsten ESE
+#   hubot jemand da? - Ist aktuell jemand im Büro?
+#   hubot buerostatus - Bürostatusgraph der letzten 6 Stunden
 #
 # Author:
 #   kiliankoe

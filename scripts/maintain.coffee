@@ -5,7 +5,7 @@
 #   moment
 #
 # Configuration:
-#   HUBOT_MAINTAINERS = list of usernames currently maintaining this hubot
+#   HUBOT_MAINTAINERS = comma-separated list of usernames currently maintaining this hubot
 #
 # Commands:
 #   hubot uptime - Wie lange läuft hubot aktuell schon?

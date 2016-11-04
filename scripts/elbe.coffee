@@ -1,12 +1,6 @@
 # Description:
 #   Aktueller Elbpegel der Station Dresden
 #
-# Dependencies:
-#   None
-#
-# Configuration:
-#   None
-#
 # Commands:
 #   hubot elbe - gibt den aktuellen Elbpegel der Station Dresden aus
 #

@@ -2,16 +2,16 @@
 #   Was gibt's heute zu essen?
 #
 # Dependencies:
-#   None
+#   cron
 #
 # Configuration:
-#   HUBOT_DEFAULT_MENSA : default mensa to return for 'hubot mensa' command
+#   HUBOT_DEFAULT_MENSA, defaults to "Alte Mensa"
 #
 # Commands:
-#   hubot mensa - Frag' hubot was es heute in der Alten Mensa gibt.
-#   hubot mensa <mensa> - Frag' hubot was es heute in einer spezifischen Mensa gibt.
-#   hubot mensen - Lass' hubot die Liste der unterstützten Mensen auflisten.
-#   hubot mensa bild <nr> - Lass' hubot das Bild zum Essen finden.
+#   hubot mensa - Was gibt's heute in der Alten Mensa?
+#   hubot mensa <mensa> - Was gibt's heute in <mensa>?
+#   hubot mensen - Welche Mensen hubot kennt
+#   hubot mensa bild <nr> - Bild zu bestimmter Mahlzeit finden
 #
 # Author:
 #   kiliankoe - me@kilian.io

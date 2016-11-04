@@ -1,16 +1,10 @@
 # Description:
 #   Der Techniker ist informiert.
 #
-# Dependencies:
-#   None
-#
-# Configuration:
-#   None
-#
 # Commands:
-#   hubot türstatus - hubot schaut nach, wie es um die Tür des APB steht.
-#   hubot tür ist ganz - teile hubot mit, dass die Tür wieder ganz ist.
-#   hubot tür ist kaputt - teile hubot mit, dass die Tür im Eimer ist.
+#   hubot türstatus - Wie steht's aktuell um den Eingang vom APB?
+#   hubot tür ist ganz - APB Eingang ist seltenerweise mal ok.
+#   hubot tür ist kaputt - APB Eingang ist im Eimer. Normalzustand halt.
 #
 # Author:
 #   kiliankoe

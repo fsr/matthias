@@ -2,10 +2,7 @@
 #   Einfache trigger-response Interaktionen
 #
 # Dependencies:
-#   None
-#
-# Configuration:
-#   None
+#   ../util
 #
 # Commands:
 #   hubot pizza - hubot nennt alle Details für eine Pizzabestellung (im Ratsaal)

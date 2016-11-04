@@ -1,11 +1,8 @@
 # Description:
 #   Dr. Sommer
 #
-# Dependencies:
-#   None
-#
 # Configuration:
-#   None
+#   HUBOT_DRSOMMER_ROOM, defaults to "dr_sommer"
 #
 # Commands:
 #   Dr. Sommer, ich hab da mal ne Frage - Stelle eine anonyme Frage in #dr_sommer

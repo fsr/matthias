@@ -1,12 +1,6 @@
 # Description:
 #   Mensa Firat
 #
-# Dependencies:
-#   None
-#
-# Configuration:
-#   None
-#
 # Commands:
 #   hubot firat - Menü unseres Lieblingsdönerrestaurants
 #

@@ -2,14 +2,11 @@
 #   Ein paar weitere kleine Antworten von matthias
 #
 # Dependencies:
-#   None
-#
-# Configuration:
-#   None
+#   ../util
 #
 # Commands:
-#   hubot bash me - Frag' hubot nach einem random Zitat link
-#   hubot random <min> <max> - Frag' hubot nach einer Zufallszahl zwischen <min> und <max> (nutzt random.org)
+#   hubot bash me - Zufälliger Bash Link
+#   hubot random <min> <max> - Zufallszahl zwischen <min> und <max> (nutzt random.org)
 #
 # Author:
 #   kiliankoe

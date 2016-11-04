@@ -1,14 +1,8 @@
 # Description:
-#   Such porn, much wow
-#
-# Dependencies:
-#   None
-#
-# Configuration:
-#   None
+#   Such stoll, much wow
 #
 # Commands:
-#   hubot stoll - Get a random Dr. Axel Stoll quote
+#   hubot stoll - Zufälliges Dr. Axel Stoll Zitat
 #
 # Author:
 #   kiliankoe
