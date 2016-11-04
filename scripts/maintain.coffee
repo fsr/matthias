@@ -19,7 +19,7 @@ moment.locale 'de'
 module.exports = (robot) ->
   robot.respond /uptime/i, (res) ->
     duration = moment.duration uptime()
-    res.send "Laufe aktuell seit #{start_time.format("Do MMM HH:mm")} Uhr, also schon #{duration.humanize()}."
+    res.send "Laufe aktuell seit dem #{start_time.format("Do MMM HH:mm")} Uhr, also schon #{duration.humanize()}."
 
   robot.respond /exit|quit/i, (res) ->
     if is_maintainer res.message.user.name
