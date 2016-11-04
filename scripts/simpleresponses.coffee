@@ -83,6 +83,16 @@ reactions = [
   [/zu alt/, ["old_man_yells_at_cloud"]]
 ]
 
+topic_adjectives = [
+  "dämliches",
+  "doofes",
+  "komisches",
+  "eigenartiges",
+  "'interessantes'",
+  "dummes",
+  "kack"
+]
+
 module.exports = (robot) ->
   responses.forEach (resp_tuple) ->
     [trigger, answer] = resp_tuple
@@ -105,3 +115,7 @@ module.exports = (robot) ->
     robot.hear trigger, (res) ->
       answers.forEach (emoji) ->
         util.react res, emoji
+
+  robot.topic (res) ->
+    unless res.message.room == "general"
+      res.send "'#{res.message.text}' ist ein #{res.random topic_adjectives} Channelthema."
