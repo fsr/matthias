@@ -58,7 +58,7 @@ noMsgs = [
   "Die Tür ist... ganz?!",
   "Alles im grünen Bereich.",
   "Sie ist ganz! Also... Zumindest gerade eben. Vermutlich schon nicht mehr.",
-  "Rufe Fr. Kapplusch an... Nop, scheint alles gut zu sein. Beeindruckend.",
+  "Rufe Fr. Kapplusch an... Nope, scheint alles gut zu sein. Beeindruckend.",
   "Hab' eben nachgesehen und... Ausnahmezustand!"
 ]
 
