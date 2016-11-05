@@ -2,7 +2,7 @@
 #   Aktueller Elbpegel der Station Dresden
 #
 # Commands:
-#   hubot elbe - gibt den aktuellen Elbpegel der Station Dresden aus
+#   hubot elbe - Aktueller Elbpegel der Station Dresden
 #
 # Author:
 #   dirkonet
