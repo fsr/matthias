@@ -29,7 +29,7 @@ module.exports = (robot) ->
     util.react res, "middle_finger"
     res.reply "Deine Mudda scheißt auf #{term}!"
 
-  robot.hear /bash/i, (res) ->
+  robot.hear /bash me/i, (res) ->
     res.send "http://bash.fsrleaks.de/?#{randomRange(1, 946)}"
 
   robot.respond /random (\d*) (\d*)/i, (res) ->
