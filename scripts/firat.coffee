@@ -8,8 +8,8 @@
 #   philipp
 
 module.exports = (robot) ->
-	robot.respond /firat/i, (msg) ->
- 	  msg.send("*Döner Gerichte*\n
+  robot.respond /firat/i, (msg) ->
+    msg.send("*Döner Gerichte*\n
 1. *Döner* normal - 3,80€\n
 2. *Döner* mit Käse - 4,40€\n
 3. *Döner* mit Halloumi - 4,80€\n

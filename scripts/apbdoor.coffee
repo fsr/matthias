@@ -73,8 +73,8 @@ maybeMsgs = [
 
 partyGifs = [
   "http://i.giphy.com/6nuiJjOOQBBn2.gif",
-	"http://i.giphy.com/EktbegF3J8QIo.gif",
-	"http://i.giphy.com/YTbZzCkRQCEJa.gif",
-	"http://i.giphy.com/3rgXBQIDHkFNniTNRu.gif",
-	"http://i.giphy.com/s2qXK8wAvkHTO.gif"
+  "http://i.giphy.com/EktbegF3J8QIo.gif",
+  "http://i.giphy.com/YTbZzCkRQCEJa.gif",
+  "http://i.giphy.com/3rgXBQIDHkFNniTNRu.gif",
+  "http://i.giphy.com/s2qXK8wAvkHTO.gif"
 ]
