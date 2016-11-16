@@ -89,7 +89,8 @@ topic_adjectives = [
   "eigenartiges",
   "'interessantes'",
   "dummes",
-  "kack"
+  "kack",
+  "großartiges"
 ]
 
 module.exports = (robot) ->
