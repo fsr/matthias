@@ -80,9 +80,10 @@ module.exports = (robot) ->
 56. *Rahmschnitzel* mit Rahmsahnesoße - 7,00€\n
 57. *Jägerschnitzel* mit Jägersahnesoße und Pilzen - 7,00€\n
 58. *Zigeunerschnitzel* mit Zigeunersahnesoße - 7,50€\n
-59. *Putenschnitzel* mit Sahnesoße - 7,50€")
+59. *Putenschnitzel* mit Sahnesoße - 7,50€\n")
 
-    msg.send("*Nudelgerichte* (nach Wahl Spaghetti, Rigatoni oder Tortellini)\n
+    setTimeout () ->
+      msg.send("*Nudelgerichte* (nach Wahl Spaghetti, Rigatoni oder Tortellini)\n
 60. *Napoli* mit Tomatensoße - 4,50€\n
 61. *Bolognese* mit Fleischsoße - 5,00€\n
 62. *Carbonara* mit Sahnesoße, Schinken und Ei - 5,50€\n
@@ -147,3 +148,4 @@ module.exports = (robot) ->
 113. *Tomatensuppe* - 3,00€\n
 \n
 Getränke und Extras auf firat-dresden.com")
+    , 500
