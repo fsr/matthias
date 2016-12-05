@@ -57,7 +57,6 @@ reactions = [
   [/\bdatenbank/i, ["sascha"]],
   [/\bduc(?:k|)/i, ["mind-the-quack"]],
   [/\bein(?:oe|ö)de/i, ["brandenburg"]],
-  [/^(?!Stud).*ente.*$/igm, ["mind-the-quack"]],
   [/\bfancy/i, ["weber_sunglasses"]],
   [/\bfefe/i, ["fefe"]],
   [/\bgabba/i, ["gandalf"]],
