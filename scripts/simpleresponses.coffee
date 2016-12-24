@@ -106,7 +106,7 @@ module.exports = (robot) ->
   rarelistens.forEach (resp_tuple) ->
     [trigger, answer] = resp_tuple
     robot.hear trigger, (res) ->
-      if Math.random() < 0.2
+      if Math.random() < 0.05
         res.send answer
 
   reactions.forEach (resp_tuple) ->
