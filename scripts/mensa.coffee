@@ -83,7 +83,10 @@ module.exports = (robot) ->
   , null, true, "Europe/Berlin")
 
   dailyMensa = (robot) ->
-    generic_resp_func(default_mensa, (m) -> robot.messageRoom '#mensa', m)
+    getMealData(mensa, mappedMensa.get(default_mensa.toLowerCase()), (data) ->
+      if not (data == [] or data == nil)
+        robot.messageRoom "#mensa", formatMenuMessage(default_mensa, data)
+    )
 
   generic_resp_func = (mensa, callback) ->
     mensaKey = mensa.toLowerCase()
@@ -141,16 +144,18 @@ module.exports = (robot) ->
 
 
   getMeals = (name, mensa, callback) ->
+    getMealData name, mensa, (data) -> callback formatMenuMessage(name, data)
+  
+  getMealData = (mensa, callback) ->
     tzoffset = (new Date()).getTimezoneOffset() * 60000
     now = (new Date(Date.now() - tzoffset)).toISOString().slice(0,10)
     robot.http("http://openmensa.org/api/v2/canteens/#{mensa}/days/#{now}/meals")
       .get() (err, res, body) ->
         callback (
           if body.trim() == ""
-            "This mensa is currently out of order, sorry."
+            null
           else
-            data = JSON.parse body
-            "Heute @ *#{name}*:\n#{data.map(formatOutput).join('\n')}"
+            JSON.parse body
         )
 
   robot.respond /mensa$/i, (msg) ->
@@ -175,6 +180,12 @@ module.exports = (robot) ->
     ).filter((name) -> name != null)
 
     msg.send "Ich kann dir heutige Speisepläne für die folgenden Mensen holen:\n - #{names.join('\n - ')}\nSprich' mich einfach mit `matthias mensa <mensa>` an."
+
+formatMenuMessage = (name, data) ->
+  if data == null
+    "This mensa is currently out of order, sorry."
+  else
+    "Heute @ *#{name}*:\n#{data.map(formatOutput).join('\n')}"
 
 formatOutput = (meal, index) ->
   "#{index}: " +
