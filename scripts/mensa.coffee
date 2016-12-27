@@ -79,12 +79,12 @@ mappedMensa = mensen.reduce((map, mensa) ->
 module.exports = (robot) ->
 
   new cronjob('00 30 10 * * 1-5', ->
-    dailyMensa(robot)
+    dailyMensa()
   , null, true, "Europe/Berlin")
 
-  dailyMensa = (robot) ->
-    getMealData(mensa, mappedMensa.get(default_mensa.toLowerCase()), (data) ->
-      if not (data == [] or data == nil)
+  dailyMensa = ->
+    getMealData(mappedMensa.get(default_mensa.toLowerCase()), (data) ->
+      if data != null and not (Array.isArray(data) and data.length == 0)
         robot.messageRoom "#mensa", formatMenuMessage(default_mensa, data)
     )
 
@@ -144,7 +144,7 @@ module.exports = (robot) ->
 
 
   getMeals = (name, mensa, callback) ->
-    getMealData name, mensa, (data) -> callback formatMenuMessage(name, data)
+    getMealData(mensa, (data) -> callback(formatMenuMessage(name, data)))
   
   getMealData = (mensa, callback) ->
     tzoffset = (new Date()).getTimezoneOffset() * 60000
@@ -160,6 +160,9 @@ module.exports = (robot) ->
 
   robot.respond /mensa$/i, (msg) ->
     generic_resp_func(default_mensa, (m) -> msg.send m)
+
+  robot.respond /mensatest/, (msg) ->
+    dailyMensa()
 
   robot.respond /mensa (\S.*)/i, (msg) ->
     mensa = msg.match[1]
