@@ -65,6 +65,7 @@ reactions = [
   [/\bkapital/i, ["marx"]],
   [/\blobo/i, ["lobo"]],
   [/\blecker/i, ["letscho"]],
+  [/\bmatthias\?/i, ["wave"]],
   [/\bmonty python/i, ["sillywalk"]],
   [/\bmuss man wissen/i, ["stoll"]],
   [/\bpampa/i, ["brandenburg"]],
