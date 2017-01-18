@@ -60,6 +60,7 @@ reactions = [
   [/\bfancy/i, ["weber_sunglasses"]],
   [/\bfefe/i, ["fefe"]],
   [/\bgabba/i, ["gandalf"]],
+  [/\bgcc/i, ["praisebe", "rms", "gnu"]],
   [/\bgraz/i, ["graz"]],
   [/\bhaskell/i, ["haskell"]],
   [/\bkapital/i, ["marx"]],
