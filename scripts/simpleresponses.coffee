@@ -48,7 +48,6 @@ rarelistens = [
 ]
 
 reactions = [
-  [/\bascii/i, ["ascii"]],
   [/\bbayern/i, ["logik", "bavaria"]],
   [/\bbrandenburg/i, ["tumbleweed"]],
   [/\bbrandschutz/i, ["brandschutz"]],
@@ -58,11 +57,9 @@ reactions = [
   [/\bduc(?:k|)/i, ["mind-the-quack"]],
   [/\bein(?:oe|ö)de/i, ["brandenburg"]],
   [/\bfancy/i, ["weber_sunglasses"]],
-  [/\bfefe/i, ["fefe"]],
   [/\bgabba/i, ["gandalf"]],
   [/\bgcc/i, ["praisebe", "rms", "gnu"]],
   [/\bgraz/i, ["graz"]],
-  [/\bhaskell/i, ["haskell"]],
   [/\bkapital/i, ["marx"]],
   [/\blobo/i, ["lobo"]],
   [/\blecker/i, ["letscho"]],
@@ -72,11 +69,9 @@ reactions = [
   [/\bpampa/i, ["brandenburg"]],
   [/\sphp|^php/i, ["php", "amen", "praisebe"]], # "." would be a word boundary, so this one is special, just as PHP is special ¯\_(ツ)_/¯
   [/\bruhe\b/i, ["psst"]],
-  [/\brust/i, ["rust"]],
   [/\bstar wars/i, ["leia"]],
   [/\bstiefel/i, ["stiefel"]],
   [/\bstoll/i, ["stoll"]],
-  [/\bswift/i, ["swift"]],
   [/\bth(?:ue|ü)ringen/i, ["thueringen"]],
   [/\bweed/i, ["gandalf"]],
   [/\bzaunpfahl/i, ["zaunpfahl"]],
