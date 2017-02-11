@@ -93,24 +93,28 @@ module.exports = (robot) ->
   responses.forEach (resp_tuple) ->
     [trigger, answer] = resp_tuple
     robot.respond trigger, (res) ->
-      res.send answer
+      unless res.message.room == "general"
+        res.send answer
 
   listens.forEach (resp_tuple) ->
     [trigger, answer] = resp_tuple
     robot.hear trigger, (res) ->
-      res.send answer
+      unless res.message.room == "general"
+        res.send answer
 
   rarelistens.forEach (resp_tuple) ->
     [trigger, answer] = resp_tuple
     robot.hear trigger, (res) ->
-      if Math.random() < 0.05
-        res.send answer
+      unless res.message.room == "general"
+        if Math.random() < 0.05
+          res.send answer
 
   reactions.forEach (resp_tuple) ->
     [trigger, answers] = resp_tuple
     robot.hear trigger, (res) ->
-      answers.forEach (emoji) ->
-        util.react res, emoji
+      unless res.message.room == "general"
+        answers.forEach (emoji) ->
+          util.react res, emoji
 
   robot.topic (res) ->
     unless res.message.room == "general"
