@@ -14,7 +14,7 @@ module.exports = (robot) ->
   robot.respond /t(?:ü|ue)rstatus/i, (msg) ->
     checkDoor(robot, msg)
 
-  robot.respond /t(?:ü|ue)r (?:ist )?(.*)/, (msg) ->
+  robot.respond /t(?:ü|ue)r (?:ist )?(.*)/i, (msg) ->
     state = msg.match[1].toLowerCase()
     switch state
       when "kaputt", "broken", "im eimer"
