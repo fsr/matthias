@@ -10,7 +10,7 @@ You can start matthias locally by running:
 
     $ bin/hubot
     
-Don't forget `$ npm install` before your first run to download all necessary dependencies.
+Don't forget running `$ npm install` beforehand to download all necessary dependencies.
 
 Then you can interact with matthias by typing `matthias help`.
 
