@@ -20,7 +20,7 @@ module.exports = (robot) ->
     else
       porn_title = msg.random porn_responses
 
-    msg.reply porn_title
+    msg.send porn_title
 
 porn_responses = [
   "11.000 Ruten",
