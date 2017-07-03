@@ -19,7 +19,7 @@
 #   Philipp Heisig - matthias@pheisig.de
 #   Lucas Woltmann - mail@lucaswoltmann.de
 
-cronjob = require("cron").CronJob
+# cronjob = require("cron").CronJob
 
 default_mensa = process.env.HUBOT_DEFAULT_MENSA or "Alte Mensa"
 
@@ -78,15 +78,15 @@ mappedMensa = mensen.reduce((map, mensa) ->
 
 module.exports = (robot) ->
 
-  new cronjob('00 30 10 * * 1-5', ->
-    dailyMensa()
-  , null, true, "Europe/Berlin")
+  # new cronjob('00 30 10 * * 1-5', ->
+  #   dailyMensa()
+  # , null, true, "Europe/Berlin")
 
-  dailyMensa = ->
-    getMealData(mappedMensa.get(default_mensa.toLowerCase()), (data) ->
-      if data != null and not (Array.isArray(data) and data.length == 0)
-        robot.messageRoom "#mensa", formatMenuMessage(default_mensa, data)
-    )
+  # dailyMensa = ->
+  #   getMealData(mappedMensa.get(default_mensa.toLowerCase()), (data) ->
+  #     if data != null and not (Array.isArray(data) and data.length == 0)
+  #       robot.messageRoom "#mensa", formatMenuMessage(default_mensa, data)
+  #   )
 
   generic_resp_func = (mensa, callback) ->
     mensaKey = mensa.toLowerCase()
@@ -101,7 +101,7 @@ module.exports = (robot) ->
     robot.http("http://openmensa.org/api/v2/canteens/79/days/#{now}/meals")
       .get() (err, res, body) ->
         if body.trim() == ""
-          msg.send "This mensa is currently out of order, sorry."
+          msg.send "Diese Mensa ist gerade kaputt, sorry."
         else
           data = JSON.parse body
           output = "#{data.map(formatOutput).join('\n')}\n"
@@ -117,7 +117,7 @@ module.exports = (robot) ->
             robot.http("http://www.studentenwerk-dresden.de/mensen/speiseplan/")
               .get() (err, res, body) ->
                 if body.trim() == ""
-                  msg.send ("No image found, sorry.")
+                  msg.send ("Kein Bild gefunden, sorry.")
                 else
                   body = body.substr(body.indexOf("<th class=\"text\">Alte Mensa</th>"))
                   if body.indexOf(output) > -1
@@ -128,24 +128,24 @@ module.exports = (robot) ->
                     robot.http(link)
                       .get() (err, res, body) ->
                         if body.trim() == ""
-                          msg.send ("No image found, sorry.")
+                          msg.send ("Kein Bild gefunden, sorry.")
                         else
                           imagelink = body.substr(body.indexOf("//bilderspeiseplan"))
                           imagelink = imagelink.substr(0, imagelink.indexOf("\""))
                           imagelink = "http:" + imagelink
                           if imagelink.length < 20
-                            msg.send ("No image found, sorry.")
+                            msg.send ("Kein Bild gefunden, sorry.")
                           else
                             msg.send(imagelink)
                   else
-                    msg.send ("No image found, sorry.")
+                    msg.send ("Kein Bild gefunden, sorry.")
           else
-            msg.send("No food with this number..");
+            msg.send("Ich kenne Speise mit der Nummer...");
 
 
   getMeals = (name, mensa, callback) ->
     getMealData(mensa, (data) -> callback(formatMenuMessage(name, data)))
-  
+
   getMealData = (mensa, callback) ->
     tzoffset = (new Date()).getTimezoneOffset() * 60000
     now = (new Date(Date.now() - tzoffset)).toISOString().slice(0,10)
@@ -161,8 +161,8 @@ module.exports = (robot) ->
   robot.respond /mensa$/i, (msg) ->
     generic_resp_func(default_mensa, (m) -> msg.send m)
 
-  robot.respond /mensatest/, (msg) ->
-    dailyMensa()
+  # robot.respond /mensatest/, (msg) ->
+  #   dailyMensa()
 
   robot.respond /mensa (\S.*)/i, (msg) ->
     mensa = msg.match[1]
@@ -182,7 +182,7 @@ module.exports = (robot) ->
         null
     ).filter((name) -> name != null)
 
-    msg.send "Ich kann dir heutige Speisepläne für die folgenden Mensen holen:\n - #{names.join('\n - ')}\nSprich' mich einfach mit `matthias mensa <mensa>` an."
+    msg.send "Ich kann dir heutige Speisepläne für die folgenden Mensen holen:\n - #{names.join('\n - ')}"
 
 formatMenuMessage = (name, data) ->
   if data == null
@@ -220,8 +220,8 @@ formatMealNotes = (notes) ->
       words = note.split(' ')
       words[words.length - 1]
     ).reduce((list, note) ->
-      if notesabbr.has note
-        list.push(notesabbr.get(note))
+      # if notesabbr.has note
+        # list.push(notesabbr.get(note))
       list
   , []).join('')
 
