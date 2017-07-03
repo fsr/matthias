@@ -210,7 +210,7 @@ notesabbr = new Map(
 )
 
 catabbr = new Map(
-    [ ["Abendangebot", ":moon:"]
+    [ ["Abendangebot", "*ABENDANGEBOT*"]
     , ["Angebote", ""]
     ]
 )
