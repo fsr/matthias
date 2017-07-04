@@ -11,21 +11,14 @@
 
 util = require "../util"
 
-responses = [
-  [
-    /wat is wacken\?/i,
-    "Dat ist Wacken. Einmal im Jahr kommen hier alle bösen schwarzen Männer aus Mittelerde her, um ma richtig die Sau rauszulassen."
-  ],
-  [
-    /marco/i,
-    "POLO"
-  ]
-]
+responses = []
 
 listens = [
   [/pimmel/i, "Höhöhö, du hast Pimmel gesagt."],
   [/jehova/i, "http://i.imgur.com/01PMBGj.gif"],
-  [/^nein$/i, "Doch!"]
+  [/^nein$/i, "Doch!"],
+  [/wat is wacken\??/i, "Dat ist Wacken. Einmal im Jahr kommen hier alle bösen schwarzen Männer aus Mittelerde her, um ma richtig die Sau rauszulassen."],
+  [/^marco$/i, "POLO"]
 ]
 
 rarelistens = [
