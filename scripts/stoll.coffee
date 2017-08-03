@@ -9,7 +9,7 @@
 
 
 module.exports = (robot) ->
-  robot.respond /stoll/i, (msg) ->
+  robot.hear /\bstoll\b/i, (msg) ->
     msg.send msg.random stoll_quotes
 
 stoll_quotes = [
