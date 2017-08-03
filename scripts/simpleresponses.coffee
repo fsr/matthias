@@ -18,7 +18,8 @@ listens = [
   [/jehova/i, "http://i.imgur.com/01PMBGj.gif"],
   [/^nein$/i, "Doch!"],
   [/wat is wacken\??/i, "Dat ist Wacken. Einmal im Jahr kommen hier alle bösen schwarzen Männer aus Mittelerde her, um ma richtig die Sau rauszulassen."],
-  [/^marco$/i, "POLO"]
+  [/^marco$/i, "POLO"],
+  [/\?$/i, "¯\\_(ツ)_/¯"]
 ]
 
 rarelistens = [
