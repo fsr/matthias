@@ -5,12 +5,12 @@ node_js:
 
 before_install:
   - rvm install 2.0.0
-  - gem install danger
-  - gem install danger-todoist
+#  - gem install danger
+#  - gem install danger-todoist
 
 script:
   # - npm test
-  - danger --verbose
+#  - danger --verbose
 
 notifications:
   email:
