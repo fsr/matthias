@@ -30,7 +30,7 @@ module.exports = (robot) ->
     res.reply "Deine Mudda scheißt auf #{term}!"
 
   robot.hear /bash me/i, (res) ->
-    res.send "http://bash.fsrleaks.de/?#{randomRange(1, 946)}"
+    res.send "http://bash.fsrleaks.de/?#{randomRange(1, 1078)}"
 
   robot.respond /random (\d*) (\d*)/i, (res) ->
     min = res.match[1]
