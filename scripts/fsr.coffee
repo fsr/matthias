@@ -17,7 +17,7 @@ util = require "../util"
 module.exports = (robot) ->
   robot.respond /ese/i, (res) ->
     currentdate = new Date()
-    esedate = new Date("2017-10-02 9:00:00")
+    esedate = new Date("2018-10-01 9:00:00")
     datediff = esedate - currentdate
 
     days = Math.floor(datediff/1000/60/60/24)
