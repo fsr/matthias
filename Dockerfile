@@ -16,4 +16,5 @@ ENV CLARIFAI_SECRET=""
 
 RUN npm install
 
-ENTRYPOINT ./bin/hubot -a slack
+ENTRYPOINT ["./bin/hubot"]
+CMD ["-a", "slack"]
