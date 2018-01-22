@@ -31,7 +31,7 @@ Matthias' name can also be substituted with a `!` at the beginning of commands. 
 
 ```shell
 $ docker pull ifsr/matthias
-$ docker run --rm -it matthias
+$ docker run --rm -it ifsr/matthias
 ```
 
 This pulls matthias' latest image (automatically built by Docker Hub from this repo) and starts a new ephemeral container with the shell adapter. 
