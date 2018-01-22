@@ -8,5 +8,4 @@ docker run -d --name matthias \
 		-e HUBOT_GOOGLE_CSE_KEY='' \
 		-e HUBOT_SLACK_TOKEN='' \
 		-e HUBOT_MAINTAINERS='shell,kilian' \
-		matthias -a slack
-
+		ifsr/matthias -a slack
