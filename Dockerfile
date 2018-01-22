@@ -1,4 +1,4 @@
-FROM node:9.4
+FROM node:9.4-alpine
 
 COPY . ./
 
