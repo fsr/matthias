@@ -17,7 +17,14 @@ util = require "../util"
 module.exports = (robot) ->
   robot.respond /ese/i, (res) ->
     currentdate = new Date()
-    esedate = new Date("2018-10-01 9:00:00")
+    eseyear = currentdate.getFullYear()
+
+    newyears = new Date("#{eseyear + 1}-01-01 00:00:00")
+    difftony = Math.floor((newyears - currentdate)/1000/3600/24)
+    if difftony <= 91
+        eseyear += 1
+
+    esedate = new Date("#{eseyear}-10-01 9:00:00")
     datediff = esedate - currentdate
 
     days = Math.floor(datediff/1000/60/60/24)
@@ -25,7 +32,7 @@ module.exports = (robot) ->
     hours = Math.floor(datediff/1000/60/60)
     datediff -= hours*3600*1000
     minutes = Math.floor(datediff/1000/60)
-    res.send "Nur noch #{days} Tage, #{hours} Stunden und #{minutes} Minuten bis zur ESE 2018. Vermutlich :stuck_out_tongue_winking_eye:"
+    res.send "Nur noch #{days} Tage, #{hours} Stunden und #{minutes} Minuten bis zur ESE #{eseyear}. Vermutlich :stuck_out_tongue_winking_eye:"
 
   robot.respond /(?:jemand|wer) da(?:\\?)/i, (res) ->
     robot.http('https://www.ifsr.de/buerostatus/output.php')
